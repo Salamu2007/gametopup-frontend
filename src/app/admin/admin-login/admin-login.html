@@ -1,0 +1,32 @@
+<div class="login-page">
+  <div class="login-card">
+    <h2>Admin Login</h2>
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        required
+        [(ngModel)]="username"
+      />
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+        [(ngModel)]="password"
+      />
+
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="!loginForm.form.valid"
+      >
+        Sign In
+      </button>
+    </form>
+  </div>
+</div>

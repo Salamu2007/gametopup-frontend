@@ -1,0 +1,235 @@
+/* ===== DASHBOARD ROOT ===== */
+.dashboard-container {
+  padding: 30px;
+  color: #f1f5f9;
+  font-family: 'Cairo', sans-serif;
+}
+
+/* ===== HEADER ===== */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.welcome h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.sub-title {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-top: 5px;
+}
+
+.page-title {
+  margin: 25px 0;
+  font-size: 20px;
+  font-weight: 600;
+  border-right: 4px solid #38bdf8;
+  padding-right: 10px;
+}
+
+.date{
+    font-size: 25px;
+}
+
+/* ===== STATS GRID ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: linear-gradient(145deg, #1e293b, #111827);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  transition: 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(56, 189, 248, 0.2);
+}
+
+/* Decorative glow */
+.card::before {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: rgba(56, 189, 248, 0.15);
+  border-radius: 50%;
+  top: -40px;
+  left: -40px;
+}
+
+/* Card header */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-header .icon {
+  font-size: 24px;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+/* Card body */
+.card-body {
+  margin-top: 15px;
+}
+
+.number {
+  font-size: 28px;
+  font-weight: bold;
+  color: #38bdf8;
+}
+
+/* Different colors for each card */
+.card-orders .number {
+  color: #facc15;
+}
+
+.card-charges .number {
+  color: #22c55e;
+}
+
+.card-games .number {
+  color: #a855f7;
+}
+
+/* ===== CHART SECTION ===== */
+.chart-container {
+  background: #111827;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.chart-container h3 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+/* Notifications */
+.notifications {
+  background: #111827;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+}
+
+.btn-test {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.btn-test:hover {
+  background: #16a34a;
+}
+
+.notification {
+  background: #1e293b;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+/* Orders Table */
+.recent-orders {
+  background: #111827;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+}
+
+.recent-orders h3 {
+  margin-top: 0;
+  color: #f1f5f9;
+}
+
+.loading,
+.no-data {
+  text-align: center;
+  padding: 20px;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.recent-orders table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recent-orders th, 
+.recent-orders td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #1e293b;
+  color: #e2e8f0;
+}
+
+.recent-orders th {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.recent-orders tr:hover {
+  background: #1e293b;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-مكتمل {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.status-قيد الانتظار {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+.status-ملغى {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

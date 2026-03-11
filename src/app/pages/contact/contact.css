@@ -1,0 +1,116 @@
+/* HERO small - gradient fallback (remove missing image) */
+.hero.small { 
+    height: 30vh; 
+    padding: 30px 20px; 
+    /* image on top of subtle gradient; fallback to gradient only if image missing */
+    background: linear-gradient(135deg, rgba(15,32,39,0.7), rgba(32,58,67,0.6)), url('/assets/images/contact-banner.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+.hero.small .hero-content h1 { 
+    font-size: 2rem; 
+}
+
+.contact-page { 
+    padding: 60px 20px; 
+    background: #0b0f14; 
+    color: #fff; 
+}
+.contact-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 360px; 
+    gap: 30px; 
+    max-width: 1100px; 
+    margin: 0 auto; 
+}
+
+.contact-form { 
+    background: #151a21; 
+    padding: 24px; 
+    border-radius: 12px; 
+    border: 1px solid #1f2937; 
+}
+.contact-form h2 { 
+    margin-top: 0; 
+    color: #00c6ff; 
+}
+.contact-form label { 
+    display: block; 
+    margin: 12px 0 6px; 
+    color: #ccc; 
+}
+.contact-form input, .contact-form textarea { 
+    width: 100%; 
+    padding: 10px 12px; 
+    border-radius: 8px; 
+    border: 1px solid #2b3138; 
+    background: #0f1720; 
+    color: #fff; 
+}
+.contact-form textarea { 
+    resize: vertical; 
+}
+.form-actions { 
+    display:flex; 
+    gap:12px; 
+    margin-top: 14px; 
+    flex-wrap:wrap; 
+}
+
+.btn-primary { 
+    background: #00c6ff; 
+    color: #000; 
+    border: none; 
+    padding: 10px 18px; 
+    border-radius: 20px; 
+    cursor: pointer; 
+}
+.btn-secondary { 
+    background: transparent; 
+    border: 1px solid #00c6ff; 
+    color: #00c6ff; 
+    padding: 10px 14px; 
+    border-radius:20px; 
+    cursor:pointer; 
+}
+
+.success { 
+    color: #8ee28e; 
+    margin-top:12px; 
+}
+.error { 
+    color: #ff7b7b; 
+    margin-top:12px; 
+}
+
+.contact-info .info-card { 
+    background: #151a21; 
+    border:1px solid #1f2937; 
+    padding:16px; 
+    border-radius:12px; 
+    margin-bottom:12px; 
+}
+.contact-info .map-placeholder { 
+    background: #0f1720; 
+    border: 1px dashed #2b3138; 
+    padding: 20px; 
+    border-radius:8px; 
+    text-align:center; 
+    color:#aaa; 
+}
+
+@media (max-width: 900px){ 
+    .contact-grid{ 
+        grid-template-columns: 1fr; 
+    } 
+    .contact-page{ 
+        padding: 40px 12px;
+    } 
+}
+

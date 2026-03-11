@@ -1,0 +1,107 @@
+<!-- Hero Section -->
+<section class="store-hero">
+	<div class="hero-content container">
+		<div class="hero-badge">🎮 متجر معتمد</div>
+		<h1 class="hero-title">متجر الألعاب الأصلية</h1>
+		<p class="subtitle">اشتري ألعاب أصلية ومفاتيح تفعيل بأسعار مناسبة مع ضمان 100%</p>
+		<div class="hero-stats">
+			<div class="stat-item">
+				<strong>+500</strong>
+				<span>مشترٍ</span>
+			</div>
+			<div class="stat-item">
+				<strong>4.8★</strong>
+				<span>تقييم</span>
+			</div>
+			<div class="stat-item">
+				<strong>24/7</strong>
+				<span>دعم</span>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Products Section -->
+<section class="store-products container">
+	<!-- Search & Filter Bar -->
+	<div class="products-controls">
+		<div class="search-box">
+			<input
+				type="text"
+				placeholder="🔍 ابحث عن لعبة..."
+				[(ngModel)]="searchTerm"
+				(input)="filterProducts()"
+				class="search-input"
+			/>
+		</div>
+		<div class="filter-box">
+			<select [(ngModel)]="selectedPlatform" (change)="filterProducts()" class="filter-select">
+				<option value="">جميع المنصات</option>
+				<option value="PC">PC</option>
+				<option value="PlayStation">PlayStation</option>
+				<option value="Xbox">Xbox</option>
+				<option value="Nintendo">Nintendo</option>
+			</select>
+		</div>
+		<div class="sort-box">
+			<select [(ngModel)]="sortBy" (change)="sortProducts()" class="sort-select">
+				<option value="newest">الأحدث</option>
+				<option value="price-asc">السعر: من الأقل</option>
+				<option value="price-desc">السعر: من الأعلى</option>
+				<option value="popular">الأكثر شهرة</option>
+			</select>
+		</div>
+	</div>
+
+	<!-- Results Counter -->
+	<div class="results-info">
+		<p>عدد النتائج: <strong>{{ filteredProducts.length }}</strong> لعبة</p>
+	</div>
+
+	<!-- Products Grid -->
+	<div class="products-grid" >
+		<div *ngFor="let p of filteredProducts; let i = index" class="product-card" [style.animation-delay]="(i * 0.05) + 's'">
+			<!-- Product Image with Badge -->
+			<div class="product-image-container">
+				<img [src]="p.imageUrl  || '/assets/images/comingsoon.png'" class="product-thumb" loading="lazy" />
+				<div *ngIf="p.is_New" class="product-badge">جديد</div>
+				<div class="product-rating">
+					<span class="stars">⭐ {{ p.rating || 0 }}</span>
+					<span class="reviews">({{ p.reviews || 0 }})</span>
+				</div>
+				<div class="product-status"></div>
+			</div>
+
+			<!-- Product Body -->
+			<div class="product-body">
+				<div class="product-meta">
+					<span class="product-platform">{{ p.platform ? p.platform : '📱' }}</span>
+					<span class="product-genre">{{  p.category || '' }}</span>
+				</div>
+				<h3 class="product-name">{{ p.name }}</h3>
+				<p class="product-desc">{{ p.description }}</p>
+			</div>
+
+			<!-- Product Footer -->
+			<div class="product-footer">
+				<div class="product-price-section">
+					<div *ngIf="p.originalPrice" class="price-original">{{ p.originalPrice }} $</div>
+					<div *ngIf="p.originalPrice" class="price-discount">{{ ((p.originalPrice - (p.price||0)) | number:'1.0-0') }} خصم</div>
+				</div>
+				<a [routerLink]="['/user/detail-buy-game', p._id]" class="btn-buy">
+					<span class="btn-text">اشتري الآن</span>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- No Results -->
+	<ng-template #noResults>
+		<div class="no-results">
+			<div class="no-results-icon">😔</div>
+			<h2>لم نجد نتائج مطابقة</h2>
+			<p>جرب البحث بكلمات مختلفة أو تغيير الفلاتر</p>
+			<button (click)="resetFilters()" class="btn-reset">إعادة تعيين الفلاتر</button>
+		</div>
+	</ng-template>
+</section>

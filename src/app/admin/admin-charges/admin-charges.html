@@ -1,0 +1,100 @@
+<div class="charges-container" dir="rtl">
+  <header class="page-header">
+    <div>
+      <h2 class="page-title">🔋 إدارة الشحنات</h2>
+      <p class="page-subtitle">راجع وحقّق الشحنات مع صور الدفعات</p>
+    </div>
+    <div class="search-wrapper">
+      <input
+        type="text"
+        placeholder="🔍 ابحث باسم اللعبة أو البريد أو Player ID"
+        [(ngModel)]="filterText"
+        (input)="searchCharges()"
+        class="search-input"
+      />
+    </div>
+  </header>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <p>جاري تحميل الشحنات...</p>
+  </div>
+
+  <div *ngIf="!isLoading" class="charges-table-container">
+    <div *ngIf="charges.length === 0" class="no-data">
+      <p>لا توجد شحنات بعد</p>
+    </div>
+
+    <table *ngIf="charges.length > 0" class="charges-table">
+      <thead>
+        <tr>
+          <th>اللعبة</th>
+          <th>صورة اللعبة</th>
+          <th>صورة الدفع</th>
+          <th>البريد الإلكتروني</th>
+          <th>Player ID</th>
+          <th>الكمية</th>
+          <th>العملة</th>
+          <th>الحالة</th>
+          <th>التاريخ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of charges" class="charge-row" (click)="openCharge(c)">
+          <td>{{ c.gameName }}</td>
+          <td>
+            <img
+              [src]="c.gameImage || '/assets/images/comingsoon.png'"
+              alt="صورة اللعبة" class="thumb-img"
+            />
+          </td>
+          <td>
+            <a *ngIf="c.paymentImage" [href]="c.paymentImage" target="_blank">
+              <img
+                [src]="c.paymentImage"
+                alt="صورة الدفع" class="thumb-img"
+              />
+            </a>
+            <span *ngIf="!c.paymentImage">-</span>
+          </td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.playerId }}</td>
+          <td>{{ c.quantity }}</td>
+          <td>{{ c.currency || 'دج' }}</td>
+          <td>{{ c.status }}</td>
+          <td>{{ c.createdAt | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- charge detail modal -->
+  <div *ngIf="selectedCharge" class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>تفاصيل الشحنة</h3>
+        <button class="close-btn" (click)="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>اللعبة:</strong> {{ selectedCharge.gameName }}</p>
+        <p><strong>Player ID:</strong> {{ selectedCharge.playerId }}</p>
+        <p><strong>الايميل:</strong> {{ selectedCharge.email }}</p>
+        <p><strong>الكمية:</strong> {{ selectedCharge.quantity }}</p>
+        <p><strong>العملة:</strong> {{ selectedCharge.currency || 'دج' }}</p>
+        <p><strong>الحالة:</strong> {{ selectedCharge.status }}</p>
+        <p><strong>التاريخ:</strong> {{ selectedCharge.createdAt | date:'short' }}</p>
+        <div *ngIf="selectedCharge.gameImage || selectedCharge.image" class="modal-section">
+          <strong>صورة اللعبة:</strong><br/>
+          <img [src]="selectedCharge.gameImage || selectedCharge.image" class="modal-img" />
+        </div>
+        <div *ngIf="selectedCharge.paymentImage" class="modal-section">
+          <strong>صورة الدفع:</strong><br/>
+          <img [src]="selectedCharge.paymentImage" class="modal-img" />
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-approve" (click)="approve()">قبول</button>
+        <button class="btn btn-reject" (click)="reject()">رفض</button>
+      </div>
+    </div>
+  </div>
+</div>

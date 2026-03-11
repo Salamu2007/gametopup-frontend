@@ -1,0 +1,64 @@
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>
+      كل ألعابك وعملاتك في مكان واحد! اشترِ الألعاب واشحن العملات بأمان وسرعة 💎🎮
+    </h1>
+
+    <p>
+     ألعابك وعملاتك هنا! 🎮💰 شحن سريع وآمن لكل الألعاب ⚡
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#games" class="btn primary">اطلب الشحن الآن</a>
+      <a routerLink="/how-it-works" class="btn secondary">كيف يتم الشحن؟</a>
+    </div>
+  </div>
+</section>
+
+<!-- GAMES SECTION -->
+<section class="games" id="games">
+  <h2>الألعاب المدعومة 🎮</h2>
+    <p class="subtitle">
+        شحن سريع وآمن لأشهر الألعاب 🔥  
+    </p>
+    <div class="game-grid" >
+      <div class="game-card" *ngFor="let game of games" >
+        <img [src]="game.image" alt="{{ game.name }} Logo">
+        <h3>{{ game.name }}</h3>
+        <p>اشحن عملتك {{ game.route }} في حسابك الان</p>
+        <a routerLink="/detail-game" class="btn-small">اشحن الآن</a>
+      </div>
+      <div class="game-card">
+        <img src="/assets/images/comingsoon.png" alt="Coming Soon">
+        <h3>المزيد قادم قريبًا!</h3>
+        <p>نضيف ألعاب جديدة باستمرار، ترقبوا المزيد من الخيارات!</p>
+        <a routerLink="/contact" class="btn-small">تواصل معنا</a>
+      </div>
+    </div>
+</section>
+<!-- SELL GAMES SECTION -->
+<section class="sell-games">
+  <h2>شراء الألعاب 🎮</h2>
+  <p class="subtitle">
+    ألعاب أصلية للـ PC بأسعار مناسبة 🔥  
+    Steam | Epic Games
+  </p>
+
+  <div class="sell-grid">
+    <div class="sell-card" *ngFor="let game of sellGames">
+      <img [src]="game.image" alt="{{ game.name }} Logo">
+      <h3>{{ game.name }}</h3>
+      <p> {{game.route}} </p>
+      <a routerLink="/contact" class="btn small">اطلب الآن</a>
+    </div>
+    <div class="sell-card">
+      <img src="/assets/images/comingsoon.png" alt="Coming Soon">
+      <h3>المزيد قادم قريبًا!</h3>
+      <p>نضيف ألعاب جديدة باستمرار، ترقبوا المزيد من الخيارات!</p>
+       <a routerLink="/contact" class="btn-small">تواصل معنا</a>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,20 @@
+<header class="header">
+  <div class="logo">
+    🎮 GameTopUp DZ
+  </div>
+
+  <div class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen" aria-label="قائمة">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav class="nav" [class.active]="isMenuOpen">
+    <a routerLink="/user/home" (click)="closeMenu()">الرئيسية</a>
+    <a routerLink="/user/charge-games" (click)="closeMenu()">شحن الألعاب</a>
+    <a routerLink="/user/games" (click)="closeMenu()">الألعاب الأصلية</a>
+    <a routerLink="/user/about-us" (click)="closeMenu()">من نحن ؟</a>
+    <a routerLink="/user/how-it-works" (click)="closeMenu()">كيف يتم الشحن؟</a>
+    <a routerLink="/user/contact" (click)="closeMenu()">تواصل معنا</a>
+  </nav>
+</header>

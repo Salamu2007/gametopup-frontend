@@ -1,0 +1,60 @@
+<!-- HERO -->
+<section class="hero small">
+	<div class="hero-content">
+		<h1>تواصل معنا ✉️</h1>
+		<p class="subtitle">نحن هنا لمساعدتك — راسلنا وسنرد بأسرع وقت</p>
+	</div>
+</section>
+
+<section class="contact-page">
+	<div class="container">
+		<div class="contact-grid">
+			<div class="contact-form">
+				<h2>أرسل رسالة</h2>
+				<form (ngSubmit)="sendContact()" #contactForm="ngForm" novalidate>
+					<label>الاسم</label>
+					<input name="name" [(ngModel)]="model.name" required placeholder="اسمك" />
+
+					<label>البريد الإلكتروني أو الرقم</label>
+					<input name="contact" [(ngModel)]="model.contact" required placeholder="example@mail.com أو رقم الهاتف" />
+
+					<label>الموضوع</label>
+					<input name="subject" [(ngModel)]="model.subject" placeholder="موضوع الرسالة" />
+
+					<label>نص الرسالة</label>
+					<textarea name="message" [(ngModel)]="model.message" rows="6" required placeholder="اكتب رسالتك هنا..."></textarea>
+
+					<div class="form-actions">
+						<button type="submit" class="btn-primary" [disabled]="sending">أرسل</button>
+						<button type="button" class="btn-secondary" (click)="resetForm()">إعادة تعيين</button>
+					</div>
+
+					<p *ngIf="success" class="success">تم إرسال الرسالة بنجاح! سنتواصل معك قريباً.</p>
+					<p *ngIf="error" class="error">يرجى ملء الحقول المطلوبة.</p>
+				</form>
+			</div>
+
+			<aside class="contact-info">
+				<div class="info-card">
+					<h3>الموقع</h3>
+					<p>الجزائر</p>
+				</div>
+
+				<div class="info-card">
+					<h3>البريد الإلكتروني</h3>
+					<p>boukhendegnour@gmail.com</p>
+				</div>
+
+				<div class="info-card">
+					<h3>ساعات العمل</h3>
+					<p>24/7 دعم فني</p>
+				</div>
+
+				<div class="map-placeholder">
+					<p>خريطة الموقع (قريباً)</p>
+				</div>
+			</aside>
+		</div>
+	</div>
+</section>
+

@@ -1,0 +1,56 @@
+
+
+<footer class="site-footer" dir="rtl">
+	<div class="footer-container">
+		<div class="footer-grid">
+			<div class="footer-brand">
+				<div class="logo">🎮 GameTopUp DZ</div>
+				<p class="tagline">اشحن ألعابك والعملات بسرعة وأمان</p>
+			</div>
+
+			<div class="footer-links">
+				<h4>روابط سريعة</h4>
+				<ul>
+					<li><a routerLink="/user/home">الرئيسية</a></li>
+					<li><a routerLink="/user/charge-games">شحن الألعاب</a></li>
+					<li><a routerLink="/user/games">الألعاب الأصلية</a></li>
+					<li><a routerLink="/user/how-it-works">كيف يتم الشحن؟</a></li>
+					<li><a routerLink="/contact">تواصل معنا</a></li>
+				</ul>
+			</div>
+
+			<div class="footer-contact">
+				<h4>تواصل معنا</h4>
+				<ul>
+					<li>
+						<a href="https://www.instagram.com/gametopupdz/" target="_blank" rel="noopener">انستغرام
+							<span class="icon">📸</span>
+						</a>
+					</li>
+					<li>
+						<a href="https://wa.me/qr/FIQ7E6E7HESHK1" target="_blank" rel="noopener">واتساب
+							<span class="icon">💬</span>
+						</a>
+					</li>
+					<li>
+						<a href="mailto:boukhendegnour@gmail.com">البريد الإلكتروني
+							<span class="icon">✉️</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="footer-bottom">
+			<p>© <span id="year"></span> GameTopUp DZ — جميع الحقوق محفوظة</p>
+		</div>
+	</div>
+</footer>
+
+<script>
+	// small inline script to set current year (safe in static template)
+	(function(){
+		try{ document.getElementById('year').textContent = new Date().getFullYear(); }catch(e){}
+	})();
+</script>
+

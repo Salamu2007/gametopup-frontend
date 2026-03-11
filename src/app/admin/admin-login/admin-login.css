@@ -1,0 +1,68 @@
+/* Dark gradient background similar to other pages */
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(15,32,39,0.9), rgba(32,58,67,0.9));
+    color: #fff;
+}
+
+.login-card {
+    background: #151a21;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    width: 320px;
+}
+
+.login-card h2 {
+    margin: 0 0 24px;
+    color: #00c6ff;
+    text-align: center;
+    font-size: 1.75rem;
+}
+
+.login-card label {
+    display: block;
+    margin: 12px 0 6px;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #2b3138;
+    background: #0f1720;
+    color: #fff;
+}
+
+.login-card button {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* reuse existing button styles */
+.btn-primary {
+    background: #00c6ff;
+    color: #000;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 400px) {
+    .login-card {
+        width: 90%;
+        padding: 30px 20px;
+    }
+}

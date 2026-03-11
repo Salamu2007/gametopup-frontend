@@ -1,0 +1,128 @@
+/* Footer styles */
+.site-footer {
+	background: linear-gradient(180deg, #07090b, #0b0f14);
+	color: #ddd;
+	padding: 36px 16px;
+	border-top: 1px solid rgba(255,255,255,0.03);
+}
+
+.footer-container {
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+.footer-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 24px;
+	align-items: start;
+}
+
+.footer-brand .logo {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #00c6ff;
+}
+
+.footer-brand .tagline {
+	margin-top: 8px;
+	color: rgba(255,255,255,0.8);
+	font-size: 0.95rem;
+}
+
+.footer-links h4,
+.footer-contact h4 {
+	margin: 0 0 10px 0;
+	color: #fff;
+	font-size: 1rem;
+}
+
+.footer-links ul,
+.footer-contact ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.footer-links li,
+.footer-contact li {
+	margin-bottom: 8px;
+	cursor: pointer;
+}
+
+.footer-links a,
+.footer-contact a {
+	color: rgba(255,255,255,0.85);
+	text-decoration: none;
+	transition: color 0.18s ease;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+	color: #00c6ff;
+}
+
+.footer-contact .icon {
+	margin-left: 8px;
+	opacity: 0.9;
+}
+
+.footer-bottom {
+	margin-top: 22px;
+	border-top: 1px solid rgba(255,255,255,0.03);
+	padding-top: 14px;
+	text-align: center;
+	color: rgba(255,255,255,0.65);
+	font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+	.footer-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media (max-width: 600px) {
+	.footer-grid {
+		grid-template-columns: 1fr;
+		gap: 18px;
+		text-align: right;
+		align-items: start;
+	}
+
+	.footer-brand {
+		text-align: right;
+	}
+
+	.footer-links,
+	.footer-contact {
+		display: block;
+		text-align: right;
+	}
+
+	.footer-links ul {
+		display: block;
+	}
+
+	.footer-links a,
+	.footer-contact a {
+		display: block;
+		width: 100%;
+		padding: 8px 0;
+		box-sizing: border-box;
+		text-align: right;
+	}
+
+	.footer-contact ul {
+		display: flex;
+		gap: 12px;
+		justify-content: flex-end;
+		align-items: center;
+		padding: 0;
+		margin: 0;
+	}
+
+	.footer-contact li { margin-bottom: 0; }
+
+	.footer-bottom { text-align: center; padding-top: 18px; }
+}

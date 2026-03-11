@@ -1,0 +1,97 @@
+<div class="orders-container" dir="rtl">
+  <header class="page-header">
+    <div>
+      <h2 class="page-title">📦 إدارة الطلبات</h2>
+      <p class="page-subtitle">راجع وحقّق الطلبات مع صور الدفعات</p>
+    </div>
+    <div class="search-wrapper">
+      <input
+        type="text"
+        placeholder="🔍 ابحث باسم اللعبة أو البريد"
+        [(ngModel)]="filterText"
+        (input)="searchOrders()"
+        class="search-input"
+      />
+    </div>
+  </header>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <p>جاري تحميل الطلبات...</p>
+  </div>
+
+  <div *ngIf="!isLoading" class="orders-table-container">
+    <div *ngIf="orders.length === 0" class="no-data">
+      <p>لا توجد طلبات بعد</p>
+    </div>
+
+    <table *ngIf="orders.length > 0" class="orders-table">
+      <thead>
+        <tr>
+          <th>اللعبة</th>
+          <th>صورة اللعبة</th>
+          <th>صورة الدفع</th>
+          <th>البريد الإلكتروني</th>
+          <th>الكمية</th>
+          <th>العملة</th>
+          <th>الحالة</th>
+          <th>التاريخ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let o of orders" class="order-row" (click)="openOrder(o)">
+          <td>{{ o.gameName }}</td>
+          <td>
+            <img
+              [src]="o.gameImage || '/assets/images/comingsoon.png'"
+              alt="صورة اللعبة" class="thumb-img"
+            />
+          </td>
+          <td>
+            <a *ngIf="o.paymentImage" [href]="o.paymentImage" target="_blank">
+              <img
+                [src]="o.paymentImage"
+                alt="صورة الدفع" class="thumb-img"
+              />
+            </a>
+            <span *ngIf="!o.paymentImage">-</span>
+          </td>
+          <td>{{ o.email }}</td>
+          <td>{{ o.quantity }}</td>
+          <td>{{ o.currency || 'دج' }}</td>
+          <td>{{ o.status }}</td>
+          <td>{{ o.createdAt | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- order detail modal -->
+  <div *ngIf="selectedOrder" class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>تفاصيل الطلب</h3>
+        <button class="close-btn" (click)="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>اللعبة:</strong> {{ selectedOrder.gameName }}</p>
+        <p><strong>الايميل:</strong> {{ selectedOrder.email }}</p>
+        <p><strong>الكمية:</strong> {{ selectedOrder.quantity }}</p>
+        <p><strong>العملة:</strong> {{ selectedOrder.currency || 'دج' }}</p>
+        <p><strong>الحالة:</strong> {{ selectedOrder.status }}</p>
+        <p><strong>التاريخ:</strong> {{ selectedOrder.createdAt | date:'short' }}</p>
+        <div *ngIf="selectedOrder.gameImage || selectedOrder.image" class="modal-section">
+          <strong>صورة اللعبة:</strong><br/>
+          <img [src]="selectedOrder.gameImage || selectedOrder.image" class="modal-img" />
+        </div>
+        <div *ngIf="selectedOrder.paymentImage" class="modal-section">
+          <strong>صورة الدفع:</strong><br/>
+          <img [src]="selectedOrder.paymentImage" class="modal-img" />
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-approve" (click)="approve()">قبول</button>
+        <button class="btn btn-reject" (click)="reject()">رفض</button>
+      </div>
+    </div>
+  </div>
+</div>

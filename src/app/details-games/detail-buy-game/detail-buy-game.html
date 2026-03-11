@@ -1,0 +1,64 @@
+<section class="detail-buy container" *ngIf="game; else loadingOrNotFound">
+	<div class="buy-grid">
+		<div class="left">
+			<div class="image-wrap">
+				<img [src]="getImageUrl()" [alt]="game.name" />
+			</div>
+			<div class="info">
+				<h1>{{ game.name }}</h1>
+				<p class="category">{{ game.category }} • {{ game.platform }}</p>
+				<p class="desc">{{ game.description }}</p>
+			</div>
+		</div>
+
+		<aside class="right">
+			<div class="price-card">
+				<div class="price-row">
+					<div class="current">{{ game.price }}</div>
+				</div>
+				<div class="purchase-form">
+					<label>الكمية</label>
+					<input type="number" min="1" [(ngModel)]="quantity" />
+
+					<label>البريد الإلكتروني</label>
+					<input type="email" [(ngModel)]="email" placeholder="your@email.com" />
+
+					<label>رقم الهاتف</label>
+					<input type="tel" [(ngModel)]="phone" placeholder="06xxxxxxxx" />
+
+					<label>طريقة الدفع</label>
+					<select [(ngModel)]="paymentMethod">
+						<option value="ccp">CCP</option>
+						<option value="baridimob">BaridiMob</option>
+						<option value="card">بطاقة بنكية</option>
+					</select>
+
+					<button class="btn-buy" (click)="buy()" [disabled]="!canBuy || isLoading">
+						<span *ngIf="!isLoading">🛒 اشتري الآن</span>
+						<span *ngIf="isLoading">⏳ جاري المعالجة...</span>
+						
+					</button>
+
+					<div class="msg" *ngIf="message">{{ message }}</div>
+				</div>
+			</div>
+		</aside>
+	</div>
+
+	<!-- Success Notification -->
+	<div *ngIf="showSuccessNotification" class="success-notification" [@fadeInOut]>
+		<div class="notification-content">
+			<span class="icon">✅</span>
+			<div class="text">
+				<h4>{{ successTitle }}</h4>
+				<p>{{ successMessage }}</p>
+			</div>
+			<button (click)="closeNotification()" class="close-btn">×</button>
+		</div>
+	</div>
+</section>
+
+<ng-template #loadingOrNotFound>
+	<div class="loading" *ngIf="isLoading">جاري التحميل...</div>
+	<div class="notfound" *ngIf="!isLoading && !game">اللعبة غير موجودة</div>
+</ng-template>

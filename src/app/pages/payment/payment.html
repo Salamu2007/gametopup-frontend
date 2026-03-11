@@ -1,0 +1,142 @@
+<div class="checkout-root" dir="rtl">
+  <div *ngIf="loading" class="center">جاري تحميل تفاصيل الطلب...</div>
+  <div *ngIf="error" class="error">
+    {{ error }}
+    <button type="button" (click)="loadOrder(orderId)">حاول مرة أخرى</button>
+  </div>
+
+  <div *ngIf="type === 'order' && order && !loading" class="checkout-container">
+    <div class="left">
+      <h2 class="title">ملخص الطلب</h2>
+      <div class="row"><span class="label">اللعبة:</span> <span class="value">{{ itemName }}</span></div>
+      <div class="row"><span class="label">الكمية:</span> <span class="value">{{ quantity }}</span></div>
+      <div class="row"><span class="label">سعر الوحدة:</span> <span class="value">{{ unitPrice | number:'1.2-2' }} دج</span></div>
+      <div class="row total"><span class="label">المجموع الكلي:</span> <span class="value">{{ totalPrice | number:'1.2-2' }} دج</span></div>
+      <div class="row"><span class="label">رقم الطلب:</span> <span class="value">{{ orderId }}</span></div>
+      <div class="row"><span class="label">الحالة:</span> <span class="value">{{ order?.status || '—' }}</span></div>
+    </div>
+  
+
+    <div class="right">
+      <h2 class="title">تعليمات الدفع</h2>
+
+      <div class="instructions">
+        <ng-container [ngSwitch]="paymentMethod">
+          <div *ngSwitchCase="'ccp'">
+            <div>رقم CCP: <strong>{{ paymentDetails().number }}</strong></div>
+            <div>اسم الحساب: <strong>{{ paymentDetails().accountName }}</strong></div>
+          </div>
+          <div *ngSwitchCase="'baridimob'">
+            <div>رقم BaridiMob: <strong>{{ paymentDetails().phone }}</strong></div>
+          </div>
+          <div *ngSwitchCase="'wise'">
+            <div>رقم IBAN: <strong>{{ paymentDetails().iban }}</strong></div>
+            <div>اسم الحساب: <strong>{{ paymentDetails().accountName }}</strong></div>
+          </div>
+          <div *ngSwitchDefault>
+            <div>طريقة الدفع: <strong>{{ paymentMethod || 'غير معروف' }}</strong></div>
+            <div *ngIf="!paymentMethod">يرجى التحقق من تفاصيل الطلب للحصول على التعليمات.</div>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="form-section">
+        <label for="proof">رفع إثبات الدفع (صورة)</label>
+        <input type="file" (change)="onFileSelected($event)" />
+
+        <div class="actions">
+          <button class="confirm" (click)="confirm()" [disabled]="submitting">
+            {{ submitting ? 'جاري الإرسال...' : 'تأكيد الدفع' }}
+          </button>
+        </div>
+
+        <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== CHARGE PAYMENT ===================== -->
+  <div *ngIf="type === 'charge' && charge && !loading" class="checkout-container">
+
+    <div class="left">
+      <h2 class="title">ملخص الشحن</h2>
+
+      <div class="row">
+        <span class="label">اللعبة:</span>
+        <span class="value">{{ charge?.name }}</span>
+      </div>
+
+      <div class="row">
+        <span class="label">Player ID:</span>
+        <span class="value">{{ charge?.playerId }}</span>
+      </div>
+
+      <div *ngIf="charge?.quantity" class="row">
+        <span class="label">الكمية:</span>
+        <span class="value">{{ charge?.quantity }}</span>
+      </div>
+      <div class="row total">
+        <span class="label">المبلغ:</span>
+        <span class="value">{{ charge?.price }} دج</span>
+      </div>
+
+      <div class="row">
+        <span class="label">رقم الطلب:</span>
+        <span class="value">{{ charge?.chargeId }}</span>
+      </div>
+
+      <div class="row">
+        <span class="label">الحالة:</span>
+        <span class="value">{{ charge?.status }}</span>
+      </div>
+    </div>
+
+
+    <div class="right">
+      <h2 class="title">تعليمات الدفع</h2>
+
+      <div class="instructions">
+        <ng-container [ngSwitch]="charge?.paymentMethod">
+
+          <div *ngSwitchCase="'ccp'">
+            <div>رقم CCP: <strong>{{ paymentFallbacks.ccp.number }}</strong></div>
+            <div>اسم الحساب: <strong>{{ paymentFallbacks.ccp.accountName }}</strong></div>
+          </div>
+
+          <div *ngSwitchCase="'baridimob'">
+            <div>رقم BaridiMob: <strong>{{ paymentFallbacks.baridimob.phone }}</strong></div>
+          </div>
+
+          <div *ngSwitchCase="'wise'">
+            <div>رقم IBAN: <strong>{{ paymentFallbacks.wise.iban }}</strong></div>
+            <div>اسم الحساب: <strong>{{ paymentFallbacks.wise.accountName }}</strong></div>
+          </div>
+
+          <div *ngSwitchDefault>
+            <div>طريقة الدفع: <strong>{{ charge?.paymentMethod }}</strong></div>
+          </div>
+
+        </ng-container>
+      </div>
+
+
+      <div class="form-section">
+        <label>رفع إثبات الدفع</label>
+        <input type="file" (change)="onFileSelected($event)" />
+
+        <div class="actions">
+          <button class="confirm" (click)="confirm()" [disabled]="submitting">
+            {{ submitting ? 'جاري الإرسال...' : 'تأكيد الدفع' }}
+          </button>
+        </div>
+
+        <div *ngIf="successMessage" class="success">
+          {{ successMessage }}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

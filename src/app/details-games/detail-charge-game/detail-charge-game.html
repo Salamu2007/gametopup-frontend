@@ -1,0 +1,154 @@
+<section *ngIf="game; else notFound" class="detail-game container">
+	<div class="game-top">
+		<div class="gallery">
+			<div class="main-image">
+				<img [src]="getImageUrl()" 
+					 [alt]="game?.name || 'game image'" />
+			</div>
+			<div class="thumbs">
+				<img src="/assets/images/game-thumb1.jpg" alt="thumb1" title="معرض الصور" />
+				<img src="/assets/images/game-thumb2.jpg" alt="thumb2" title="معرض الصور" />
+				<img src="/assets/images/game-thumb3.jpg" alt="thumb3" title="معرض الصور" />
+			</div>
+		</div>
+
+		<aside class="game-meta">
+			<h1 class="game-title">{{ game?.name }}</h1>
+			
+			<div class="meta-row">
+				<span class="platform" title="المنصة">📱 </span>
+				<span class="category" title="الفئة">🎮 {{ game?.category }}</span>
+				<span class="currency-badge"  title="العملة">💰 {{ game?.currency }}</span>
+			</div>
+
+			<div class="price-card">
+				<div class="currency-info" >
+					<p class="info-text">💡 هذه لعبة شحن. اختر كمية من الحزمة وأدخل معرّف لاعبك</p>
+					<p *ngIf="selectedPackage">السعر: {{ selectedPackage.price }} {{ game?.currency }}</p>
+				</div>
+
+				<!-- Purchase controls: choose amount and enter player id -->
+				<div class="purchase-controls">
+					<label>💰 اختر الحزمة </label>
+					<select id="amountSelect" (change)="onAmountChange($event)" class="select-amount">
+						<option value="">اختر كمية...</option>
+						<option *ngFor="let pkg of game?.package" [value]="pkg.amount">{{ pkg.amount }} — {{ pkg.price }} {{ game?.currency }}</option>
+					</select>
+
+					<label style="margin-top: 14px;">👤 معرّف اللاعب (Player ID)</label>
+					<input id="playerId" [(ngModel)]="playerId" name="playerId" 
+						   type="text" 
+						   placeholder="أدخل معرّف اللاعب..." 
+						   class="input-player" />
+
+					<label style="margin-top: 12px;">📧 البريد الإلكتروني</label>
+					<input id="email" [(ngModel)]="email" name="email"
+						   type="email"
+						   placeholder="أدخل البريد الإلكتروني (اختياري)"
+						   class="input-email" />
+
+					<label style="margin-top: 12px;">📞 رقم الهاتف</label>
+					<input id="phone" [(ngModel)]="phone" name="phone"
+						   type="tel"
+						   placeholder="أدخل رقم الهاتف (اختياري)"
+						   class="input-phone" />
+
+					<label style="margin-top: 12px;">💳 طريقة الدفع</label>
+					<select [(ngModel)]="paymentMethod" class="select-payment">
+						<option value="ccp">CCP</option>
+						<option value="baridimob">BaridiMob</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="actions">
+				<button class="btn-buy" (click)="buyNow()"
+						[class.disabled]="!canBuy"
+						[disabled]="!canBuy"
+						[title]="canBuy ? 'اضغط لشراء' : 'اختر كمية وأدخل معرّف اللاعب'">
+					🛒 شراء الآن
+				</button>
+				<button class="btn-wishlist" title="أضفها للمفضلات">❤️ مفضلة</button>
+			</div>
+
+			<div *ngIf="message" 
+				 [class]="'message ' + (message.startsWith('✅') ? 'success' : 'error')"
+				 [@messageAnimation]>
+				{{ message }}
+			</div>
+
+			<div class="tags">
+				<span class="tag" *ngFor="let tag of ['كبير العالم', 'Co-op', 'قصة رائعة']">{{ tag }}</span>
+			</div>
+		</aside>
+	</div>
+
+	<div class="game-body">
+		<section class="description">
+			<h2>📖 وصف تفصيلي عن اللعبة</h2>
+			<p ></p>
+			<p>
+				تقدم هذه اللعبة تجربة غامرة في عالم مفصل مليء بالمهام المتشابكة. تتقمص شخصية لاعب يتنقل بين تحديات وسرد قصصي متفرع، والقرارات التي تتخذها تؤثر مباشرة على مجريات اللعب ونهايات الشخصيات الرئيسية.
+			</p>
+			<p>
+				تتميز اللعبة بنظام قتال مرن يجمع بين الأسلحة النارية والتعديلات السيبرانية المتقدمة، مع خيارات تطوير شاملة تسمح لك بتخصيص قدراتك وأدواتك بشكل كامل. كما تحتوي على مهمات جانبية مترابطة تقدم قصصًا قصيرة مؤثرة، وعروض بصرية سينمائية رائعة، ومقاطع حوارية عميقة.
+			</p>
+			<p>
+				من ناحية الأداء، صُممت اللعبة لتستفيد من قدرات الحواسب الحديثة مع إعدادات رسومية قابلة للتخصيص بالكامل، وتدعم أوضاع عرض مختلفة للاعبين، إضافةً إلى تحسينات للأداء على الأجهزة المتوسطة والضعيفة نسبياً.
+			</p>
+
+			<h3>⚙️ مميزات رئيسية</h3>
+			<ul>
+				<li>قصة متفرعة تعتمد بشكل كامل على اختيار اللاعب والقرارات</li>
+				<li>عالم ضخم مع عدد كبير جداً من المواقع والأماكن القابلة للاستكشاف</li>
+				<li>نظام تخصيص شخصيّة متقدم وتعديلات تقنية (Cyberware) متنوعة</li>
+				<li>مهام جانبية مستقلة تتضمن شخصيات ثانوية ذات طابع درامي قوي</li>
+				<li>دعم تحديثات منتظمة ومحتوى قابل للتحميل (DLC)</li>
+			</ul>
+
+			<h3>🖥️ متطلبات النظام (مقترحة)</h3>
+			<p>
+				<strong>الحد الأدنى:</strong> المعالج رباعي النواة · الذاكرة: 8GB RAM · بطاقة رسوميات: GTX 960<br/>
+				<strong>الموصى به:</strong> المعالج سداسي النواة أو أعلى · الذاكرة: 16GB RAM · بطاقة رسوميات: GTX 1080 · مساحة تخزينية: 150GB SSD
+			</p>
+		</section>
+
+		<section class="reviews">
+			<h2>⭐ تقييمات وآراء اللاعبين</h2>
+			<div class="review-item">
+				<strong>🎮 معجب بالألعاب</strong>
+				<p>تجربة لا تُنسى! القصة مثيرة للغاية والعمق في نظام التخصيص يجعلك تريد إعادة اللعبة مرات عديدة.</p>
+			</div>
+			<div class="review-item">
+				<strong>👾 لاعب محترف</strong>
+				<p>رسومات مذهلة وميكانيكا جيدة، لكن الأداء قد يكون مشكلة على الأجهزة القديمة. تستحق التجربة!</p>
+			</div>
+			<div class="review-item">
+				<strong>🎯 متحمس</strong>
+				<p>وجدت نفسي مستغرقاً في هذا العالم لساعات! أفضل استثمار للأموال في السنوات الأخيرة.</p>
+			</div>
+		</section>
+	</div>
+</section>
+
+<ng-template #notFound>
+	<section class="detail-game container">
+		<div class="no-results" style="padding:60px 20px; text-align:center;">
+			<div style="font-size: 4rem; margin-bottom: 20px;">🎮❌</div>
+			<h2>اللعبة غير موجودة</h2>
+			<p>للأسف، لم نعثر على اللعبة المطلوبة. الرجاء التأكد من الرابط أو العودة إلى صفحة الألعاب.</p>
+		</div>
+	</section>
+
+	<!-- Success Notification -->
+	<div *ngIf="showSuccessNotification" class="success-notification" [@messageAnimation]>
+		<div class="notification-content">
+			<span class="icon">✅</span>
+			<div class="text">
+				<h4>{{ successTitle }}</h4>
+				<p>{{ successMessage }}</p>
+			</div>
+			<button (click)="closeNotification()" class="close-btn">×</button>
+		</div>
+	</div>
+</ng-template>

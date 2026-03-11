@@ -1,0 +1,160 @@
+<div class="games-container" dir="rtl">
+  <!-- Header -->
+  <header class="page-header">
+    <div>
+      <h2 class="page-title">📱 إدارة الألعاب</h2>
+      <p class="page-subtitle">أضف، عدّل، أو احذف الألعاب من النظام</p>
+    </div>
+    <button class="btn btn-add" (click)="openAddForm()">➕ إضافة لعبة</button>
+  </header>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <p>جاري تحميل البيانات...</p>
+  </div>
+
+  <!-- Games Table -->
+  <div *ngIf="!isLoading" class="games-table-container">
+    <div *ngIf="games.length === 0" class="no-data">
+      <p>لا توجد ألعاب حالياً</p>
+    </div>
+
+    <table *ngIf="games.length > 0" class="games-table">
+      <thead>
+        <tr>
+          <th>اسم اللعبة</th>
+          <th>الفئة</th>
+          <th>المنصة</th>
+          <th>السعر</th>
+          <th>المخزون</th>
+          <th>التقييم</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of games" class="game-row">
+          <td class="game-name">{{ game.name }}</td>
+          <td><span class="badge badge-category">{{ game.category }}</span></td>
+          <td>{{ game.platform || '-' }}</td>
+          <td class="price">{{ game.price || 0 }} {{ game.currency || 'دج' }}</td>
+          <td>
+            <span class="badge" [class.badge-warning]="game.stock! < 20" [class.badge-success]="game.stock! >= 20">
+              {{ game.stock || 0 }}
+            </span>
+          </td>
+          <td>
+            <span *ngIf="game.rating">⭐ {{ game.rating }}</span>
+            <span *ngIf="!game.rating">-</span>
+          </td>
+          <td class="actions">
+            <button class="btn-icon btn-edit" (click)="openEditForm(game)" title="تعديل">✏️</button>
+            <button class="btn-icon btn-delete" (click)="deleteGame(game._id)" title="حذف">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Add/Edit Form Modal -->
+  <div *ngIf="showForm" class="modal-overlay" (click)="closeForm()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>{{ formTitle }}</h3>
+        <button class="close-btn" (click)="closeForm()">✕</button>
+      </div>
+
+      <form (ngSubmit)="submitForm()" class="game-form">
+        <div class="form-group">
+          <label>اسم اللعبة *</label>
+          <input type="text" [(ngModel)]="formData.name" name="name" placeholder="مثال: لعبة الأكشن" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>الفئة *</label>
+            <select [(ngModel)]="formData.category" name="category" required>
+              <option value="" disabled>اختر فئة</option>
+              <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>المنصة</label>
+            <select [(ngModel)]="formData.platform" name="platform">
+              <option value="">اختر منصة</option>
+              <option *ngFor="let plat of platforms" [value]="plat">{{ plat }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>السعر (اختياري)</label>
+            <input type="number" [(ngModel)]="formData.price" name="price" placeholder="0" min="0">
+          </div>
+          <div class="form-group">
+            <label>المخزون</label>
+            <input type="number" [(ngModel)]="formData.stock" name="stock" placeholder="0" min="0">
+          </div>
+          <div class="form-group">
+            <label>التقييم (0-5)</label>
+            <input type="number" [(ngModel)]="formData.rating" name="rating" placeholder="0" min="0" max="5" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>النوع</label>
+            <select [(ngModel)]="formData.type" name="type">
+              <option value="game">بيع عادي</option>
+              <option value="charge">شحن</option>
+            </select>
+          </div>
+        </div>
+
+        <div *ngIf="formData.type === 'charge'" class="packages-section">
+          <label>الحزم</label>
+          <div *ngFor="let pkg of formData.package; let idx = index" class="package-row">
+            <input type="number" [(ngModel)]="pkg.amount" name="pkgAmount{{idx}}" placeholder="الكمية" min="0" />
+            <input type="number" [(ngModel)]="pkg.price" name="pkgPrice{{idx}}" placeholder="السعر" min="0" />
+            <button type="button" class="btn btn-delete" (click)="removePackage(idx)">حذف</button>
+          </div>
+          <button type="button" class="btn btn-add" (click)="addPackage()">أضف حزمة</button>
+        </div>
+
+        <div class="form-group">
+          <label>الوصف</label>
+          <textarea [(ngModel)]="formData.description" name="description" placeholder="اكت وصف اللعبة..." rows="3"></textarea>
+        </div>
+
+        <!-- Image Upload Section -->
+        <div class="form-group">
+          <label>صورة اللعبة</label>
+          <div class="image-upload-container">
+            <input 
+              type="file" 
+              #imageInput
+              id="imageInput"
+              (change)="onImageSelected($event)" 
+              accept="image/*"
+              [disabled]="uploadingImage"
+              class="image-input"
+            />
+            <label for="imageInput" class="image-upload-label">
+              <span *ngIf="!uploadingImage && !imagePreview">📸 اختر صورة</span>
+              <span *ngIf="uploadingImage">جاري التحميل...</span>
+            </label>
+            <div *ngIf="imagePreview" class="image-preview">
+              <img [src]="imagePreview" alt="معاينة الصورة" />
+              <p>{{ formData.image || 'تم تحميل الصورة' }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-submit">{{ editingId ? 'تحديث' : 'إضافة' }}</button>
+          <button type="button" class="btn btn-cancel" (click)="closeForm()">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

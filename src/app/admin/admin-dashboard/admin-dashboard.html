@@ -1,0 +1,92 @@
+<div class="dashboard-container" dir="rtl">
+  <!-- Header with welcome message -->
+  <header class="dashboard-header">
+    <div class="welcome">
+      <h2>مرحبا، Salamu_200IQ</h2>
+      <p class="sub-title">إليك نظرة سريعة على النظام</p>
+    </div>
+    <div class="date">
+      {{ today | date:'fullDate' }}
+    </div>
+  </header>
+
+  <h2 class="page-title">لوحة التحكم - الرئيسية</h2>
+
+  <div class="stats-grid">
+    <div class="card card-orders">
+      <div class="card-header">
+        <span class="icon">📦</span>
+        <h3>الطلبات</h3>
+      </div>
+      <div class="card-body">
+        <p class="number">{{ totalOrders }}</p>
+      </div>
+    </div>
+
+    <div class="card card-charges">
+      <div class="card-header">
+        <span class="icon">💳</span>
+        <h3>الشحنات</h3>
+      </div>
+      <div class="card-body">
+        <p class="number">{{ totalCharges }}</p>
+      </div>
+    </div>
+
+    <div class="card card-games">
+      <div class="card-header">
+        <span class="icon">🎮</span>
+        <h3>الألعاب</h3>
+      </div>
+      <div class="card-body">
+        <p class="number">{{ totalGames }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification -->
+   <div class="notifications">
+    <h3>🔔 التنبيهات</h3>
+    <button (click)="testNotification()" class="btn-test">اختبار الإشعار</button>
+    <div *ngFor="let note of notifications" class="notification">
+        {{ note }}
+    </div>
+   </div>
+
+   <!--table-->
+
+   <div class="recent-orders">
+    <h3>آخر الطلبات</h3>
+
+    <div *ngIf="isLoading" class="loading">جاري التحميل...</div>
+    
+    <div *ngIf="!isLoading && orders.length === 0" class="no-data">لا توجد طلبات حالياً</div>
+
+    <table *ngIf="!isLoading && orders.length > 0">
+        <thead>
+        <tr>
+            <th>اللعبة</th>
+            <th>الايميل</th>
+            <th>الكمية</th>
+            <th>الحالة</th>
+            <th>التاريخ</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of orders">
+            <td>{{ order.gameName }}</td>
+            <td>{{ order.email }}</td>
+            <td>{{ order.quantity }}</td>
+            <td><span class="status" [class]="'status-' + order.status">{{ order.status }}</span></td>
+            <td>{{ order.createdAt | date:'short' }}</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+  <!-- Chart placeholder -->
+  <div class="chart-container">
+    <h3>مخطط الأحداث الأخيرة</h3>
+    <canvas id="dashboardChart"></canvas>
+  </div>
+</div>

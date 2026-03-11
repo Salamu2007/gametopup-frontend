@@ -1,0 +1,324 @@
+/* HERO SECTION */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.hero {
+  height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  background-image: url('/assets/images/site.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: darken;
+}
+
+.hero .hero-content {
+  max-width: 700px;
+}
+
+.hero .hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero .hero-content h1 span {
+  color: #133aff;
+}
+
+.hero .hero-content p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.hero .hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero .hero-buttons .btn {
+  padding: 12px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.hero .hero-buttons .primary {
+  background: #00c6ff;
+  color: #000;
+}
+
+.hero .hero-buttons .primary:hover {
+  background: #00a8dd;
+}
+
+.hero .hero-buttons .secondary {
+  border: 2px solid #00c6ff;
+  color: #00c6ff;
+}
+
+.hero .hero-buttons .secondary:hover {
+  background: #00c6ff;
+  color: #000;
+}
+
+/* GAMES SECTION */
+.games {
+  padding: 80px 20px;
+  background: #0b0f14;
+  color: white;
+  text-align: center;
+}
+
+.games h2 {
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+}
+
+.games .game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 100%;
+  margin: 50px auto;
+}
+
+.games .game-grid .game-card {
+  background: #151a21;
+  padding: 20px 10px;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.games .game-grid .game-card h3 {
+  margin-top: 10px;
+}
+
+.games .game-grid .game-card p {
+  opacity: 0.8;
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+.btn-small {
+  padding: 8px 15px;
+  border-radius: 25px;
+  background: #00c6ff;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-top: 17px;
+}
+
+.btn-small:hover {
+  background: #00a8dd;
+}
+
+.games .game-grid .game-card:hover {
+  transform: translateY(-8px);
+  background: #1e2530;
+}
+
+.games .game-grid .game-card img {
+    width: 170px;
+    height: 170px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+
+}
+
+
+/* SELL GAMES SECTION */
+.sell-games {
+  padding: 80px 20px;
+  background: #10151c;
+  color: white;
+  text-align: center;
+}
+
+.sell-games h2 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.sell-games .subtitle {
+  opacity: 0.8;
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+}
+
+.sell-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 100%;
+  margin: 50px auto;
+}
+
+.sell-card {
+  background: #151a21;
+  padding: 20px 10px;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sell-card h3 {
+  margin-top: 10px;
+}
+
+.sell-card p {
+  opacity: 0.8;
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+.sell-card img {
+    width: 170px;
+    height: 170px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.sell-card:hover {
+  transform: translateY(-8px);
+  background: #1e2530;
+}
+
+.sell-card .btn.small {
+  padding: 8px 15px;
+  border-radius: 25px;
+  background: #00c6ff;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-top: 17px;
+}
+.sell-card .btn.small:hover {
+  background: #00a8dd;
+}
+
+/* MOBILE SCREENS */
+@media screen and (max-width: 768px) {
+  .hero {
+    height: 80vh;
+    padding: 20px;
+  }
+
+  .hero .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero .hero-content p {
+    font-size: 1rem;
+  }
+
+  .games .game-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .games .game-grid .game-card img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .sell-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .sell-card img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .games h2,
+  .sell-games h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* SMALL SCREENS */
+@media screen and (max-width: 480px) {
+  .hero {
+    height: 60vh;
+    padding: 15px;
+  }
+
+  .hero .hero-content h1 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .hero .hero-content p {
+    font-size: 0.9rem;
+  }
+
+  .hero .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .games {
+    padding: 50px 15px;
+  }
+
+  .games .game-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .games .game-grid .game-card {
+    padding: 15px 8px;
+  }
+
+  .games .game-grid .game-card img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .games .game-grid .game-card h3 {
+    font-size: 1rem;
+  }
+
+  .sell-games {
+    padding: 50px 15px;
+  }
+
+  .sell-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .games h2,
+  .sell-games h2 {
+    font-size: 1.5rem;
+  }
+}

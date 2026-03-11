@@ -1,0 +1,124 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  position: fixed;
+  direction: ltr;
+  width: 100%;
+  background: rgba(37, 37, 37, 0.539); 
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #00c6ff;
+}
+
+.nav {
+  display: flex;
+  gap: 25px;
+  direction: rtl;
+  text-align: center;
+  
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.nav a:hover {
+  color: #00c6ff;
+}
+
+/* Mobile / Hamburger styles */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.menu-toggle span {
+  width: 26px;
+  height: 3px;
+  background-color: #00c6ff;
+  display: block;
+  transition: 0.25s ease;
+  text-align: center;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    left: 0;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(37, 37, 37, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 14px 18px;
+    overflow: hidden;
+    align-items: center;
+    z-index: 999;
+    transform: translateY(-120%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+
+  .nav.active {
+    max-height: 420px;
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .nav a {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 198, 255, 0.08);
+    text-align: right;
+  }
+
+  .nav a:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 12px 15px;
+  }
+
+  .nav {
+    top: 45px;
+    padding: 12px 14px;
+  }
+
+  .nav a {
+    padding: 10px 0;
+    font-size: 0.95rem;
+  }
+}
