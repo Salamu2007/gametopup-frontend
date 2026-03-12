@@ -33,7 +33,7 @@
           <th>البريد الإلكتروني</th>
           <th>Player ID</th>
           <th>الكمية</th>
-          <th>العملة</th>
+          <th>نوع العملة</th>
           <th>الحالة</th>
           <th>التاريخ</th>
         </tr>
@@ -59,7 +59,7 @@
           <td>{{ c.email }}</td>
           <td>{{ c.playerId }}</td>
           <td>{{ c.quantity }}</td>
-          <td>{{ c.currency || 'دج' }}</td>
+          <td>{{ c.currencyType || 'UC' }}</td>
           <td>{{ c.status }}</td>
           <td>{{ c.createdAt | date:'short' }}</td>
         </tr>
@@ -79,7 +79,7 @@
         <p><strong>Player ID:</strong> {{ selectedCharge.playerId }}</p>
         <p><strong>الايميل:</strong> {{ selectedCharge.email }}</p>
         <p><strong>الكمية:</strong> {{ selectedCharge.quantity }}</p>
-        <p><strong>العملة:</strong> {{ selectedCharge.currency || 'دج' }}</p>
+        <p><strong>نوع العملة:</strong> {{ selectedCharge.currencyType || 'UC' }}</p>
         <p><strong>الحالة:</strong> {{ selectedCharge.status }}</p>
         <p><strong>التاريخ:</strong> {{ selectedCharge.createdAt | date:'short' }}</p>
         <div *ngIf="selectedCharge.gameImage || selectedCharge.image" class="modal-section">

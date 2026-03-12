@@ -11,6 +11,7 @@ export interface Game {
   price?: number;
   stock?: number;
   currency?: string;
+  currencyType?: string;
   image?: string;
   description?: string;
   genre?: string;
@@ -180,6 +181,7 @@ export class AdminGames implements OnInit {
       price: 0,
       stock: 0,
       currency: 'دج',
+      currencyType: 'UC',
       description: '',
       genre: '',
       rating: 0,
@@ -209,6 +211,7 @@ export class AdminGames implements OnInit {
         price: 199,
         stock: 50,
         currency: 'دج',
+        currencyType: 'UC',
         rating: 4.5
       },
       {
@@ -219,6 +222,7 @@ export class AdminGames implements OnInit {
         price: 99,
         stock: 100,
         currency: 'دج',
+        currencyType: 'Diamonds',
         rating: 4
       }
     ];

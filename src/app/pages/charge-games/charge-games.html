@@ -33,6 +33,7 @@
         <div class="game-info">
           <h3>{{ game.name }}</h3>
           <p class="game-currency">{{ game.currency }}</p>
+          <p class="game-currency-type">{{ game.currencyType || 'UC' }} 💎</p>
         </div>
         <a [routerLink]="['/user/detail-charge-game', game._id]" class="btn-charge">اشحن الآن</a>
       </div>

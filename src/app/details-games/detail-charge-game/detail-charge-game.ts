@@ -51,8 +51,6 @@ export class DetailChargeGame implements OnInit {
       this.gameService.loadGamecharge(id).subscribe({
         next: (data) => {
           this.game = data;
-          console.log('Loaded game:', this.game);
-          console.log('Game packages:', this.game?.package);
         },
         error: (err) => {
           console.error(err);
@@ -131,7 +129,8 @@ export class DetailChargeGame implements OnInit {
       quantity: this.selectedPackage.amount, // actual top-up quantity
       email: this.email,
       phone: this.phone,
-      paymentMethod: this.paymentMethod
+      paymentMethod: this.paymentMethod,
+      currencyType: this.game.currencyType || "UC"
     };
 
     this.gameService.createCharge(this.game!._id, payload).subscribe({

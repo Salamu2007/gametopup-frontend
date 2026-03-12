@@ -7,6 +7,7 @@ export interface GamesCharges {
   _id: string;
   name: string;
   currency: string; 
+  currencyType: string;
   category: string;
   platform: string;
   imageUrl: string;
@@ -19,6 +20,7 @@ export interface GameDetailcharge {
   image: string; // مش imageUrl
   description: string;
   currency: string;
+  currencyType: string;
   package: {
     amount: number;
     price: number;
@@ -72,6 +74,7 @@ export interface chargePayment {
   playerId: string;
   amount: number;
   quantity?: number;
+  currencyType: string;
   paymentMethod: string;
   status: string;
   price: number;
@@ -91,7 +94,6 @@ export class GameService {
       `${this.apiUrl}/products/charges`
     ).pipe(
       map((res) => {
-        console.log('Charge res:', res);
         return res;
       }),
       catchError((error) => {

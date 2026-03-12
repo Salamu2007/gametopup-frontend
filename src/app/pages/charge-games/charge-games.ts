@@ -74,7 +74,6 @@ export class ChargeGames implements OnInit {
     this.gameService.loadgamecharges().subscribe({
       next: (data) => {
         this.games = data;
-        console.log('Games loaded:', this.games);
       },
       error: (error) => {
         console.error('Error loading games:', error);

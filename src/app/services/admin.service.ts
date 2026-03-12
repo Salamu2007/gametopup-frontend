@@ -22,6 +22,7 @@ export interface AdminCharge {
   gameImage?: string;
   image?: string; // legacy fallback
   currency?: string;
+  currencyType?: string;
   paymentImage?: string;
   email: string;
   quantity: number;
