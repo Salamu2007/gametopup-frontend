@@ -26,6 +26,7 @@
           <th>الفئة</th>
           <th>المنصة</th>
           <th>السعر</th>
+          <th>نوع العملة</th>
           <th>المخزون</th>
           <th>التقييم</th>
           <th>الإجراءات</th>
@@ -37,6 +38,7 @@
           <td><span class="badge badge-category">{{ game.category }}</span></td>
           <td>{{ game.platform || '-' }}</td>
           <td class="price">{{ game.price || 0 }} {{ game.currency || 'دج' }}</td>
+          <td>{{ game.currencyType || 'UC' }}</td>
           <td>
             <span class="badge" [class.badge-warning]="game.stock! < 20" [class.badge-success]="game.stock! >= 20">
               {{ game.stock || 0 }}
@@ -107,6 +109,18 @@
             <select [(ngModel)]="formData.type" name="type">
               <option value="game">بيع عادي</option>
               <option value="charge">شحن</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>نوع العملة</label>
+            <select [(ngModel)]="formData.currencyType" name="currencyType">
+              <option value="UC">UC</option>
+              <option value="Diamonds">Diamonds</option>
+              <option value="Coins">Coins</option>
+              <option value="Points">Points</option>
+              <option value="Credits">Credits</option>
+              <option value="Gold">Gold</option>
+              <option value="Gems">Gems</option>
             </select>
           </div>
         </div>
