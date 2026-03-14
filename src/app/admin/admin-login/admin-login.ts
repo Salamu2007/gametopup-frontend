@@ -22,7 +22,6 @@ export class AdminLogin {
     // TODO: call backend service to authenticate admin
     this.gameService.makeAdminLogin(this.username, this.password).subscribe(
       (res) => {
-        console.log('Login successful:', res);
         // Store token and role in localStorage
         localStorage.setItem('token', res.token);
         localStorage.setItem('role', 'admin');

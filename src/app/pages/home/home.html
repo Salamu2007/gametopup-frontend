@@ -11,53 +11,62 @@
     </p>
 
     <div class="hero-buttons">
-      <a href="#games" class="btn primary">اطلب الشحن الآن</a>
+      <a href="#chargegames" class="btn primary">اطلب الشحن الآن</a>
       <a routerLink="/how-it-works" class="btn secondary">كيف يتم الشحن؟</a>
     </div>
   </div>
 </section>
 
-<!-- GAMES SECTION -->
-<section class="games" id="games">
-  <h2>الألعاب المدعومة 🎮</h2>
-    <p class="subtitle">
-        شحن سريع وآمن لأشهر الألعاب 🔥  
-    </p>
-    <div class="game-grid" >
-      <div class="game-card" *ngFor="let game of games" >
-        <img [src]="game.image" alt="{{ game.name }} Logo">
-        <h3>{{ game.name }}</h3>
-        <p>اشحن عملتك {{ game.route }} في حسابك الان</p>
-        <a routerLink="/detail-game" class="btn-small">اشحن الآن</a>
-      </div>
-      <div class="game-card">
-        <img src="/assets/images/comingsoon.png" alt="Coming Soon">
-        <h3>المزيد قادم قريبًا!</h3>
-        <p>نضيف ألعاب جديدة باستمرار، ترقبوا المزيد من الخيارات!</p>
-        <a routerLink="/contact" class="btn-small">تواصل معنا</a>
-      </div>
+<!-- CHARGE GAMES SECTION -->
+<section class="games" id="chargegames">
+  <h2>شحن الألعاب 🎮</h2>
+  <p class="subtitle">
+    اختر اللعبة وارفع شحنتك بسرعة وآمان 🔥
+  </p>
+
+  <div class="game-grid">
+    <div class="game-card" *ngFor="let game of chargeGames | slice:0:8">
+      <img [src]="game.imageUrl" alt="{{ game.name }} Logo">
+      <h3>{{ game.name }}</h3>
+      <p class="short-desc">
+        {{ (game.description || 'وصف مختصر غير متوفر').slice(0, 70) }}
+        <span *ngIf="game.description && game.description.length > 70">...</span>
+      </p>
+      <p>عملة: {{ game.currency }} {{ game.currencyType }}</p>
+      <a [routerLink]="['/user/detail-charge-game', game._id]" class="btn-small">اشحن الآن</a>
     </div>
+
+    <div class="game-card">
+      <img src="/assets/images/comingsoon.png" alt="Coming Soon">
+      <h3>المزيد قادم قريبًا!</h3>
+      <p>نضيف ألعاب جديدة باستمرار، ترقبوا المزيد من الخيارات!</p>
+      <a routerLink="/user/contact" class="btn-small">تواصل معنا</a>
+    </div>
+  </div>
 </section>
-<!-- SELL GAMES SECTION -->
-<section class="sell-games">
+
+<!-- ORDERS GAMES SECTION -->
+<section class="sell-games" id="ordersgames">
   <h2>شراء الألعاب 🎮</h2>
   <p class="subtitle">
-    ألعاب أصلية للـ PC بأسعار مناسبة 🔥  
-    Steam | Epic Games
+    ألعاب أصلية لسطح المكتب بأسعار منافسة 🔥
   </p>
 
   <div class="sell-grid">
-    <div class="sell-card" *ngFor="let game of sellGames">
-      <img [src]="game.image" alt="{{ game.name }} Logo">
+    <div class="sell-card" *ngFor="let game of sellGames | slice:0:8">
+      <img [src]="game.imageUrl" alt="{{ game.name }} Logo">
       <h3>{{ game.name }}</h3>
-      <p> {{game.route}} </p>
-      <a routerLink="/contact" class="btn small">اطلب الآن</a>
+      <p class="short-desc">
+        {{ (game.description || game.category || 'لعبة رائعة').slice(0, 70) }}
+        <span *ngIf="(game.description || game.category || 'لعبة رائعة').length > 70">...</span>
+      </p>
+      <a [routerLink]="['/user/detail-buy-game', game._id]" class="btn small">اطلب الآن</a>
     </div>
     <div class="sell-card">
       <img src="/assets/images/comingsoon.png" alt="Coming Soon">
       <h3>المزيد قادم قريبًا!</h3>
       <p>نضيف ألعاب جديدة باستمرار، ترقبوا المزيد من الخيارات!</p>
-       <a routerLink="/contact" class="btn-small">تواصل معنا</a>
+       <a routerLink="/user/contact" class="btn-small">تواصل معنا</a>
     </div>
   </div>
 </section>

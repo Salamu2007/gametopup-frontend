@@ -70,12 +70,8 @@ export class AdminOrders implements OnInit {
   approve() {
     if (!this.selectedOrder) return;
     
-    console.log('Approving order:', this.selectedOrder._id);
-    console.log('Token:', this.adminService.getToken());
-    
     this.adminService.confirmOrder(this.selectedOrder._id as string).subscribe({
       next: (response) => {
-        console.log('Approve success:', response);
         alert('تم قبول الطلب');
         this.closeModal();
         this.loadOrders();

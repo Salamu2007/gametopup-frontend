@@ -6,11 +6,12 @@ import { of } from 'rxjs';
 export interface GamesCharges {
   _id: string;
   name: string;
-  currency: string; 
+  currency: string;
   currencyType: string;
   category: string;
   platform: string;
   imageUrl: string;
+  description?: string; // optional description, used on card previews
 }
 export interface GameDetailcharge {
   _id: string;
@@ -109,7 +110,6 @@ export class GameService {
   loadGamebuy(id: string): Observable<GameDetailbuy> {
     return this.http.get<GameDetailbuy>(`${this.apiUrl}/products/${id}`).pipe(
       map((res) => {
-        console.log('Game res:', res);
         return res;
       }),
       catchError((error) => {
@@ -122,7 +122,6 @@ export class GameService {
   loadGamecharge(id: string): Observable<GameDetailcharge> {
     return this.http.get<GameDetailcharge>(`${this.apiUrl}/products/${id}`).pipe(
       map((res) => {
-        console.log('Game res:', res);
         return res;
       }),
       catchError((error) => {
@@ -144,7 +143,6 @@ export class GameService {
   loadGamesCards(): Observable<GameCard[]> {
     return this.http.get<GameCard[]>(`${this.apiUrl}/products/orders`).pipe(
       map((res) => {
-        console.log('Game cards res:', res);
         return res;
       }),
       
@@ -158,7 +156,6 @@ export class GameService {
   loadOrderPayment(orderId: string): Observable<OrderPayment> {
     return this.http.get<OrderPayment>(`${this.apiUrl}/orders/paymentorder/${orderId}`).pipe(
       map((res) => {
-        console.log('Order payment res:', res);
         return res;
       }),
       catchError((error) => {
@@ -175,7 +172,6 @@ export class GameService {
   loadChargePayment(chargeId: string): Observable<chargePayment> {
     return this.http.get<chargePayment>(`${this.apiUrl}/charges/paymentcharge/${chargeId}`).pipe(
       map((res) => {
-        console.log('Charge payment res:', res);
         return res;
       }),
       catchError((error) => {

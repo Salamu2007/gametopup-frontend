@@ -1,33 +1,58 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { GameService, GamesCharges, GameCard } from '../../services/game.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
-export class Home {
-  games = [
-    { name: 'Fortnite', route: 'vbucks' ,image : 'assets/images/fortnite.png'},
-    { name: 'Valorant', route: 'VB' ,image : 'assets/images/valorant.png'},
-    { name: 'Roblox', route: 'robux' ,image : 'assets/images/roblox.png'},
-    { name: 'Free Fire', route: 'diamonds' ,image : 'assets/images/freefire.png'},
-    { name: 'CallOfDuty Mobile', route: 'CB' ,image : 'assets/images/codmobile.png'},
-    { name: 'Fc Mobile', route: 'fc point' ,image : 'assets/images/fcmobile.png'},
-    { name: 'efootball', route: 'coins' ,image : 'assets/images/efootball.png'},
-    { name: 'PUBG Mobile', route: 'UC' ,image : 'assets/images/pubgmobile.png'},
-  ];
+export class Home implements OnInit {
+  chargeGames: GamesCharges[] = [];
+  sellGames: GameCard[] = [];
 
-  sellGames = [
-    { name: 'Minecraft', route: 'for PC' ,image : 'assets/images/Minecraft.png'},
-    { name: 'GTA V', route: 'For PC' ,image : 'assets/images/gta5.png'},
-    { name: 'Red Dead Redemption 2', route: 'For PC' ,image : 'assets/images/rdr2.png'},
-    { name: 'EA Sports FC 24', route: 'For PC' ,image : 'assets/images/fc24.png'},
-    { name: 'EA Sports FC 25', route: 'For PC' ,image : 'assets/images/fc25.png'},
-    { name: 'Cyberpunk 2077', route: 'For PC' ,image : 'assets/images/cyperbank2077.png'},
-    { name: 'The Witcher 3', route: 'For PC' ,image : 'assets/images/the witcher 3.png'},
+  constructor(private gameService: GameService) {}
 
-  ];
+  ngOnInit(): void {
+    this.loadChargeGames();
+    this.loadSellGames();
+  }
+
+  private fixImageUrl(imageUrl: string | undefined): string {
+    if (!imageUrl) return '/assets/images/comingsoon.png';
+    if (imageUrl.startsWith('http')) return imageUrl;
+    if (imageUrl.startsWith('/uploads/')) return `http://localhost:3000${imageUrl}`;
+    return imageUrl;
+  }
+
+  private loadChargeGames(): void {
+    this.gameService.loadgamecharges().subscribe({
+      next: (data) => {
+        this.chargeGames = data.map(game => ({
+          ...game,
+          imageUrl: this.fixImageUrl(game.imageUrl)
+        }));
+      },
+      error: (err) => {
+        console.error('Error loading charge games:', err);
+      }
+    });
+  }
+
+  private loadSellGames(): void {
+    this.gameService.loadGamesCards().subscribe({
+      next: (data) => {
+        this.sellGames = data.map(game => ({
+          ...game,
+          imageUrl: this.fixImageUrl(game.imageUrl)
+        }));
+      },
+      error: (err) => {
+        console.error('Error loading sell games:', err);
+      }
+    });
+  }
 }

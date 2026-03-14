@@ -85,7 +85,8 @@
 			<!-- Product Footer -->
 			<div class="product-footer">
 				<div class="product-price-section">
-					<div *ngIf="p.originalPrice" class="price-original">{{ p.originalPrice }} $</div>
+					<div class="price-current">{{ p.price || 0 }} دج</div>
+					<div *ngIf="p.originalPrice" class="price-original">{{ p.originalPrice }} دج</div>
 					<div *ngIf="p.originalPrice" class="price-discount">{{ ((p.originalPrice - (p.price||0)) | number:'1.0-0') }} خصم</div>
 				</div>
 				<a [routerLink]="['/user/detail-buy-game', p._id]" class="btn-buy">

@@ -9,13 +9,16 @@ export interface Game {
   category: string;
   platform?: string;
   price?: number;
-  stock?: number;
+  originalPrice?: number;
+  discount?: number; // percentage discount applied to price
   currency?: string;
   currencyType?: string;
+  stock?: number;
   image?: string;
   description?: string;
   genre?: string;
   rating?: number;
+  reviews?: number;
   type?: string; // 'game' or 'charge'
   package?: { amount: number; price: number }[];
 }
@@ -100,7 +103,6 @@ export class AdminGames implements OnInit {
         next: (response) => {
           this.formData.image = response.imageUrl;
           this.uploadingImage = false;
-          console.log('Image uploaded successfully:', response);
         },
         error: (err) => {
           console.error('Error uploading image:', err);
@@ -115,6 +117,13 @@ export class AdminGames implements OnInit {
     if (!this.formData.name || !this.formData.category) {
       alert('يرجى ملء الحقول المطلوبة');
       return;
+    }
+
+    // حساب السعر الأصلي تلقائياً بناءً على نسبة الخصم (إن وجدت)
+    if (this.formData.price != null && this.formData.discount != null) {
+      const basePrice = this.formData.price || 0;
+      const discount = this.formData.discount || 0;
+      this.formData.originalPrice = Math.round(basePrice + (basePrice * discount) / 100);
     }
 
     if (this.editingId) {
@@ -179,6 +188,8 @@ export class AdminGames implements OnInit {
       category: '',
       platform: '',
       price: 0,
+      originalPrice: 0,
+      discount: 0,
       stock: 0,
       currency: 'دج',
       currencyType: 'UC',

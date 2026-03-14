@@ -50,7 +50,6 @@ export class DetailBuyGame implements OnInit {
     this.isLoading = true;
     this.gameService.loadGamebuy(id).subscribe({
       next: (data) => {
-        console.log("DATA RECEIVED:", data);
         this.game = data;
         this.isLoading = false;
       },

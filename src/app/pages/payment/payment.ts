@@ -26,11 +26,12 @@ export class Payment implements OnInit {
   // Fallback payment details if the order doesn't provide them
   paymentFallbacks: any = {
     ccp: {
-      number: '123456789012345678',
-      accountName: 'GameTopup DZ'
+      number: '0044028662',
+      key: '90',
+      accountName: 'Mouhamed Islam Boukhendeg'
     },
     baridimob: {
-      phone: '0550000000'
+      phone: '004402866290'
     },
     wise: {
       iban: 'FR76XXXXXXXXXXXX',
@@ -48,8 +49,6 @@ export class Payment implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id')!;
 
     const currentUrl = this.router.url;
-
-    console.log("Current URL:", currentUrl);
 
     if (currentUrl.includes('order-payment')) {
       this.type = 'order';

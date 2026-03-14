@@ -5,10 +5,12 @@
 				<img [src]="getImageUrl()" 
 					 [alt]="game?.name || 'game image'" />
 			</div>
-			<div class="thumbs">
-				<img src="/assets/images/game-thumb1.jpg" alt="thumb1" title="معرض الصور" />
-				<img src="/assets/images/game-thumb2.jpg" alt="thumb2" title="معرض الصور" />
-				<img src="/assets/images/game-thumb3.jpg" alt="thumb3" title="معرض الصور" />
+			
+
+			<!-- Full description for detail view -->
+			<div class="game-description" *ngIf="game?.description">
+				<h3>نبذة عن اللعبة</h3>
+				<p>{{ game.description }}</p>
 			</div>
 		</div>
 
@@ -22,13 +24,7 @@
 				<span class="currency-type-badge" title="نوع العملة">💎 {{ game?.currencyType || 'UC' }}</span>
 			</div>
 
-			<div class="price-card">
-				<div class="currency-info" >
-					<p class="info-text">💡 هذه لعبة شحن. اختر كمية من الحزمة وأدخل معرّف لاعبك</p>
-					<p *ngIf="selectedPackage">السعر: {{ selectedPackage.price }} {{ game?.currency }}</p>
-				</div>
-
-				<!-- Purchase controls: choose amount and enter player id -->
+		<div class="price-card">
 				<div class="purchase-controls">
 					<label>💰 اختر الحزمة </label>
 					<select id="amountSelect" (change)="onAmountChange($event)" class="select-amount">
@@ -84,52 +80,7 @@
 		</aside>
 	</div>
 
-	<div class="game-body">
-		<section class="description">
-			<h2>📖 وصف تفصيلي عن اللعبة</h2>
-			<p ></p>
-			<p>
-				تقدم هذه اللعبة تجربة غامرة في عالم مفصل مليء بالمهام المتشابكة. تتقمص شخصية لاعب يتنقل بين تحديات وسرد قصصي متفرع، والقرارات التي تتخذها تؤثر مباشرة على مجريات اللعب ونهايات الشخصيات الرئيسية.
-			</p>
-			<p>
-				تتميز اللعبة بنظام قتال مرن يجمع بين الأسلحة النارية والتعديلات السيبرانية المتقدمة، مع خيارات تطوير شاملة تسمح لك بتخصيص قدراتك وأدواتك بشكل كامل. كما تحتوي على مهمات جانبية مترابطة تقدم قصصًا قصيرة مؤثرة، وعروض بصرية سينمائية رائعة، ومقاطع حوارية عميقة.
-			</p>
-			<p>
-				من ناحية الأداء، صُممت اللعبة لتستفيد من قدرات الحواسب الحديثة مع إعدادات رسومية قابلة للتخصيص بالكامل، وتدعم أوضاع عرض مختلفة للاعبين، إضافةً إلى تحسينات للأداء على الأجهزة المتوسطة والضعيفة نسبياً.
-			</p>
-
-			<h3>⚙️ مميزات رئيسية</h3>
-			<ul>
-				<li>قصة متفرعة تعتمد بشكل كامل على اختيار اللاعب والقرارات</li>
-				<li>عالم ضخم مع عدد كبير جداً من المواقع والأماكن القابلة للاستكشاف</li>
-				<li>نظام تخصيص شخصيّة متقدم وتعديلات تقنية (Cyberware) متنوعة</li>
-				<li>مهام جانبية مستقلة تتضمن شخصيات ثانوية ذات طابع درامي قوي</li>
-				<li>دعم تحديثات منتظمة ومحتوى قابل للتحميل (DLC)</li>
-			</ul>
-
-			<h3>🖥️ متطلبات النظام (مقترحة)</h3>
-			<p>
-				<strong>الحد الأدنى:</strong> المعالج رباعي النواة · الذاكرة: 8GB RAM · بطاقة رسوميات: GTX 960<br/>
-				<strong>الموصى به:</strong> المعالج سداسي النواة أو أعلى · الذاكرة: 16GB RAM · بطاقة رسوميات: GTX 1080 · مساحة تخزينية: 150GB SSD
-			</p>
-		</section>
-
-		<section class="reviews">
-			<h2>⭐ تقييمات وآراء اللاعبين</h2>
-			<div class="review-item">
-				<strong>🎮 معجب بالألعاب</strong>
-				<p>تجربة لا تُنسى! القصة مثيرة للغاية والعمق في نظام التخصيص يجعلك تريد إعادة اللعبة مرات عديدة.</p>
-			</div>
-			<div class="review-item">
-				<strong>👾 لاعب محترف</strong>
-				<p>رسومات مذهلة وميكانيكا جيدة، لكن الأداء قد يكون مشكلة على الأجهزة القديمة. تستحق التجربة!</p>
-			</div>
-			<div class="review-item">
-				<strong>🎯 متحمس</strong>
-				<p>وجدت نفسي مستغرقاً في هذا العالم لساعات! أفضل استثمار للأموال في السنوات الأخيرة.</p>
-			</div>
-		</section>
-	</div>
+	
 </section>
 
 <ng-template #notFound>

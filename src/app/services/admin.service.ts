@@ -108,10 +108,6 @@ export class AdminService {
   confirmOrder(orderId: string): Observable<any> {
     const headers = this.getAuthHeaders();
     const token = this.getToken();
-    console.log('Confirming order:', orderId);
-    console.log('Token exists:', !!token);
-    console.log('Headers:', headers);
-    
     return this.http.put(`http://localhost:3000/api/admin/confirm/${orderId}`, {}, { headers });
   }
 

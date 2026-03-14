@@ -24,6 +24,7 @@
         <ng-container [ngSwitch]="paymentMethod">
           <div *ngSwitchCase="'ccp'">
             <div>رقم CCP: <strong>{{ paymentDetails().number }}</strong></div>
+            <div>مفتاح CCP: <strong>{{ paymentDetails().key }}</strong></div>
             <div>اسم الحساب: <strong>{{ paymentDetails().accountName }}</strong></div>
           </div>
           <div *ngSwitchCase="'baridimob'">

@@ -30,7 +30,6 @@
 					<select [(ngModel)]="paymentMethod">
 						<option value="ccp">CCP</option>
 						<option value="baridimob">BaridiMob</option>
-						<option value="card">بطاقة بنكية</option>
 					</select>
 
 					<button class="btn-buy" (click)="buy()" [disabled]="!canBuy || isLoading">

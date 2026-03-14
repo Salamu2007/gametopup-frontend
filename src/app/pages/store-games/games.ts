@@ -34,7 +34,6 @@ import { GameCard } from '../../services/game.service';
           }));
           this.filterProducts()
           this.isLoading = false;
-          console.log('Loaded games:', data);
         },
         error: (err) => {
           console.error(err);

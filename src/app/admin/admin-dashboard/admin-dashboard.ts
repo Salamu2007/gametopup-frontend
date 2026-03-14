@@ -48,15 +48,12 @@ export class AdminDashboard implements OnInit, OnDestroy {
     if ('Notification' in window) {
       Notification.requestPermission().then(permission => {
         if (permission === 'granted') {
-          console.log('Notification permission granted');
         } else {
-          console.log('Notification permission denied');
           // Fallback: show in-page notification
           this.showInPageNotification('يرجى السماح بإشعارات المتصفح لرؤية التنبيهات الجديدة', 'warning');
         }
       });
     } else {
-      console.log('Notifications not supported');
       this.showInPageNotification('متصفحك لا يدعم الإشعارات', 'error');
     }
   }
@@ -188,7 +185,7 @@ export class AdminDashboard implements OnInit, OnDestroy {
   getOrders() {
     this.adminService.getOrders().subscribe({
       next: (res) => {
-        console.log('Orders received:', res);
+
         this.orders = res && res.length > 0 ? res : this.getSampleOrders();
         this.isLoading = false;
       },

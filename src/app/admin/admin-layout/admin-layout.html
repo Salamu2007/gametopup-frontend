@@ -8,6 +8,13 @@
   </aside>
 
   <main class="content">
+    <div class="layout-notifications" *ngIf="notifications.length > 0">
+      <h4>🔔 التنبيهات</h4>
+      <div *ngFor="let note of notifications" class="layout-notification">
+        {{ note }}
+      </div>
+    </div>
+
     <router-outlet></router-outlet>
   </main>
 </div>

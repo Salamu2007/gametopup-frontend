@@ -46,6 +46,28 @@
 	transform: translateY(-4px);
 }
 
+.game-description{
+	margin-top: 20px;
+	padding: 18px 20px;
+	border-radius: 14px;
+	background: rgba(0,0,0,0.30);
+	border: 1px solid rgba(0,198,255,0.18);
+	box-shadow: 0 18px 40px rgba(0,198,255,0.08);
+}
+
+.game-description h3{
+	margin: 0 0 10px;
+	font-size: 1.25rem;
+	color: var(--accent);
+	letter-spacing: 0.5px;
+}
+
+.game-description p{
+	margin: 0;
+	color: rgba(230,247,255,0.85);
+	line-height: 1.7;
+}
+
 .main-image{ 
 	border-radius: 14px;
 	overflow: hidden;
