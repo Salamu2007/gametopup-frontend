@@ -86,7 +86,9 @@ export interface chargePayment {
   providedIn: 'root'
 })
 export class GameService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000/api'
+    : 'https://gametopup-api.onrender.com/api';
 
   constructor(private http: HttpClient) {}
 
