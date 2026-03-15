@@ -138,6 +138,49 @@
   margin-bottom: 30px;
 }
 
+/* Google Tag Manager panel */
+.gtm-panel {
+  background: #111827;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+}
+
+.gtm-panel h3 {
+  margin-top: 0;
+  color: #e2e8f0;
+}
+
+.gtm-desc {
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.gtm-snippet {
+  background: #0f172a;
+  padding: 15px;
+  border-radius: 12px;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.btn-copy {
+  background: #38bdf8;
+  color: #0f172a;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-copy:hover {
+  background: #22c55e;
+}
+
 .btn-test {
   background: #22c55e;
   color: white;
