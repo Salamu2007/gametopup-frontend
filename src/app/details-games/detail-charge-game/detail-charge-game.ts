@@ -63,19 +63,24 @@ export class DetailChargeGame implements OnInit {
     if (!this.game?.image) {
       return '/assets/images/default.png';
     }
-    
+
     // If it's already a full URL, return as is
     if (this.game.image.startsWith('http')) {
       return this.game.image;
     }
-    
+
+    // Deploy host helper (matches backend host)
+    const apiHost = window.location.hostname === 'localhost'
+      ? 'http://localhost:3000'
+      : 'https://gametopup-api.onrender.com';
+
     // If it's a relative path starting with /uploads, make it full URL
     if (this.game.image.startsWith('/uploads/')) {
-      return `http://localhost:3000${this.game.image}`;
+      return `${apiHost}${this.game.image}`;
     }
-    
+
     // Otherwise, assume it's just the filename in uploads
-    return `http://localhost:3000/uploads/${this.game.image}`;
+    return `${apiHost}/uploads/${this.game.image}`;
   }
 
   /**

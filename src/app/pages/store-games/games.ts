@@ -27,10 +27,14 @@ import { GameCard } from '../../services/game.service';
      this.gameService.loadGamesCards().subscribe({
        next: (data) => {
           // ensure full url for images
+          const apiHost = window.location.hostname === 'localhost'
+            ? 'http://localhost:3000'
+            : 'https://gametopup-api.onrender.com';
+
           this.products = data.map(p => ({
             ...p,
             imageUrl: p.imageUrl && p.imageUrl.startsWith('/uploads/') ?
-                       `http://localhost:3000${p.imageUrl}` : p.imageUrl
+                       `${apiHost}${p.imageUrl}` : p.imageUrl
           }));
           this.filterProducts()
           this.isLoading = false;

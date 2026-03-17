@@ -86,9 +86,21 @@ export interface chargePayment {
   providedIn: 'root'
 })
 export class GameService {
-  private apiUrl = window.location.hostname === 'localhost'
-    ? 'http://localhost:3000/api'
-    : 'https://gametopup-api.onrender.com/api';
+  // If you want to force a specific API URL in any environment (e.g. local dev),
+  // set `window.API_BASE_URL = 'https://gametopup-api.onrender.com/api'` in the browser console.
+  private readonly remoteApiUrl = 'https://gametopup-api.onrender.com/api';
+  private readonly localApiUrl = 'http://localhost:3000/api';
+
+  private get apiUrl(): string {
+    const override = (window as any).API_BASE_URL;
+    if (override) return override;
+
+    const host = window.location.hostname;
+    const isLocalHost = host === 'localhost' || host === '127.0.0.1';
+
+    // Normally use remote API in production; use local API only when running locally.
+    return isLocalHost ? this.localApiUrl : this.remoteApiUrl;
+  }
 
   constructor(private http: HttpClient) {}
 

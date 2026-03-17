@@ -36,7 +36,22 @@ export interface AdminCharge {
 })
 
 export class AdminService {
-  private apiUrl = 'http://localhost:3000/api/admin';
+  private readonly remoteApiUrl = 'https://gametopup-api.onrender.com/api';
+  private readonly localApiUrl = 'http://localhost:3000/api';
+
+  private get baseApiUrl(): string {
+    const override = (window as any).API_BASE_URL;
+    if (override) return override;
+
+    const host = window.location.hostname;
+    const isLocalHost = host === 'localhost' || host === '127.0.0.1';
+
+    return isLocalHost ? this.localApiUrl : this.remoteApiUrl;
+  }
+
+  private get apiUrl(): string {
+    return `${this.baseApiUrl}/admin`;
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -76,7 +91,7 @@ export class AdminService {
   // Games Management
   getGames(): Observable<any[]> {
     const headers = this.getAuthHeaders();
-    return this.http.get<any[]>('http://localhost:3000/api/products', { headers }).pipe(
+    return this.http.get<any[]>(`${this.baseApiUrl}/products`, { headers }).pipe(
       catchError(error => {
         console.error('Error fetching games:', error);
         return of([]);
@@ -86,43 +101,43 @@ export class AdminService {
 
   createGame(gameData: any): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.post('http://localhost:3000/api/products/create', gameData, { headers });
+    return this.http.post(`${this.baseApiUrl}/products/create`, gameData, { headers });
   }
 
   updateGame(id: string, gameData: any): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.put(`http://localhost:3000/api/products/${id}`, gameData, { headers });
+    return this.http.put(`${this.baseApiUrl}/products/${id}`, gameData, { headers });
   }
 
   deleteGame(id: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.delete(`http://localhost:3000/api/products/${id}`, { headers });
+    return this.http.delete(`${this.baseApiUrl}/products/${id}`, { headers });
   }
 
   uploadGameImage(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('image', file);
-    return this.http.post('http://localhost:3000/api/products/upload-image', formData);
+    return this.http.post(`${this.baseApiUrl}/products/upload-image`, formData);
   }
 
   confirmOrder(orderId: string): Observable<any> {
     const headers = this.getAuthHeaders();
     const token = this.getToken();
-    return this.http.put(`http://localhost:3000/api/admin/confirm/${orderId}`, {}, { headers });
+    return this.http.put(`${this.apiUrl}/confirm/${orderId}`, {}, { headers });
   }
 
   rejectOrder(orderId: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.put(`http://localhost:3000/api/admin/reject/${orderId}`, {}, { headers });
+    return this.http.put(`${this.apiUrl}/reject/${orderId}`, {}, { headers });
   }
 
   confirmCharge(chargeId: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.put(`http://localhost:3000/api/admin/confirm-charge/${chargeId}`, {}, { headers });
+    return this.http.put(`${this.apiUrl}/confirm-charge/${chargeId}`, {}, { headers });
   }
 
   rejectCharge(chargeId: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.put(`http://localhost:3000/api/admin/reject-charge/${chargeId}`, {}, { headers });
+    return this.http.put(`${this.apiUrl}/reject-charge/${chargeId}`, {}, { headers });
   }
 }

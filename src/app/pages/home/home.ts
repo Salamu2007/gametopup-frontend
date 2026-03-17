@@ -24,7 +24,12 @@ export class Home implements OnInit {
   private fixImageUrl(imageUrl: string | undefined): string {
     if (!imageUrl) return '/assets/images/comingsoon.png';
     if (imageUrl.startsWith('http')) return imageUrl;
-    if (imageUrl.startsWith('/uploads/')) return `http://localhost:3000${imageUrl}`;
+
+    const apiHost = window.location.hostname === 'localhost'
+      ? 'http://localhost:3000'
+      : 'https://gametopup-api.onrender.com';
+
+    if (imageUrl.startsWith('/uploads/')) return `${apiHost}${imageUrl}`;
     return imageUrl;
   }
 

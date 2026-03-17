@@ -64,17 +64,22 @@ export class DetailBuyGame implements OnInit {
     getImageUrl(): string {
       if (!this.game) return '/assets/images/comingsoon.png';
       const img = this.game.image || '';
-      
+
+      // Use the deployed API host when not running locally
+      const apiHost = window.location.hostname === 'localhost'
+        ? 'http://localhost:3000'
+        : 'https://gametopup-api.onrender.com';
+
       // إذا كانت صورة مرفوعة من backend
       if (img.includes('/uploads/') || img.includes('localhost:3000')) {
-        return img.startsWith('http') ? img : `http://localhost:3000${img}`;
+        return img.startsWith('http') ? img : `${apiHost}${img}`;
       }
-      
+
       // إذا كانت موارد محلية
       if (img.startsWith('http') || img.startsWith('/assets') || img.startsWith('assets')) {
         return img.startsWith('/') ? img : '/' + img;
       }
-      
+
       // افتراضياً استخدم assets
       const file = img.split('/').pop() || 'comingsoon.png';
       return `/assets/images/${file}`;

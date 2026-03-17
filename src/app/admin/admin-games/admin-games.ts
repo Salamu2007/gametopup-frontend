@@ -76,7 +76,11 @@ export class AdminGames implements OnInit {
     this.editingId = game._id || null;
     this.formTitle = 'تعديل اللعبة';
     this.showForm = true;
-    this.imagePreview = game.image ? `http://localhost:3000${game.image}` : null;
+    const apiHost = window.location.hostname === 'localhost'
+      ? 'http://localhost:3000'
+      : 'https://gametopup-api.onrender.com';
+
+    this.imagePreview = game.image ? `${apiHost}${game.image}` : null;
   }
 
   closeForm() {

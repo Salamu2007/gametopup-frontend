@@ -43,7 +43,13 @@ export class AdminOrders implements OnInit {
   private fixImageUrl(imageUrl: string | undefined): string {
     if (!imageUrl) return '/assets/images/comingsoon.png';
     if (imageUrl.startsWith('http')) return imageUrl;
-    if (imageUrl.startsWith('/uploads/')) return `http://localhost:3000${imageUrl}`;
+
+    // Use the deployed API host when not running locally
+    const apiHost = window.location.hostname === 'localhost'
+      ? 'http://localhost:3000'
+      : 'https://gametopup-api.onrender.com';
+
+    if (imageUrl.startsWith('/uploads/')) return `${apiHost}${imageUrl}`;
     return imageUrl;
   }
 
