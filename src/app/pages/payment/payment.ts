@@ -148,21 +148,22 @@ export class Payment implements OnInit {
     if (this.type === 'order') {
       this.gameService.confirmOrder(this.id, formData).subscribe({
         next: () => {
-          this.successMessage = '✅ تم إرسال إثبات الدفع.';
           this.submitting = false;
+          this.router.navigate(['/user/payment-success', 'order', this.id]);
         },
         error: () => {
           this.submitting = false;
         }
       });
     } else {
-        this.gameService.confirmCharge(this.id, formData).subscribe({
+      this.gameService.confirmCharge(this.id, formData).subscribe({
         next: () => {
-          this.successMessage = '✅ تم إرسال إثبات الدفع.';
           this.submitting = false;
+          this.router.navigate(['/user/payment-success', 'charge', this.id]);
         },
         error: (err : any) => {
           console.error(err);
+          this.submitting = false;
         }
       });
     }

@@ -163,6 +163,8 @@
   border: 1px solid rgba(255, 71, 71, 0.22);
 }
 
+.btn-primary{
+
   background: linear-gradient(135deg, #00c6ff, #2f8cff);
   color: #06121f;
   font-weight: 800;
