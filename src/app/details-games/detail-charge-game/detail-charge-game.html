@@ -6,6 +6,7 @@
 				<img [src]="getImageUrl()" 
 				 [alt]="game?.name || 'game image'"
 				 (error)="onImageError($event)" />
+			</div>
 
 			<!-- Full description for detail view -->
 			<div class="game-description" *ngIf="game?.description">
