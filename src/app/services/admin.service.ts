@@ -60,7 +60,11 @@ export class AdminService {
   }
   getAuthHeaders(): HttpHeaders {
     const token = this.getToken();
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
   }
 
   getDashboardData(): Observable<any> {

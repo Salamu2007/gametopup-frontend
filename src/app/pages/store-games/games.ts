@@ -24,9 +24,9 @@ import { GameCard } from '../../services/game.service';
    constructor(private gameService: GameService) {}
  
    ngOnInit(): void {
+     this.isLoading = true;
      this.gameService.loadGamesCards().subscribe({
        next: (data) => {
-          // ensure full url for images
           const apiHost = window.location.hostname === 'localhost'
             ? 'http://localhost:3000'
             : 'https://gametopup-api.onrender.com';
@@ -36,11 +36,14 @@ import { GameCard } from '../../services/game.service';
             imageUrl: p.imageUrl && p.imageUrl.startsWith('/uploads/') ?
                        `${apiHost}${p.imageUrl}` : p.imageUrl
           }));
-          this.filterProducts()
+          this.filterProducts();
           this.isLoading = false;
         },
         error: (err) => {
           console.error(err);
+          this.products = [];
+          this.filteredProducts = [];
+          this.isLoading = false;
         }
      });
    }

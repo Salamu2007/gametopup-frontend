@@ -1,1 +1,61 @@
-<p>payment-success works!</p>
+<section class="payment-success-page" *ngIf="!loading && !error; else stateTpl">
+  <div class="payment-success-card">
+    <div class="success-badge">
+      <div class="success-icon">✓</div>
+      <div class="success-text">تمت العملية بنجاح</div>
+    </div>
+
+    <h1>تم تأكيد الدفع بنجاح</h1>
+    <p class="subtitle">تم جلب تفاصيل الدفع عبر رقم الطلب وسيتم إعلامك في البريد الإلكتروني.</p>
+
+    <div class="summary-panel">
+      <div class="summary-row">
+        <span>المنتج</span>
+        <strong>{{ productName }}</strong>
+      </div>
+      <div class="summary-row">
+        <span>السعر</span>
+        <strong>{{ price | number:'1.0-0' }} دج</strong>
+      </div>
+      <div class="summary-row">
+        <span>البريد الإلكتروني</span>
+        <strong>{{ customerEmail }}</strong>
+      </div>
+      <div class="summary-note">
+        🔔 سيتم إعلامك في البريد الإلكتروني عند تحديث حالة طلبك أو الشحن.
+      </div>
+    </div>
+
+    <div class="details-panel">
+      <div class="details-item">
+        <span>نوع الدفع</span>
+        <strong>{{ type === 'charge' ? 'شحن رصيد' : 'طلب شراء' }}</strong>
+      </div>
+      <div class="details-item">
+        <span>رقم التعريف</span>
+        <strong>{{ id }}</strong>
+      </div>
+    </div>
+
+    <div class="actions-row">
+      <a routerLink="/user/home" class="btn-primary">العودة إلى الشاشة الرئيسية</a>
+    </div>
+  </div>
+</section>
+
+<ng-template #stateTpl>
+  <section class="payment-success-page">
+    <div class="payment-success-card">
+      <div *ngIf="loading" class="state-block">
+        <div class="spinner"></div>
+        <h2>جاري جلب بيانات الدفع...</h2>
+        <p>يرجى الانتظار بينما نسترجع معلومات الطلب من الخادم.</p>
+      </div>
+      <div *ngIf="error" class="state-block error-block">
+        <h2>حدث خطأ</h2>
+        <p>{{ error }}</p>
+        <a routerLink="/user/home" class="btn-primary">العودة إلى الشاشة الرئيسية</a>
+      </div>
+    </div>
+  </section>
+</ng-template>

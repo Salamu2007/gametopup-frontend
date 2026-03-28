@@ -1,3 +1,4 @@
+<ng-container *ngIf="!isLoading; else loadingSkeleton">
 <section *ngIf="game; else notFound" class="detail-game container">
 	<div class="game-top">
 		<div class="gallery">
@@ -82,6 +83,34 @@
 
 	
 </section>
+</ng-container>
+
+<ng-template #loadingSkeleton>
+	<section class="detail-game container skeleton-page">
+		<div class="game-top">
+			<div class="gallery">
+				<div class="main-image skeleton-box skeleton-image"></div>
+				<div class="game-description">
+					<div class="skeleton-box skeleton-title"></div>
+					<div class="skeleton-box skeleton-subtitle"></div>
+					<div class="skeleton-box skeleton-paragraph"></div>
+					<div class="skeleton-box skeleton-paragraph short"></div>
+				</div>
+			</div>
+
+			<aside class="game-meta">
+				<div class="skeleton-box skeleton-price-large"></div>
+				<div class="purchase-controls">
+					<div class="skeleton-box skeleton-input"></div>
+					<div class="skeleton-box skeleton-input"></div>
+					<div class="skeleton-box skeleton-input"></div>
+					<div class="skeleton-box skeleton-input"></div>
+					<div class="skeleton-box skeleton-button"></div>
+				</div>
+			</aside>
+		</div>
+	</section>
+</ng-template>
 
 <ng-template #notFound>
 	<section class="detail-game container">

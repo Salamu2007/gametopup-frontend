@@ -8,6 +8,7 @@ import { ChargeGames } from './pages/charge-games/charge-games';
 import { DetailBuyGame } from './details-games/detail-buy-game/detail-buy-game';
 import { DetailChargeGame } from './details-games/detail-charge-game/detail-charge-game';
 import { Payment } from './pages/payment/payment'
+import { PaymentSuccess } from './pages/payment-success/payment-success';
 import { AdminLogin } from './admin/admin-login/admin-login';
 import { AdminLayout } from './admin/admin-layout/admin-layout';
 import { AdminDashboard } from './admin/admin-dashboard/admin-dashboard';
@@ -33,6 +34,7 @@ export const routes: Routes = [
             {path:'payment/:id', component: Payment},
             {path: 'order-payment/:id', component: Payment},
             {path: 'charge-payment/:id', component: Payment},
+            {path: 'payment-success/:type/:id', component: PaymentSuccess},
             {path:'', redirectTo:'user/home', pathMatch:'full'}
         ]
     },

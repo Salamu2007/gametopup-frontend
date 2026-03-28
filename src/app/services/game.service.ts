@@ -66,6 +66,7 @@ export interface OrderPayment {
   unitPrice: number;    // stored per-order price
   totalPrice: number;   // precomputed total
   price?: number;       // optional original product price
+  email?: string;
 }
 
 export interface chargePayment {
@@ -79,6 +80,7 @@ export interface chargePayment {
   paymentMethod: string;
   status: string;
   price: number;
+  email?: string;
 }
 
 
