@@ -37,6 +37,7 @@ export class DetailChargeGame implements OnInit {
   showSuccessNotification: boolean = false;
   successTitle: string = '';
   successMessage: string = '';
+  fallbackImage: string = '/assets/images/comingsoon.png';
 
   constructor(
     private route: ActivatedRoute,
@@ -63,27 +64,23 @@ export class DetailChargeGame implements OnInit {
   }
 
   getImageUrl(): string {
-    if (!this.game?.image) {
-      return '/assets/images/default.png';
+    const imageValue = this.game?.image || '';
+    if (!imageValue) {
+      return this.fallbackImage;
     }
 
-    // If it's already a full URL, return as is
-    if (this.game.image.startsWith('http')) {
-      return this.game.image;
+    if (imageValue.startsWith('http://') || imageValue.startsWith('https://')) {
+      return imageValue;
     }
 
-    // Deploy host helper (matches backend host)
-    const apiHost = window.location.hostname === 'localhost'
-      ? 'http://localhost:3000'
-      : 'https://gametopup-api.onrender.com';
+    return this.fallbackImage;
+  }
 
-    // If it's a relative path starting with /uploads, make it full URL
-    if (this.game.image.startsWith('/uploads/')) {
-      return `${apiHost}${this.game.image}`;
+  onImageError(event: Event): void {
+    const target = event.target as HTMLImageElement;
+    if (target) {
+      target.src = this.fallbackImage;
     }
-
-    // Otherwise, assume it's just the filename in uploads
-    return `${apiHost}/uploads/${this.game.image}`;
   }
 
   /**

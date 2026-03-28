@@ -27,6 +27,7 @@ export class DetailBuyGame implements OnInit {
   game: GameDetailbuy | null = null;
   quantity: number = 1;
   email: string = '';
+  fallbackImage: string = '/assets/images/comingsoon.png';
   phone: string = '';
   paymentMethod: string = 'ccp';
   isLoading: boolean = false;
@@ -62,27 +63,23 @@ export class DetailBuyGame implements OnInit {
   }
 
     getImageUrl(): string {
-      if (!this.game) return '/assets/images/comingsoon.png';
-      const img = this.game.image || '';
-
-      // Use the deployed API host when not running locally
-      const apiHost = window.location.hostname === 'localhost'
-        ? 'http://localhost:3000'
-        : 'https://gametopup-api.onrender.com';
-
-      // إذا كانت صورة مرفوعة من backend
-      if (img.includes('/uploads/') || img.includes('localhost:3000')) {
-        return img.startsWith('http') ? img : `${apiHost}${img}`;
+      const img = this.game?.image || '';
+      if (!img) {
+        return this.fallbackImage;
       }
 
-      // إذا كانت موارد محلية
-      if (img.startsWith('http') || img.startsWith('/assets') || img.startsWith('assets')) {
-        return img.startsWith('/') ? img : '/' + img;
+      if (img.startsWith('http://') || img.startsWith('https://')) {
+        return img;
       }
 
-      // افتراضياً استخدم assets
-      const file = img.split('/').pop() || 'comingsoon.png';
-      return `/assets/images/${file}`;
+      return this.fallbackImage;
+    }
+
+    onImageError(event: Event): void {
+      const target = event.target as HTMLImageElement;
+      if (target) {
+        target.src = this.fallbackImage;
+      }
     }
 
 

@@ -4,9 +4,8 @@
 		<div class="gallery">
 			<div class="main-image">
 				<img [src]="getImageUrl()" 
-					 [alt]="game?.name || 'game image'" />
-			</div>
-			
+				 [alt]="game?.name || 'game image'"
+				 (error)="onImageError($event)" />
 
 			<!-- Full description for detail view -->
 			<div class="game-description" *ngIf="game?.description">

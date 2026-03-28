@@ -3,7 +3,7 @@
 		<div class="buy-grid">
 			<div class="left">
 				<div class="image-wrap">
-					<img [src]="getImageUrl()" [alt]="game.name" />
+					<img [src]="getImageUrl()" [alt]="game.name" (error)="onImageError($event)" />
 				</div>
 				<div class="info">
 					<h1>{{ game.name }}</h1>
