@@ -76,11 +76,7 @@ export class AdminGames implements OnInit {
     this.editingId = game._id || null;
     this.formTitle = 'تعديل اللعبة';
     this.showForm = true;
-    const apiHost = window.location.hostname === 'localhost'
-      ? 'http://localhost:3000'
-      : 'https://gametopup-api.onrender.com';
-
-    this.imagePreview = game.image ? `${apiHost}${game.image}` : null;
+    this.imagePreview = this.resolveImageUrl(game.image);
   }
 
   closeForm() {
@@ -88,6 +84,22 @@ export class AdminGames implements OnInit {
     this.formData = this.getEmptyForm();
     this.editingId = null;
     this.imagePreview = null;
+  }
+
+  private resolveImageUrl(imageUrl?: string | null): string | null {
+    if (!imageUrl) {
+      return null;
+    }
+
+    if (imageUrl.startsWith('http')) {
+      return imageUrl;
+    }
+
+    const apiHost = window.location.hostname === 'localhost'
+      ? 'http://localhost:3000'
+      : 'https://gametopup-api.onrender.com';
+
+    return `${apiHost}${imageUrl}`;
   }
 
   onImageSelected(event: any) {
