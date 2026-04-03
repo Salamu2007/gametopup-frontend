@@ -22,6 +22,54 @@
 .purchase-form input, .purchase-form select{ width:100%; padding:12px 14px; border-radius:10px; margin-top:8px; margin-bottom:10px; background:rgba(0,0,0,0.35); border:1px solid rgba(0,198,255,0.12); color:#e6f7ff; display: block; visibility: visible }
 .purchase-form .hint{ color:var(--muted); font-size:0.9rem; margin-top:6px }
 
+/* Dynamic Fields */
+.dynamic-field {
+	margin-bottom: 8px;
+}
+
+.dynamic-field label {
+	margin-top: 12px;
+	margin-bottom: 4px;
+}
+
+.dynamic-field input,
+.dynamic-field select,
+.dynamic-field textarea {
+	width: 100%;
+	padding: 12px 14px;
+	border-radius: 10px;
+	margin-top: 8px;
+	margin-bottom: 10px;
+	background: rgba(0,0,0,0.35);
+	border: 1px solid rgba(0,198,255,0.12);
+	color: #e6f7ff;
+	display: block;
+	visibility: visible;
+}
+
+.dynamic-field textarea {
+	resize: vertical;
+	min-height: 80px;
+}
+
+.dynamic-field .checkbox-container {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 8px;
+	margin-bottom: 10px;
+}
+
+.dynamic-field .checkbox-container input[type="checkbox"] {
+	width: auto;
+	margin: 0;
+}
+
+.required {
+	color: #ff6b6b;
+	font-weight: bold;
+}
+
 .btn-buy{ 
 	margin-top:12px; 
 	width:100%; 

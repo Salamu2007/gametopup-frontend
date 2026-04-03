@@ -244,6 +244,41 @@
 	margin-bottom: 8px;
 }
 
+.dynamic-field {
+	margin: 10px 0;
+	padding: 10px;
+	border: 1px solid rgba(0,198,255,0.2);
+	border-radius: 10px;
+	background: rgba(0,0,0,0.22);
+}
+
+.dynamic-field label {
+	display: block;
+	font-weight: 700;
+	margin-bottom: 6px;
+	color: #c7d9ed;
+}
+
+.dynamic-field input,
+.dynamic-field select,
+.dynamic-field textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid rgba(0,198,255,0.14);
+	border-radius: 8px;
+	background: rgba(8,25,46,0.8);
+	color: #eaf6ff;
+	margin-bottom: 8px;
+}
+
+.dynamic-field textarea { min-height: 70px; }
+
+.checkbox-container { display: flex; align-items: center; gap: 8px; }
+
+.checkbox-container input { width: auto; }
+
+.required { color: #ff6b6b; }
+
 .select-amount, 
 .input-player, 
 .input-email, 

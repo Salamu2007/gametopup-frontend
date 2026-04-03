@@ -2,8 +2,37 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { GameService, GameDetailbuy } from '../../services/game.service';
+import { GameService } from '../../services/game.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+
+export interface Field {
+  name: string;
+  label: string;
+  type: string;
+  required: boolean;
+  options?: string[];
+}
+
+export interface GameDetailbuyLocal {
+  _id: string;
+  name: string;
+  category?: string;
+  platform?: string;
+  price: number;
+  originalPrice?: number;
+  discount?: number;
+  currency?: string;
+  currencyType?: string;
+  stock?: number;
+  image?: string;
+  description?: string;
+  genre?: string;
+  rating?: number;
+  reviews?: number;
+  type?: string;
+  package?: { amount: number; price: number }[];
+  fields?: Field[];
+}
 
 @Component({
   selector: 'app-detail-buy-game',
@@ -24,7 +53,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
   ]
 })
 export class DetailBuyGame implements OnInit {
-  game: GameDetailbuy | null = null;
+  game: GameDetailbuyLocal | null = null;
   quantity: number = 1;
   email: string = '';
   fallbackImage: string = '/assets/images/comingsoon.png';
@@ -35,6 +64,7 @@ export class DetailBuyGame implements OnInit {
   showSuccessNotification: boolean = false;
   successTitle: string = '';
   successMessage: string = '';
+  dynamicData: { [key: string]: any } = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -84,7 +114,23 @@ export class DetailBuyGame implements OnInit {
 
 
   get canBuy(): boolean {
-    return !!this.game && this.quantity > 0 && this.email.trim() !== '' && this.phone.trim() !== '';
+    if (!this.game || this.quantity <= 0 || this.email.trim() === '' || this.phone.trim() === '') {
+      return false;
+    }
+
+    // Check required dynamic fields
+    if (this.game.fields) {
+      for (const field of this.game.fields) {
+        if (field.required) {
+          const value = this.dynamicData[field.name];
+          if (!value || (typeof value === 'string' && value.trim() === '')) {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
   }
 
   showNotification(title: string, body: string) {
@@ -112,7 +158,8 @@ export class DetailBuyGame implements OnInit {
       quantity: this.quantity,
       paymentMethod: this.paymentMethod,
       email: this.email,
-      phone: this.phone
+      phone: this.phone,
+      dynamicData: this.dynamicData
     };
 
     this.gameService.createOrder(this.game._id, payload).subscribe({

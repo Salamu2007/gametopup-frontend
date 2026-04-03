@@ -3,6 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 
+export interface Field {
+  name: string;
+  label: string;
+  type: 'text' | 'email' | 'number' | 'textarea' | 'select' | 'checkbox';
+  required: boolean;
+  options?: string[];
+}
+
 export interface Game {
   _id?: string;
   name: string;
@@ -21,6 +29,7 @@ export interface Game {
   reviews?: number;
   type?: string; // 'game' or 'charge'
   package?: { amount: number; price: number }[];
+  fields?: Field[];
 }
 
 @Component({
@@ -41,6 +50,7 @@ export class AdminGames implements OnInit {
   formData: Game = this.getEmptyForm();
   categories = ['أكشن', 'مغامرة', 'ألغاز', 'رياضة', 'محاكاة', 'أخرى'];
   platforms = ['PC', 'PlayStation', 'Xbox', 'Nintendo', 'Mobile'];
+  fieldTypes = ['text', 'email', 'number', 'textarea', 'select', 'checkbox'];
 
   constructor(private adminService: AdminService) {}
 
@@ -214,7 +224,8 @@ export class AdminGames implements OnInit {
       rating: 0,
       type: 'game',
       image: '',
-      package: []
+      package: [],
+      fields: []
     };
   }
 
@@ -226,6 +237,32 @@ export class AdminGames implements OnInit {
   removePackage(index: number) {
     if (!this.formData.package) return;
     this.formData.package.splice(index, 1);
+  }
+
+  addField() {
+    if (!this.formData.fields) this.formData.fields = [];
+    this.formData.fields.push({
+      name: '',
+      label: '',
+      type: 'text',
+      required: false,
+      options: []
+    });
+  }
+
+  removeField(index: number) {
+    if (!this.formData.fields) return;
+    this.formData.fields.splice(index, 1);
+  }
+
+  addOption(field: Field) {
+    if (!field.options) field.options = [];
+    field.options.push('');
+  }
+
+  removeOption(field: Field, optionIndex: number) {
+    if (!field.options) return;
+    field.options.splice(optionIndex, 1);
   }
 
   private getSampleGames(): Game[] {

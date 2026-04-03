@@ -165,6 +165,34 @@
           </div>
         </div>
 
+        <!-- Dynamic Fields Section -->
+        <div class="fields-section">
+          <label>الحقول الديناميكية للفورم</label>
+          <div *ngFor="let field of formData.fields; let idx = index" class="field-row">
+            <div class="field-inputs">
+              <input type="text" [(ngModel)]="field.name" name="fieldName{{idx}}" placeholder="اسم الحقل (name)" required />
+              <input type="text" [(ngModel)]="field.label" name="fieldLabel{{idx}}" placeholder="عنوان الحقل (label)" required />
+              <select [(ngModel)]="field.type" name="fieldType{{idx}}" required>
+                <option *ngFor="let type of fieldTypes" [value]="type">{{ type }}</option>
+              </select>
+              <label class="checkbox-label">
+                <input type="checkbox" [(ngModel)]="field.required" name="fieldRequired{{idx}}" />
+                مطلوب
+              </label>
+              <button type="button" class="btn btn-delete" (click)="removeField(idx)">حذف</button>
+            </div>
+            <div *ngIf="field.type === 'select'" class="options-section">
+              <label>خيارات الاختيار:</label>
+              <div *ngFor="let option of field.options || []; let optIdx = index" class="option-row">
+                <input type="text" [(ngModel)]="field.options![optIdx]" name="option{{idx}}{{optIdx}}" placeholder="خيار" />
+                <button type="button" class="btn btn-delete" (click)="removeOption(field, optIdx)">حذف</button>
+              </div>
+              <button type="button" class="btn btn-add" (click)="addOption(field)">أضف خيار</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-add" (click)="addField()">أضف حقل</button>
+        </div>
+
         <div class="form-actions">
           <button type="submit" class="btn btn-submit">{{ editingId ? 'تحديث' : 'إضافة' }}</button>
           <button type="button" class="btn btn-cancel" (click)="closeForm()">إلغاء</button>

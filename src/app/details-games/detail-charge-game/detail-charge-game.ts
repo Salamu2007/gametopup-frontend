@@ -6,6 +6,14 @@ import { GameService } from '../../services/game.service';
 import { GameDetailcharge } from '../../services/game.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 
+export interface Field {
+  name: string;
+  label: string;
+  type: 'text' | 'email' | 'number' | 'textarea' | 'select' | 'checkbox';
+  required: boolean;
+  options?: string[];
+}
+
 @Component({
   selector: 'app-detail-charge-game',
   standalone: true,
@@ -34,6 +42,7 @@ export class DetailChargeGame implements OnInit {
   phone: string = '';
   paymentMethod: string = 'ccp';
   game: GameDetailcharge | null = null;
+  dynamicData: { [key: string]: any } = {};
   showSuccessNotification: boolean = false;
   successTitle: string = '';
   successMessage: string = '';
@@ -105,7 +114,22 @@ export class DetailChargeGame implements OnInit {
   }
 
   get canBuy(): boolean {
-    return this.selectedAmount !== '' && this.playerId.trim() !== '' && !!this.selectedPackage;
+    if (!this.selectedPackage || this.selectedAmount === '' || this.playerId.trim() === '') {
+      return false;
+    }
+
+    if (this.game?.fields) {
+      for (const field of this.game.fields) {
+        if (field.required) {
+          const value = this.dynamicData[field.name];
+          if (value === undefined || value === null || (typeof value === 'string' && value.trim() === '')) {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
   }
 
   showNotification(title: string, body: string) {
@@ -135,7 +159,8 @@ export class DetailChargeGame implements OnInit {
       email: this.email,
       phone: this.phone,
       paymentMethod: this.paymentMethod,
-      currencyType: this.game.currencyType || "UC"
+      currencyType: this.game.currencyType || "UC",
+      dynamicData: this.dynamicData
     };
 
     this.gameService.createCharge(this.game!._id, payload).subscribe({

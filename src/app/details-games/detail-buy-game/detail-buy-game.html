@@ -21,6 +21,55 @@
 						<label>الكمية</label>
 						<input type="number" min="1" [(ngModel)]="quantity" />
 
+						<!-- Dynamic Fields -->
+						<div *ngFor="let field of game.fields" class="dynamic-field">
+							<label>{{ field.label }} <span *ngIf="field.required" class="required">*</span></label>
+							
+							<input *ngIf="field.type === 'text'" 
+							       type="text" 
+							       [(ngModel)]="dynamicData[field.name]" 
+							       [name]="field.name"
+							       [required]="field.required"
+							       [placeholder]="field.label" />
+							
+							<input *ngIf="field.type === 'email'" 
+							       type="email" 
+							       [(ngModel)]="dynamicData[field.name]" 
+							       [name]="field.name"
+							       [required]="field.required"
+							       [placeholder]="field.label" />
+							
+							<input *ngIf="field.type === 'number'" 
+							       type="number" 
+							       [(ngModel)]="dynamicData[field.name]" 
+							       [name]="field.name"
+							       [required]="field.required"
+							       [placeholder]="field.label" />
+							
+							<textarea *ngIf="field.type === 'textarea'" 
+							          [(ngModel)]="dynamicData[field.name]" 
+							          [name]="field.name"
+							          [required]="field.required"
+							          [placeholder]="field.label"
+							          rows="3"></textarea>
+							
+							<select *ngIf="field.type === 'select'" 
+							        [(ngModel)]="dynamicData[field.name]" 
+							        [name]="field.name"
+							        [required]="field.required">
+								<option value="" disabled>اختر {{ field.label }}</option>
+								<option *ngFor="let option of field.options" [value]="option">{{ option }}</option>
+							</select>
+							
+							<label *ngIf="field.type === 'checkbox'" class="checkbox-container">
+								<input type="checkbox" 
+								       [(ngModel)]="dynamicData[field.name]" 
+								       [name]="field.name"
+								       [required]="field.required" />
+								{{ field.label }}
+							</label>
+						</div>
+
 						<label>البريد الإلكتروني</label>
 						<input type="email" [(ngModel)]="email" placeholder="your@email.com" />
 

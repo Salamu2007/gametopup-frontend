@@ -26,6 +26,13 @@ export interface GameDetailcharge {
     amount: number;
     price: number;
   }[];
+  fields?: {
+    name: string;
+    label: string;
+    type: string;
+    required: boolean;
+    options?: string[];
+  }[];
 
 }
 
@@ -54,6 +61,13 @@ export interface GameDetailbuy {
   category?: string;
   description?: string;
   reviews?: number;
+  fields?: {
+    name: string;
+    label: string;
+    type: string;
+    required: boolean;
+    options?: string[];
+  }[];
 }
 
 export interface OrderPayment {
