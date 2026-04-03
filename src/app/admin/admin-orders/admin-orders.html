@@ -79,6 +79,18 @@
         <p><strong>العملة:</strong> {{ selectedOrder.currency || 'دج' }}</p>
         <p><strong>الحالة:</strong> {{ selectedOrder.status }}</p>
         <p><strong>التاريخ:</strong> {{ selectedOrder.createdAt | date:'short' }}</p>
+
+        <!-- Dynamic Fields -->
+        <div *ngIf="selectedOrder.dynamicData && Object.keys(selectedOrder.dynamicData).length > 0" class="modal-section">
+          <strong>الحقول الإضافية:</strong>
+          <div class="dynamic-fields-display">
+            <div *ngFor="let key of objectKeys(selectedOrder.dynamicData)" class="field-item">
+              <span class="field-label">{{ key }}:</span>
+              <span class="field-value">{{ selectedOrder.dynamicData[key] }}</span>
+            </div>
+          </div>
+        </div>
+
         <div *ngIf="selectedOrder.gameImage || selectedOrder.image" class="modal-section">
           <strong>صورة اللعبة:</strong><br/>
           <img [src]="selectedOrder.gameImage || selectedOrder.image" class="modal-img" />

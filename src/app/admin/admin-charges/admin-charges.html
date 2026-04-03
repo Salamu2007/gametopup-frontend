@@ -31,7 +31,6 @@
           <th>صورة اللعبة</th>
           <th>صورة الدفع</th>
           <th>البريد الإلكتروني</th>
-          <th>Player ID</th>
           <th>الكمية</th>
           <th>نوع العملة</th>
           <th>الحالة</th>
@@ -57,7 +56,6 @@
             <span *ngIf="!c.paymentImage">-</span>
           </td>
           <td>{{ c.email }}</td>
-          <td>{{ c.playerId }}</td>
           <td>{{ c.quantity }}</td>
           <td>{{ c.currencyType || 'UC' }}</td>
           <td>{{ c.status }}</td>
@@ -76,12 +74,23 @@
       </div>
       <div class="modal-body">
         <p><strong>اللعبة:</strong> {{ selectedCharge.gameName }}</p>
-        <p><strong>Player ID:</strong> {{ selectedCharge.playerId }}</p>
         <p><strong>الايميل:</strong> {{ selectedCharge.email }}</p>
         <p><strong>الكمية:</strong> {{ selectedCharge.quantity }}</p>
         <p><strong>نوع العملة:</strong> {{ selectedCharge.currencyType || 'UC' }}</p>
         <p><strong>الحالة:</strong> {{ selectedCharge.status }}</p>
         <p><strong>التاريخ:</strong> {{ selectedCharge.createdAt | date:'short' }}</p>
+
+        <!-- Dynamic Fields -->
+        <div *ngIf="selectedCharge.dynamicData && Object.keys(selectedCharge.dynamicData).length > 0" class="modal-section">
+          <strong>الحقول الإضافية:</strong>
+          <div class="dynamic-fields-display">
+            <div *ngFor="let key of objectKeys(selectedCharge.dynamicData)" class="field-item">
+              <span class="field-label">{{ key }}:</span>
+              <span class="field-value">{{ selectedCharge.dynamicData[key] }}</span>
+            </div>
+          </div>
+        </div>
+
         <div *ngIf="selectedCharge.gameImage || selectedCharge.image" class="modal-section">
           <strong>صورة اللعبة:</strong><br/>
           <img [src]="selectedCharge.gameImage || selectedCharge.image" class="modal-img" />

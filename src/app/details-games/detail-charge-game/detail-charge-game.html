@@ -33,13 +33,7 @@
 						<option *ngFor="let pkg of game?.package" [value]="pkg.amount">{{ pkg.amount }} — {{ pkg.price }} {{ game?.currency }}</option>
 					</select>
 
-					<label style="margin-top: 14px;">👤 معرّف اللاعب (Player ID)</label>
-					<input id="playerId" [(ngModel)]="playerId" name="playerId" 
-						   type="text" 
-						   placeholder="أدخل معرّف اللاعب..." 
-						   class="input-player" />
-
-						<!-- Dynamic charge fields -->
+<!-- Dynamic charge fields -->
 						<div *ngFor="let field of game?.fields" class="dynamic-field">
 							<label>{{ field.label }} <span *ngIf="field.required" class="required">*</span></label>
 

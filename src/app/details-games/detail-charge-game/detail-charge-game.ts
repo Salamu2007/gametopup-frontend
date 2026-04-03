@@ -123,7 +123,7 @@ export class DetailChargeGame implements OnInit {
   }
 
   get canBuy(): boolean {
-    if (!this.selectedPackage || this.selectedAmount === '' || this.playerId.trim() === '') {
+    if (!this.selectedPackage || this.selectedAmount === '') {
       return false;
     }
 
@@ -166,7 +166,6 @@ export class DetailChargeGame implements OnInit {
 
     this.isLoading = true;
     const payload = {
-      playerId: this.playerId,
       amount: this.selectedPackage.price, // price to pay
       quantity: this.selectedPackage.amount, // actual top-up quantity
       email: this.email,

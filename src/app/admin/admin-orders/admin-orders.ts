@@ -103,4 +103,8 @@ export class AdminOrders implements OnInit {
       }
     });
   }
+
+  objectKeys(obj: any): string[] {
+    return Object.keys(obj || {});
+  }
 }

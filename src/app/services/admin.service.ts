@@ -14,6 +14,7 @@ export interface AdminOrder {
   quantity: number;
   status: string;
   createdAt: string;
+  dynamicData?: { [key: string]: any };
 }
 
 export interface AdminCharge {
@@ -26,9 +27,9 @@ export interface AdminCharge {
   paymentImage?: string;
   email: string;
   quantity: number;
-  playerId: string;
   status: string;
   createdAt: string;
+  dynamicData?: { [key: string]: any };
 }
 
 @Injectable({

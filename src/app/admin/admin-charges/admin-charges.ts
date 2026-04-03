@@ -60,8 +60,7 @@ export class AdminCharges implements OnInit {
     }
     this.charges = this.allCharges.filter(c =>
       (c.gameName || '').toLowerCase().includes(term) ||
-      (c.email || '').toLowerCase().includes(term) ||
-      (c.playerId || '').toLowerCase().includes(term)
+      (c.email || '').toLowerCase().includes(term) 
     );
   }
 
@@ -101,5 +100,9 @@ export class AdminCharges implements OnInit {
         alert('فشل رفض الشحنة');
       }
     });
+  }
+
+  objectKeys(obj: any): string[] {
+    return Object.keys(obj || {});
   }
 }
