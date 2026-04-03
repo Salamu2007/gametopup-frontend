@@ -113,8 +113,21 @@ export class DetailChargeGame implements OnInit {
     this.playerId = target.value;
   }
 
+  private validateEmail(email: string): boolean {
+    if (!email || email.trim() === '') {
+      return false;
+    }
+    const normalized = email.trim();
+    const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return re.test(normalized);
+  }
+
   get canBuy(): boolean {
     if (!this.selectedPackage || this.selectedAmount === '' || this.playerId.trim() === '') {
+      return false;
+    }
+
+    if (!this.validateEmail(this.email)) {
       return false;
     }
 
