@@ -81,7 +81,7 @@
         <p><strong>التاريخ:</strong> {{ selectedCharge.createdAt | date:'short' }}</p>
 
         <!-- Dynamic Fields -->
-        <div *ngIf="selectedCharge.dynamicData && Object.keys(selectedCharge.dynamicData).length > 0" class="modal-section">
+        <div *ngIf="selectedCharge.dynamicData && objectKeys(selectedCharge.dynamicData).length > 0" class="modal-section">
           <strong>الحقول الإضافية:</strong>
           <div class="dynamic-fields-display">
             <div *ngFor="let key of objectKeys(selectedCharge.dynamicData)" class="field-item">

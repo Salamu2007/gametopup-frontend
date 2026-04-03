@@ -81,7 +81,7 @@
         <p><strong>التاريخ:</strong> {{ selectedOrder.createdAt | date:'short' }}</p>
 
         <!-- Dynamic Fields -->
-        <div *ngIf="selectedOrder.dynamicData && Object.keys(selectedOrder.dynamicData).length > 0" class="modal-section">
+        <div *ngIf="selectedOrder.dynamicData && objectKeys(selectedOrder.dynamicData).length > 0" class="modal-section">
           <strong>الحقول الإضافية:</strong>
           <div class="dynamic-fields-display">
             <div *ngFor="let key of objectKeys(selectedOrder.dynamicData)" class="field-item">
