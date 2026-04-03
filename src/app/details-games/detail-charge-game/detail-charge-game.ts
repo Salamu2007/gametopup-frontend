@@ -113,7 +113,7 @@ export class DetailChargeGame implements OnInit {
     this.playerId = target.value;
   }
 
-  private validateEmail(email: string): boolean {
+  validateEmail(email: string): boolean {
     if (!email || email.trim() === '') {
       return false;
     }
