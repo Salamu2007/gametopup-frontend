@@ -37,7 +37,6 @@ export class DetailChargeGame implements OnInit {
   isLoading: boolean = false;
   selectedAmount: string = '';
   selectedPackage: { amount: number; price: number } | null = null;
-  playerId: string = '';
   email: string = '';
   phone: string = '';
   paymentMethod: string = 'ccp';
@@ -106,11 +105,6 @@ export class DetailChargeGame implements OnInit {
     } else {
       this.selectedPackage = null;
     }
-  }
-
-  onPlayerIdInput(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    this.playerId = target.value;
   }
 
   validateEmail(email: string): boolean {

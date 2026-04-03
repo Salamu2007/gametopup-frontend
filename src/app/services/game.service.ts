@@ -87,7 +87,6 @@ export interface chargePayment {
   chargeId: string;
   name: string;
   image: string;
-  playerId: string;
   amount: number;
   quantity?: number;
   currencyType: string;
