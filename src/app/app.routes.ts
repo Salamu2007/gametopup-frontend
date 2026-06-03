@@ -17,7 +17,7 @@ import { AdminCharges } from './admin/admin-charges/admin-charges';
 import { AdminGames } from './admin/admin-games/admin-games';
 import { AdminBanners } from './admin/admin-banners/admin-banners';
 import { AdminGuard } from '../guard/admin.guard';
-import { Userlayout } from './layout/userlayout/userlayout';
+import { Userlayout } from './layout/userlayout';
 
 export const routes: Routes = [
     {
