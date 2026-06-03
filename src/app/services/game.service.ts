@@ -13,6 +13,17 @@ export interface GamesCharges {
   imageUrl: string;
   description?: string; // optional description, used on card previews
 }
+
+export interface Banner {
+  _id: string;
+  title: string;
+  subtitle?: string;
+  linkUrl?: string;
+  ctaText?: string;
+  imageUrl: string;
+  sortOrder: number;
+  isActive: boolean;
+}
 export interface GameDetailcharge {
   _id: string;
   name: string;
@@ -177,6 +188,18 @@ export class GameService {
       
       catchError((error) => {
         console.error('Error fetching game cards:', error);
+        return of([]);
+      })
+    );
+  }
+
+  loadBanners(): Observable<Banner[]> {
+    return this.http.get<Banner[]>(`${this.apiUrl}/banners?active=true`).pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => {
+        console.error('Error fetching banners:', error);
         return of([]);
       })
     );

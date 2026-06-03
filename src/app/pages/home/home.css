@@ -75,6 +75,121 @@ body {
   color: #000;
 }
 
+.banner-slider {
+  position: relative;
+  padding: 40px 20px;
+  background: #07101a;
+  color: white;
+}
+
+.banner-slider .slider-wrapper {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #0f1620;
+}
+
+.banner-slider .slider-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.banner-slider .slide {
+  min-width: 100%;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 30px;
+  padding: 40px;
+}
+
+.banner-slider .slide.active {
+  opacity: 1;
+  transform: scale(1);
+  position: relative;
+}
+
+.banner-slider .slide img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  max-height: 420px;
+}
+
+.banner-slider .banner-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 10px 0;
+}
+
+.banner-slider .banner-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #38bdf8;
+  letter-spacing: 1px;
+}
+
+.banner-slider h2 {
+  font-size: 2.6rem;
+  margin: 0;
+}
+
+.banner-slider p {
+  max-width: 520px;
+  line-height: 1.7;
+  opacity: 0.82;
+}
+
+.banner-slider .slider-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.55);
+  color: white;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.banner-slider .slider-button.prev {
+  left: 18px;
+}
+
+.banner-slider .slider-button.next {
+  right: 18px;
+}
+
+.banner-slider .slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.banner-slider .slider-dots button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+}
+
+.banner-slider .slider-dots button.active {
+  background: #38bdf8;
+}
+
 /* GAMES SECTION */
 .games {
   padding: 80px 20px;
@@ -233,6 +348,20 @@ body {
 
   .hero .hero-content p {
     font-size: 1rem;
+  }
+
+  .banner-slider .slide {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .banner-slider .slider-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .banner-slider h2 {
+    font-size: 2rem;
   }
 
   .games .game-grid {

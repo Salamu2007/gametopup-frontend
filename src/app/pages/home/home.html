@@ -17,6 +17,29 @@
   </div>
 </section>
 
+<section class="banner-slider" *ngIf="banners.length > 0">
+  <div class="slider-wrapper">
+    <div class="slider-track">
+      <div class="slide" *ngFor="let banner of banners; let i = index" [class.active]="i === currentBannerIndex">
+        <img [src]="banner.imageUrl" [alt]="banner.title" />
+        <div class="banner-copy">
+          <span class="banner-label">أحدث عروضنا</span>
+          <h2>{{ banner.title }}</h2>
+          <p>{{ banner.subtitle }}</p>
+          <a *ngIf="banner.linkUrl" [href]="banner.linkUrl" class="btn primary">{{ banner.ctaText || 'عرض الآن' }}</a>
+        </div>
+      </div>
+    </div>
+
+    <button class="slider-button prev" (click)="previousBanner()">❮</button>
+    <button class="slider-button next" (click)="nextBanner()">❯</button>
+
+    <div class="slider-dots">
+      <button *ngFor="let banner of banners; let idx = index" [class.active]="idx === currentBannerIndex" (click)="selectBanner(idx)"></button>
+    </div>
+  </div>
+</section>
+
 <!-- CHARGE GAMES SECTION -->
 <section class="games" id="chargegames">
   <h2>شحن الألعاب 🎮</h2>

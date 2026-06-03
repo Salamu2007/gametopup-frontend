@@ -32,6 +32,18 @@ export interface AdminCharge {
   dynamicData?: { [key: string]: any };
 }
 
+export interface AdminBanner {
+  _id?: string;
+  title: string;
+  subtitle?: string;
+  linkUrl?: string;
+  ctaText?: string;
+  imageUrl: string;
+  imagePublicId?: string;
+  sortOrder: number;
+  isActive: boolean;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -123,6 +135,33 @@ export class AdminService {
     const formData = new FormData();
     formData.append('image', file);
     return this.http.post(`${this.baseApiUrl}/products/upload-image`, formData);
+  }
+
+  uploadBannerImage(file: File): Observable<any> {
+    const headers = this.getAuthHeaders();
+    const formData = new FormData();
+    formData.append('image', file);
+    return this.http.post(`${this.baseApiUrl}/banners/upload-image`, formData, { headers });
+  }
+
+  getBanners(): Observable<AdminBanner[]> {
+    const headers = this.getAuthHeaders();
+    return this.http.get<AdminBanner[]>(`${this.baseApiUrl}/banners`, { headers });
+  }
+
+  createBanner(bannerData: any): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.post(`${this.baseApiUrl}/banners`, bannerData, { headers });
+  }
+
+  updateBanner(id: string, bannerData: any): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.put(`${this.baseApiUrl}/banners/${id}`, bannerData, { headers });
+  }
+
+  deleteBanner(id: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete(`${this.baseApiUrl}/banners/${id}`, { headers });
   }
 
   confirmOrder(orderId: string): Observable<any> {

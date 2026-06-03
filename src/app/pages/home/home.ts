@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { GameService, GamesCharges, GameCard } from '../../services/game.service';
+import { GameService, GamesCharges, GameCard, Banner } from '../../services/game.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -10,13 +10,18 @@ import { RouterModule } from '@angular/router';
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
-export class Home implements OnInit {
+export class Home implements OnInit, OnDestroy {
   chargeGames: GamesCharges[] = [];
   sellGames: GameCard[] = [];
+  banners: Banner[] = [];
+  currentBannerIndex = 0;
+  private bannerInterval: any;
+  private readonly autoplayDelay = 5000;
 
   constructor(private gameService: GameService) {}
 
   ngOnInit(): void {
+    this.loadBanners();
     this.loadChargeGames();
     this.loadSellGames();
   }
@@ -47,6 +52,62 @@ export class Home implements OnInit {
     });
   }
 
+  private loadBanners(): void {
+    this.gameService.loadBanners().subscribe({
+      next: (data) => {
+        this.banners = data
+          .filter(banner => banner.isActive)
+          .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
+          .map(banner => ({
+            ...banner,
+            imageUrl: this.fixImageUrl(banner.imageUrl)
+          }));
+
+        if (this.banners.length > 0) {
+          this.startAutoplay();
+        }
+      },
+      error: (err) => {
+        console.error('Error loading banners:', err);
+      }
+    });
+  }
+
+  private startAutoplay(): void {
+    this.stopAutoplay();
+    this.bannerInterval = setInterval(() => {
+      this.nextBanner();
+    }, this.autoplayDelay);
+  }
+
+  private stopAutoplay(): void {
+    if (this.bannerInterval) {
+      clearInterval(this.bannerInterval);
+      this.bannerInterval = null;
+    }
+  }
+
+  previousBanner(): void {
+    if (!this.banners.length) return;
+    this.currentBannerIndex = (this.currentBannerIndex - 1 + this.banners.length) % this.banners.length;
+    this.restartAutoplay();
+  }
+
+  nextBanner(): void {
+    if (!this.banners.length) return;
+    this.currentBannerIndex = (this.currentBannerIndex + 1) % this.banners.length;
+  }
+
+  selectBanner(index: number): void {
+    this.currentBannerIndex = index;
+    this.restartAutoplay();
+  }
+
+  private restartAutoplay(): void {
+    this.stopAutoplay();
+    this.startAutoplay();
+  }
+
   private loadSellGames(): void {
     this.gameService.loadGamesCards().subscribe({
       next: (data) => {
@@ -59,5 +120,9 @@ export class Home implements OnInit {
         console.error('Error loading sell games:', err);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.stopAutoplay();
   }
 }
