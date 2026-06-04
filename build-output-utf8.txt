@@ -1,0 +1,302 @@
+
+> gametopupdz@0.0.0 build
+> ng build
+
+[33m❯[39m Building...
+[32m✔[39m Building...
+[1mInitial chunk files[22m  [2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m[2m | [22m[1mEstimated transfer size[22m
+[32mmain-353LIVFB.js[39m     [2m | [22m[2mmain[22m         [2m | [22m[36m837.79 kB[39m[2m | [22m              [36m193.21 kB[39m
+[32mpolyfills-5CFQRCPP.js[39m[2m | [22m[2mpolyfills[22m    [2m | [22m [36m34.59 kB[39m[2m | [22m               [36m11.33 kB[39m
+[32mstyles-ZCPHTPES.css[39m  [2m | [22m[2mstyles[22m       [2m | [22m[36m164 bytes[39m[2m | [22m              [36m164 bytes[39m
+
+[1m [22m                    [2m | [22m[1mInitial total[22m[2m | [22m[1m[93m872.54 kB[39m[22m[2m | [22m              [1m204.71 kB[22m
+
+Application bundle generation complete. [18.332 seconds] - 2026-06-04T01:21:10.051Z
+
+node.exe : [1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: 
+Header is not used within the template of App[0m [1m[35m[plugin 
+angular-compiler][0m
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([1m[33m[33m▲...r-compiler][0m 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+    src/app/app.ts:9:26:
+[37m      9 │   imports: [RouterOutlet, [32mHeader[37m, Footer],
+        ╵                           [32m~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: Footer is not used 
+within the template of App[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.ts:9:34:
+[37m      9 │   imports: [RouterOutlet, Header, [32mFooter[37m],
+        ╵                                   [32m~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/details-games/detail-charge-game/detail-charge-game.html:7:18:
+[37m      7 │          [alt]="game?.[32mname[37m || 'game image'"
+        ╵                       [32m~~~~[0m
+
+  Warning occurs in the template of component DetailChargeGame.
+
+    src/app/details-games/detail-charge-game/detail-charge-game.ts:21:15:
+[37m      21 │   templateUrl: [32m'./detail-charge-game.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/details-games/detail-charge-game/detail-charge-game.html:19:35:
+[37m      19 │       <h1 class="game-title">{{ game?.[32mname[37m }}</h1>
+         ╵                                       [32m~~~~[0m
+
+  Warning occurs in the template of component DetailChargeGame.
+
+    src/app/details-games/detail-charge-game/detail-charge-game.ts:21:15:
+[37m      21 │   templateUrl: [32m'./detail-charge-game.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/details-games/detail-charge-game/detail-charge-game.html:23:53:
+[37m      23 │ ...ass="category" title="الفئة">🎮 {{[32m game?.c[37mategory 
+}}</span>
+         ╵                                     [32m~~~~~~~~[0m
+
+  Warning occurs in the template of component DetailChargeGame.
+
+    src/app/details-games/detail-charge-game/detail-charge-game.ts:21:15:
+[37m      21 │   templateUrl: [32m'./detail-charge-game.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/details-games/detail-charge-game/detail-charge-game.html:24:61:
+[37m      24 │ ...ency-badge"  title="العملة">💰 {[32m{ game?.[37mcurrency 
+}}</span>
+         ╵                                   [32m~~~~~~~~[0m
+
+  Warning occurs in the template of component DetailChargeGame.
+
+    src/app/details-games/detail-charge-game/detail-charge-game.ts:21:15:
+[37m      21 │   templateUrl: [32m'./detail-charge-game.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/details-games/detail-charge-game/detail-charge-game.html:25:69:
+[37m      25 │ ..."نوع العملة">💎 {{ g[32mame?.c[37murrencyType || 'UC' 
+}}</span>
+         ╵                       [32m~~~~~~[0m
+
+  Warning occurs in the template of component DetailChargeGame.
+
+    src/app/details-games/detail-charge-game/detail-charge-game.ts:21:15:
+[37m      21 │   templateUrl: [32m'./detail-charge-game.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/details-games/detail-charge-game/detail-charge-game.html:33:113:
+[37m      33 │ ...{{ pkg.amount }} — {{ pkg.price }} {{ 
+game[32m?.curren[37mcy }}</option>
+         ╵                                              [32m~~~~~~~~[0m
+
+  Warning occurs in the template of component DetailChargeGame.
+
+    src/app/details-games/detail-charge-game/detail-charge-game.ts:21:15:
+[37m      21 │   templateUrl: [32m'./detail-charge-game.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/payment/payment.html:16:88:
+[37m      16 │ ...pan> <span class="value">{{ o[32mrder?.[37mstatus || '—' 
+}}</span></div>
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component Payment.
+
+    src/app/pages/payment/payment.ts:10:15:
+[37m      10 │   templateUrl: [32m'./payment.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/payment/payment.html:67:39:
+[37m      67 │         <span class="value">{{ charge?.[32mname[37m }}</span>
+         ╵                                        [32m~~~~[0m
+
+  Warning occurs in the template of component Payment.
+
+    src/app/pages/payment/payment.ts:10:15:
+[37m      10 │   templateUrl: [32m'./payment.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/payment/payment.html:72:39:
+[37m      72 │         <span class="value">{{ charge?.[32mquantity[37m 
+}}</span>
+         ╵                                        [32m~~~~~~~~[0m
+
+  Warning occurs in the template of component Payment.
+
+    src/app/pages/payment/payment.ts:10:15:
+[37m      10 │   templateUrl: [32m'./payment.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~[0m
+
+Output location: C:\Users\boukh\OneDrive\Desktop\gametopupdz\gametopupdz\dist\gametopupdz
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/payment/payment.html:76:39:
+[37m      76 │         <span class="value">{{ charge?.[32mprice[37m }} 
+دج</span>
+         ╵                                        [32m~~~~~[0m
+
+  Warning occurs in the template of component Payment.
+
+    src/app/pages/payment/payment.ts:10:15:
+[37m      10 │   templateUrl: [32m'./payment.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/payment/payment.html:81:39:
+[37m      81 │         <span class="value">{{ charge?.[32mchargeId[37m 
+}}</span>
+         ╵                                        [32m~~~~~~~~[0m
+
+  Warning occurs in the template of component Payment.
+
+    src/app/pages/payment/payment.ts:10:15:
+[37m      10 │   templateUrl: [32m'./payment.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/payment/payment.html:86:39:
+[37m      86 │         <span class="value">{{ charge?.[32mstatus[37m 
+}}</span>
+         ╵                                        [32m~~~~~~[0m
+
+  Warning occurs in the template of component Payment.
+
+    src/app/pages/payment/payment.ts:10:15:
+[37m      10 │   templateUrl: [32m'./payment.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/payment/payment.html:95:42:
+[37m      95 │         <ng-container 
+[ngSwitch]="charge?.[32mpaymentMethod[37m">
+         ╵                                           [32m~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component Payment.
+
+    src/app/pages/payment/payment.ts:10:15:
+[37m      10 │   templateUrl: [32m'./payment.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this 
+optional chain operation does not include 'null' or 'undefined' in its type, 
+therefore the '?.' operator can be replaced with the '.' operator.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/payment/payment.html:112:49:
+[37m      112 │ ...�ة الدفع: <strong>{[32m{ charge?.pay[37mmentMethod 
+}}</strong></...
+          ╵                       [32m~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component Payment.
+
+    src/app/pages/payment/payment.ts:10:15:
+[37m      10 │   templateUrl: [32m'./payment.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mbundle initial exceeded 
+maximum budget. Budget 500.00 kB was not met by 372.54 kB with a total of 
+872.54 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m 
+[1msrc/app/pages/store-games/games.css exceeded maximum budget. Budget 6.00 
+kB was not met by 3.06 kB with a total of 9.06 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m 
+[1msrc/app/pages/charge-games/charge-games.css exceeded maximum budget. 
+Budget 6.00 kB was not met by 720 bytes with a total of 6.72 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m 
+[1msrc/app/pages/about-us/about-us.css exceeded maximum budget. Budget 6.00 
+kB was not met by 1.19 kB with a total of 7.19 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m 
+[1msrc/app/details-games/detail-charge-game/detail-charge-game.css exceeded 
+maximum budget. Budget 6.00 kB was not met by 5.15 kB with a total of 11.15 
+kB.[0m
+
+[39m[22m
