@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/sitemap-v2.xml",
-      "destination": "https://gametopup-api.onrender.com/sitemap.xml"
+      "destination": "https://gametopup-api.onrender.com/sitemap-v2.xml"
     }
   ]
 }
