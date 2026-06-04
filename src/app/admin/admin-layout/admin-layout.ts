@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-admin-layout',
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterModule, RouterOutlet],
   templateUrl: './admin-layout.html',
-  styleUrl: './admin-layout.css',
+  styleUrls: ['./admin-layout.css'],
 })
 export class AdminLayout {
   notifications: string[] = [];
