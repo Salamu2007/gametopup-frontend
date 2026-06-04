@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/sitemap.xml",
-      "destination": "https://gametopup-api.onrender.com/sitemap.xml"
+      "source": "/sitemap-v2.xml",
+      "destination": "https://gametopup-api.onrender.com/sitemap-v2.xml"
     }
   ]
 }
