@@ -1,3 +1,12 @@
 {
-  "cleanUrls": true
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemaps"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/api/robots"
+    }
+  ]
 }
