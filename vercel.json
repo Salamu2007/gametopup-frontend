@@ -1,12 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/sitemap.xml",
-      "destination": "/api/sitemaps"
-    },
-    {
-      "source": "/robots.txt",
-      "destination": "/api/robots"
+      "source": "/sitema.xml",
+      "destination": "https://gametopup-api.onrender.com/sitemap.xml"
     }
   ]
 }
