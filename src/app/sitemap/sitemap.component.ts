@@ -36,7 +36,7 @@ export class SitemapComponent implements OnInit {
 
     const entries = urls
       .map((path) => {
-        const url = `${this.baseUrl}/${path}`.replace(/\/+/g, '/').replace(/\?$/, '');
+        const url = path === '' ? this.baseUrl : `${this.baseUrl}/${path}`;
 
         return `  <url>
     <loc>${this.escapeXml(url)}</loc>
