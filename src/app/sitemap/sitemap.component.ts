@@ -12,16 +12,14 @@ export class SitemapComponent implements OnInit {
 
   ngOnInit(): void {
     const xml = this.generateSitemapXml();
+    // 1. نصنع Blob بنوع xml وبترميز utf-8
     const blob = new Blob([xml], { type: 'text/xml;charset=utf-8' });
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.document.open('text/xml');
-      this.document.write(reader.result as string);
-      this.document.close();
-    };
-
-    reader.readAsText(blob);
+    
+    // 2. نولد رابط وهمي خاص بالـ Blob داخل ذاكرة المتصفح
+    const blobUrl = URL.createObjectURL(blob);
+    
+    // 3. نوجه المتصفح لهذا الرابط مباشرة ليعرض الملف بأكواد الـ XML الرسمية
+    this.document.location.replace(blobUrl);
   }
 
   private generateSitemapXml(): string {
