@@ -1,4 +1,4 @@
-export default function handler(req, res) {
+module.exports = function handler(req, res) {
   const baseUrl = 'https://gamestopupdz.vercel.app';
   const urls = ['', 'games', 'how-it-works', 'contact', 'about-us', 'charge-games'];
   const lastMod = new Date().toISOString();
