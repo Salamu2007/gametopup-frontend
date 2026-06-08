@@ -18,8 +18,13 @@ import { AdminGames } from './admin/admin-games/admin-games';
 import { AdminBanners } from './admin/admin-banners/admin-banners';
 import { AdminGuard } from '../guard/admin.guard';
 import { Userlayout } from './layout/userlayout';
+import { SitemapComponent } from './sitemap/sitemap.component';
 
 export const routes: Routes = [
+    {
+        path: 'sitemap.xml',
+        component: SitemapComponent,
+    },
     {
         path:'user',
         component: Userlayout,
