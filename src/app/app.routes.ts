@@ -21,10 +21,7 @@ import { Userlayout } from './layout/userlayout';
 import { SitemapComponent } from './sitemap/sitemap.component';
 
 export const routes: Routes = [
-    {
-        path: 'sitemap.xml',
-        component: SitemapComponent,
-    },
+    
     {
         path:'user',
         component: Userlayout,
