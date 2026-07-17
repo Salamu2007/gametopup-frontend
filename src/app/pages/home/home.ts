@@ -1,5 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChild, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  OnDestroy,
+  ElementRef,
+  ViewChild,
+  HostListener,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GameService, GamesCharges, GameCard, Banner } from '../../services/game.service';
 import { RouterModule } from '@angular/router';
@@ -20,7 +28,8 @@ interface Particle {
   styleUrls: ['./home.css'],
 })
 export class Home implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('particleCanvas', { static: true }) private particleCanvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('particleCanvas', { static: true })
+  private particleCanvas!: ElementRef<HTMLCanvasElement>;
 
   chargeGames: GamesCharges[] = [];
   sellGames: GameCard[] = [];
@@ -44,13 +53,53 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
     this.loadSellGames();
   }
 
+  ngAfterViewInit(): void {
+    this.initializeCanvas();
+    this.startCanvasAnimation();
+  }
+
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    this.resizeCanvas();
+  }
+
+  onPagePointerMove(event: PointerEvent): void {
+    const rect = this.particleCanvas.nativeElement.getBoundingClientRect();
+    this.pointer.x = (event.clientX - rect.left) / rect.width;
+    this.pointer.y = (event.clientY - rect.top) / rect.height;
+    this.pointer.active = true;
+  }
+
+  resetPagePointer(): void {
+    this.pointer.active = false;
+  }
+
+  onCardPointerMove(event: PointerEvent): void {
+    const card = event.currentTarget as HTMLElement;
+    const rect = card.getBoundingClientRect();
+    const offsetX = event.clientX - (rect.left + rect.width / 2);
+    const offsetY = event.clientY - (rect.top + rect.height / 2);
+    const rotateY = (offsetX / rect.width) * 14;
+    const rotateX = -(offsetY / rect.height) * 14;
+
+    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+    card.style.transition = 'transform 0.12s ease-out';
+  }
+
+  resetCardTransform(event: Event): void {
+    const card = event.currentTarget as HTMLElement;
+    card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    card.style.transition = 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)';
+  }
+
   private fixImageUrl(imageUrl: string | undefined): string {
     if (!imageUrl) return '/assets/images/comingsoon.png';
     if (imageUrl.startsWith('http')) return imageUrl;
 
-    const apiHost = window.location.hostname === 'localhost'
-      ? 'http://localhost:3000'
-      : 'https://gametopup-api.onrender.com';
+    const apiHost =
+      window.location.hostname === 'localhost'
+        ? 'http://localhost:3000'
+        : 'https://gametopup-api.onrender.com';
 
     if (imageUrl.startsWith('/uploads/')) return `${apiHost}${imageUrl}`;
     return imageUrl;
@@ -59,14 +108,14 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
   private loadChargeGames(): void {
     this.gameService.loadgamecharges().subscribe({
       next: (data) => {
-        this.chargeGames = data.map(game => ({
+        this.chargeGames = data.map((game) => ({
           ...game,
-          imageUrl: this.fixImageUrl(game.imageUrl)
+          imageUrl: this.fixImageUrl(game.imageUrl),
         }));
       },
       error: (err) => {
         console.error('Error loading charge games:', err);
-      }
+      },
     });
   }
 
@@ -74,11 +123,11 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
     this.gameService.loadBanners().subscribe({
       next: (data) => {
         this.banners = data
-          .filter(banner => banner.isActive)
+          .filter((banner) => banner.isActive)
           .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
-          .map(banner => ({
+          .map((banner) => ({
             ...banner,
-            imageUrl: this.fixImageUrl(banner.imageUrl)
+            imageUrl: this.fixImageUrl(banner.imageUrl),
           }));
 
         if (this.banners.length > 0) {
@@ -87,7 +136,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
       },
       error: (err) => {
         console.error('Error loading banners:', err);
-      }
+      },
     });
   }
 
@@ -129,53 +178,15 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
   private loadSellGames(): void {
     this.gameService.loadGamesCards().subscribe({
       next: (data) => {
-        this.sellGames = data.map(game => ({
+        this.sellGames = data.map((game) => ({
           ...game,
-          imageUrl: this.fixImageUrl(game.imageUrl)
+          imageUrl: this.fixImageUrl(game.imageUrl),
         }));
       },
       error: (err) => {
         console.error('Error loading sell games:', err);
-      }
+      },
     });
-  }
-
-  ngAfterViewInit(): void {
-    this.initializeCanvas();
-    this.startCanvasAnimation();
-  }
-
-  @HostListener('window:resize')
-  onWindowResize(): void {
-    this.resizeCanvas();
-  }
-
-  onPagePointerMove(event: PointerEvent): void {
-    const rect = this.particleCanvas.nativeElement.getBoundingClientRect();
-    this.pointer.x = (event.clientX - rect.left) / rect.width;
-    this.pointer.y = (event.clientY - rect.top) / rect.height;
-    this.pointer.active = true;
-  }
-
-  resetPagePointer(): void {
-    this.pointer.active = false;
-  }
-
-  onCardPointerMove(event: PointerEvent): void {
-    const card = event.currentTarget as HTMLElement;
-    const rect = card.getBoundingClientRect();
-    const offsetX = event.clientX - (rect.left + rect.width / 2);
-    const offsetY = event.clientY - (rect.top + rect.height / 2);
-    const rotateY = (offsetX / rect.width) * 14;
-    const rotateX = -(offsetY / rect.height) * 14;
-    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
-    card.style.transition = 'transform 0.12s ease-out';
-  }
-
-  resetCardTransform(event: Event): void {
-    const card = (event.currentTarget as HTMLElement);
-    card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-    card.style.transition = 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)';
   }
 
   private initializeCanvas(): void {
@@ -200,9 +211,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private animateCanvas(): void {
-    if (!this.canvasCtx) {
-      return;
-    }
+    if (!this.canvasCtx) return;
 
     this.canvasCtx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 
