@@ -4,6 +4,30 @@ body {
   padding: 0;
 }
 
+.page-home {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.interactive-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.82;
+}
+
+.hero,
+.banner-slider,
+.games,
+.sell-games {
+  position: relative;
+  z-index: 1;
+}
+
 .hero {
   height: 100vh;
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
@@ -211,17 +235,35 @@ body {
   margin: 50px auto;
 }
 
-.games .game-grid .game-card {
-  background: #151a21;
+.games .game-grid .game-card,
+.sell-card {
+  position: relative;
+  background: rgba(20, 28, 44, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   padding: 20px 10px;
-  border-radius: 15px;
+  border-radius: 20px;
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
 }
 
-.games .game-grid .game-card h3 {
+.games .game-grid .game-card::before,
+.sell-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(138, 180, 248, 0.16), transparent 65%);
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.games .game-grid .game-card h3,
+.sell-card h3 {
   margin-top: 10px;
 }
 
@@ -247,16 +289,22 @@ body {
   background: #00a8dd;
 }
 
-.games .game-grid .game-card:hover {
-  transform: translateY(-8px);
-  background: #1e2530;
+.interactive-card:hover {
+  transform: translateY(-10px) scale3d(1.02, 1.02, 1.02);
 }
 
-.games .game-grid .game-card img {
-    width: 170px;
-    height: 170px;
-    margin-bottom: 15px;
-    border-radius: 10px;
+.games .game-grid .game-card:hover,
+.sell-card:hover {
+  background: rgba(24, 35, 54, 0.86);
+}
+
+.games .game-grid .game-card img,
+.sell-card img {
+  width: 170px;
+  height: 170px;
+  margin-bottom: 15px;
+  border-radius: 14px;
+  object-fit: cover;
 
 }
 
@@ -288,16 +336,6 @@ body {
   margin: 50px auto;
 }
 
-.sell-card {
-  background: #151a21;
-  padding: 20px 10px;
-  border-radius: 15px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
 .sell-card h3 {
   margin-top: 10px;
 }
@@ -306,18 +344,6 @@ body {
   opacity: 0.8;
   margin-top: 5px;
   font-size: 0.9rem;
-}
-
-.sell-card img {
-    width: 170px;
-    height: 170px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-}
-
-.sell-card:hover {
-  transform: translateY(-8px);
-  background: #1e2530;
 }
 
 .sell-card .btn.small {
@@ -337,6 +363,10 @@ body {
 
 /* MOBILE SCREENS */
 @media screen and (max-width: 768px) {
+  .interactive-bg {
+    opacity: 0.65;
+  }
+
   .hero {
     height: 80vh;
     padding: 20px;

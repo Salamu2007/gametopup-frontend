@@ -1,10 +1,13 @@
 
-<!-- HERO SECTION -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>
-      كل ألعابك وعملاتك في مكان واحد! اشترِ الألعاب واشحن العملات بأمان وسرعة 💎🎮
-    </h1>
+<div class="page-home" (pointermove)="onPagePointerMove($event)" (pointerleave)="resetPagePointer()">
+  <canvas class="interactive-bg" #particleCanvas aria-hidden="true"></canvas>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>
+        كل ألعابك وعملاتك في مكان واحد! اشترِ الألعاب واشحن العملات بأمان وسرعة 💎🎮
+      </h1>
 
     <p>
      ألعابك وعملاتك هنا! , شحن سريع وآمن لكل الألعاب ⚡
@@ -48,7 +51,7 @@
   </p>
 
   <div class="game-grid">
-    <div class="game-card" *ngFor="let game of chargeGames | slice:0:8">
+    <div class="game-card interactive-card" *ngFor="let game of chargeGames | slice:0:8" (pointermove)="onCardPointerMove($event)" (pointerleave)="resetCardTransform($event)">
       <img [src]="game.imageUrl" alt="{{ game.name }} Logo">
       <h3>{{ game.name }}</h3>
       <p class="short-desc">
@@ -76,7 +79,7 @@
   </p>
 
   <div class="sell-grid">
-    <div class="sell-card" *ngFor="let game of sellGames | slice:0:8">
+    <div class="sell-card interactive-card" *ngFor="let game of sellGames | slice:0:8" (pointermove)="onCardPointerMove($event)" (pointerleave)="resetCardTransform($event)">
       <img [src]="game.imageUrl" alt="{{ game.name }} Logo">
       <h3>{{ game.name }}</h3>
       <p class="short-desc">
@@ -93,4 +96,5 @@
     </div>
   </div>
 </section>
+</div>
 
