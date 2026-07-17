@@ -1,107 +1,100 @@
+
 <div class="page-home" (pointermove)="onPagePointerMove($event)" (pointerleave)="resetPagePointer()">
   <canvas class="interactive-bg" #particleCanvas aria-hidden="true"></canvas>
 
+  <!-- HERO SECTION -->
   <section class="hero">
     <div class="hero-content">
       <h1>
         كل ألعابك وعملاتك في مكان واحد! اشترِ الألعاب واشحن العملات بأمان وسرعة 💎🎮
       </h1>
 
-      <p>
-        ألعابك وعملاتك هنا! شحن سريع وآمن لكل الألعاب ⚡
-      </p>
+    <p>
+     ألعابك وعملاتك هنا! , شحن سريع وآمن لكل الألعاب ⚡
+    </p>
 
-      <div class="hero-buttons">
-        <a href="#chargegames" class="btn primary">اطلب الشحن الآن</a>
-        <a routerLink="/how-it-works" class="btn secondary">كيف يتم الشحن؟</a>
-      </div>
+    <div class="hero-buttons">
+      <a href="#chargegames" class="btn primary">اطلب الشحن الآن</a>
+      <a routerLink="/how-it-works" class="btn secondary">كيف يتم الشحن؟</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="banner-slider" *ngIf="banners.length > 0">
-    <div class="slider-wrapper">
-      <div class="slider-track">
-        <div class="slide" *ngFor="let banner of banners; let i = index" [class.active]="i === currentBannerIndex">
-          <img [src]="banner.imageUrl" [alt]="banner.title" />
-          <div class="banner-copy">
-            <span class="banner-label">أحدث عروضنا</span>
-            <h2>{{ banner.title }}</h2>
-            <p>{{ banner.subtitle }}</p>
-            <a *ngIf="banner.linkUrl" [href]="banner.linkUrl" class="btn primary">{{ banner.ctaText || 'عرض الآن' }}</a>
-          </div>
+<section class="banner-slider" *ngIf="banners.length > 0">
+  <div class="slider-wrapper">
+    <div class="slider-track">
+      <div class="slide" *ngFor="let banner of banners; let i = index" [class.active]="i === currentBannerIndex">
+        <img [src]="banner.imageUrl" [alt]="banner.title" />
+        <div class="banner-copy">
+          <span class="banner-label">أحدث عروضنا</span>
+          <h2>{{ banner.title }}</h2>
+          <p>{{ banner.subtitle }}</p>
+          <a *ngIf="banner.linkUrl" [href]="banner.linkUrl" class="btn primary">{{ banner.ctaText || 'عرض الآن' }}</a>
         </div>
       </div>
-
-      <button class="slider-button prev" (click)="previousBanner()">❮</button>
-      <button class="slider-button next" (click)="nextBanner()">❯</button>
-
-      <div class="slider-dots">
-        <button *ngFor="let banner of banners; let idx = index" [class.active]="idx === currentBannerIndex" (click)="selectBanner(idx)"></button>
-      </div>
     </div>
-  </section>
 
-  <section class="games" id="chargegames">
-    <h2>شحن الألعاب 🎮</h2>
-    <p class="subtitle">
-      اختر اللعبة وارفع شحنتك بسرعة وآمان 🔥
-    </p>
+    <button class="slider-button prev" (click)="previousBanner()">❮</button>
+    <button class="slider-button next" (click)="nextBanner()">❯</button>
 
-    <div class="game-grid">
-      <div
-        class="game-card interactive-card"
-        *ngFor="let game of chargeGames | slice:0:8"
-        (pointermove)="onCardPointerMove($event)"
-        (pointerleave)="resetCardTransform($event)"
-      >
-        <img [src]="game.imageUrl" alt="{{ game.name }} Logo">
-        <h3>{{ game.name }}</h3>
-        <p class="short-desc">
-          {{ (game.description || 'وصف مختصر غير متوفر').slice(0, 70) }}
-          <span *ngIf="game.description && game.description.length > 70">...</span>
-        </p>
-        <p>عملة: {{ game.currency }} {{ game.currencyType }}</p>
-        <a [routerLink]="['/user/detail-charge-game', game._id]" class="btn-small">اشحن الآن</a>
-      </div>
-
-      <div class="game-card">
-        <img src="/assets/images/comingsoon.png" alt="Coming Soon">
-        <h3>المزيد قادم قريبًا!</h3>
-        <p>نضيف ألعاب جديدة باستمرار، ترقبوا المزيد من الخيارات!</p>
-        <a routerLink="/user/contact" class="btn-small">تواصل معنا</a>
-      </div>
+    <div class="slider-dots">
+      <button *ngFor="let banner of banners; let idx = index" [class.active]="idx === currentBannerIndex" (click)="selectBanner(idx)"></button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="sell-games" id="ordersgames">
-    <h2>شراء الألعاب 🎮</h2>
-    <p class="subtitle">
-      ألعاب أصلية لسطح المكتب بأسعار منافسة 🔥
-    </p>
+<!-- CHARGE GAMES SECTION -->
+<section class="games" id="chargegames">
+  <h2>شحن الألعاب 🎮</h2>
+  <p class="subtitle">
+    اختر اللعبة وارفع شحنتك بسرعة وآمان 🔥
+  </p>
 
-    <div class="sell-grid">
-      <div
-        class="sell-card interactive-card"
-        *ngFor="let game of sellGames | slice:0:8"
-        (pointermove)="onCardPointerMove($event)"
-        (pointerleave)="resetCardTransform($event)"
-      >
-        <img [src]="game.imageUrl" alt="{{ game.name }} Logo">
-        <h3>{{ game.name }}</h3>
-        <p class="short-desc">
-          {{ (game.description || game.category || 'لعبة رائعة').slice(0, 70) }}
-          <span *ngIf="(game.description || game.category || 'لعبة رائعة').length > 70">...</span>
-        </p>
-        <a [routerLink]="['/user/detail-buy-game', game._id]" class="btn small">اطلب الآن</a>
-      </div>
-
-      <div class="sell-card">
-        <img src="/assets/images/comingsoon.png" alt="Coming Soon">
-        <h3>المزيد قادم قريبًا!</h3>
-        <p>نضيف ألعاب جديدة باستمرار، ترقبوا المزيد من الخيارات!</p>
-        <a routerLink="/user/contact" class="btn-small">تواصل معنا</a>
-      </div>
+  <div class="game-grid">
+    <div class="game-card interactive-card" *ngFor="let game of chargeGames | slice:0:8" (pointermove)="onCardPointerMove($event)" (pointerleave)="resetCardTransform($event)">
+      <img [src]="game.imageUrl" alt="{{ game.name }} Logo">
+      <h3>{{ game.name }}</h3>
+      <p class="short-desc">
+        {{ (game.description || 'وصف مختصر غير متوفر').slice(0, 70) }}
+        <span *ngIf="game.description && game.description.length > 70">...</span>
+      </p>
+      <p>عملة: {{ game.currency }} {{ game.currencyType }}</p>
+      <a [routerLink]="['/user/detail-charge-game', game._id]" class="btn-small">اشحن الآن</a>
     </div>
-  </section>
+
+    <div class="game-card">
+      <img src="/assets/images/comingsoon.png" alt="Coming Soon">
+      <h3>المزيد قادم قريبًا!</h3>
+      <p>نضيف ألعاب جديدة باستمرار، ترقبوا المزيد من الخيارات!</p>
+      <a routerLink="/user/contact" class="btn-small">تواصل معنا</a>
+    </div>
+  </div>
+</section>
+
+<!-- ORDERS GAMES SECTION -->
+<section class="sell-games" id="ordersgames">
+  <h2>شراء الألعاب 🎮</h2>
+  <p class="subtitle">
+    ألعاب أصلية لسطح المكتب بأسعار منافسة 🔥
+  </p>
+
+  <div class="sell-grid">
+    <div class="sell-card interactive-card" *ngFor="let game of sellGames | slice:0:8" (pointermove)="onCardPointerMove($event)" (pointerleave)="resetCardTransform($event)">
+      <img [src]="game.imageUrl" alt="{{ game.name }} Logo">
+      <h3>{{ game.name }}</h3>
+      <p class="short-desc">
+        {{ (game.description || game.category || 'لعبة رائعة').slice(0, 70) }}
+        <span *ngIf="(game.description || game.category || 'لعبة رائعة').length > 70">...</span>
+      </p>
+      <a [routerLink]="['/user/detail-buy-game', game._id]" class="btn small">اطلب الآن</a>
+    </div>
+    <div class="sell-card">
+      <img src="/assets/images/comingsoon.png" alt="Coming Soon">
+      <h3>المزيد قادم قريبًا!</h3>
+      <p>نضيف ألعاب جديدة باستمرار، ترقبوا المزيد من الخيارات!</p>
+       <a routerLink="/user/contact" class="btn-small">تواصل معنا</a>
+    </div>
+  </div>
+</section>
 </div>
 

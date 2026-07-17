@@ -289,8 +289,38 @@ body {
   background: #00a8dd;
 }
 
-.interactive-card:hover {
-  transform: translateY(-10px) scale3d(1.02, 1.02, 1.02);
+.games .game-grid .game-card,
+.sell-card {
+  position: relative;
+  background: rgba(20, 28, 44, 0.6); /* خففنا الخلفية باش يبان الزجاج */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  /* تأثير الزجاج الضبابي الفخم */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  
+  padding: 20px 10px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  
+  /* أهم سطرين للـ 3D: نرجعوا الكرت يقبل الأبعاد الثلاثية */
+  transform-style: preserve-3d;
+  will-change: transform;
+  
+  /* الـ transition هنا خليه خفيف جداً باش ما يقاومش الـ TS */
+  transition: transform 0.1s ease-out, background 0.28s ease, box-shadow 0.28s ease;
+  z-index: 2;
+}
+
+/* عند مرور الماوس، نزيدو برك في الإضاءة والـ Shadow بلا ما نخلطو في الـ transform */
+.games .game-grid .game-card:hover,
+.sell-card:hover {
+  background: rgba(29, 41, 64, 0.75);
+  box-shadow: 0 30px 60px rgba(0, 198, 255, 0.2); /* ضوء أزرق خفيف وراء الكرت */
 }
 
 .games .game-grid .game-card:hover,
