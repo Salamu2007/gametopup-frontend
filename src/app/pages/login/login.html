@@ -1,0 +1,23 @@
+<section class="auth-page">
+  <div class="auth-card">
+    <h2>Login</h2>
+    <p class="auth-subtitle">Enter your account details</p>
+
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" [(ngModel)]="email" required />
+
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" [(ngModel)]="password" required />
+
+      <div class="error-box" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <button type="submit" [disabled]="!loginForm.form.valid">Login</button>
+    </form>
+
+    <p class="auth-link">
+      Don't have an account?
+      <a routerLink="/register">Create one</a>
+    </p>
+  </div>
+</section>

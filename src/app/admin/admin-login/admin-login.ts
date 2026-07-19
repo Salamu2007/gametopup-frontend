@@ -13,6 +13,7 @@ import { GameService } from '../../services/game.service';
 export class AdminLogin {
   username = '';
   password = '';
+  errorMessage = '';
 
   constructor(
     private gameService: GameService,
@@ -20,16 +21,24 @@ export class AdminLogin {
   ) {}
 
   login() {
+    this.errorMessage = '';
+
     this.gameService.makeAdminLogin(this.username, this.password).subscribe({
       next: (res: any) => {
         if (res?.token) {
           localStorage.setItem('token', res.token);
+          localStorage.setItem('auth_user', JSON.stringify({
+            id: 'admin',
+            username: this.username,
+            email: '',
+            role: 'admin'
+          }));
         }
         this.router.navigate(['/admin/dashboard']);
       },
       error: (err) => {
         console.error('Admin login failed', err);
-        alert('Login failed. Please try again.');
+        this.errorMessage = err?.error?.message || 'Login failed. Please try again.';
       }
     });
   }

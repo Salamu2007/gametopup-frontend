@@ -323,6 +323,7 @@ body {
   box-shadow: 0 30px 60px rgba(0, 198, 255, 0.2); /* ضوء أزرق خفيف وراء الكرت */
 }
 
+
 .games .game-grid .game-card:hover,
 .sell-card:hover {
   background: rgba(24, 35, 54, 0.86);

@@ -30,7 +30,7 @@
   gap: 25px;
   direction: rtl;
   text-align: center;
-  
+  align-items: center;
 }
 
 .nav a {
@@ -39,6 +39,31 @@
   font-weight: 500;
   transition: 0.3s;
   cursor: pointer;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 12px;
+}
+
+.user-badge {
+  color: #ffffff;
+  font-weight: 700;
+  background: rgba(0, 198, 255, 0.18);
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.logout-button {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: #ef4444;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 700;
 }
 
 .nav a:hover {

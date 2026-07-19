@@ -1,0 +1,26 @@
+<section class="auth-page">
+  <div class="auth-card">
+    <h2>Create account</h2>
+    <p class="auth-subtitle">Register to continue shopping</p>
+
+    <form (ngSubmit)="register()" #registerForm="ngForm">
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username" [(ngModel)]="username" required />
+
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" [(ngModel)]="email" required />
+
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" [(ngModel)]="password" required minlength="6" />
+
+      <div class="error-box" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <button type="submit" [disabled]="!registerForm.form.valid">Register</button>
+    </form>
+
+    <p class="auth-link">
+      Already have an account?
+      <a routerLink="/login">Login here</a>
+    </p>
+  </div>
+</section>

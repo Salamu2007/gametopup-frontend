@@ -17,7 +17,10 @@ import { AdminCharges } from './admin/admin-charges/admin-charges';
 import { AdminGames } from './admin/admin-games/admin-games';
 import { AdminBanners } from './admin/admin-banners/admin-banners';
 import { AdminGuard } from '../guard/admin.guard';
+import { authGuard } from '../guard/auth.guard';
 import { Userlayout } from './layout/userlayout';
+import { LoginComponent } from './pages/login/login';
+import { RegisterComponent } from './pages/register/register';
 
 export const routes: Routes = [
     
@@ -33,12 +36,20 @@ export const routes: Routes = [
             {path:'charge-games', component: ChargeGames},
             {path:'detail-buy-game/:id', component: DetailBuyGame},
             {path:'detail-charge-game/:id', component: DetailChargeGame},
-            {path:'payment/:id', component: Payment},
-            {path: 'order-payment/:id', component: Payment},
-            {path: 'charge-payment/:id', component: Payment},
-            {path: 'payment-success/:type/:id', component: PaymentSuccess},
+            {path:'payment/:id', component: Payment, canActivate: [authGuard]},
+            {path: 'order-payment/:id', component: Payment, canActivate: [authGuard]},
+            {path: 'charge-payment/:id', component: Payment, canActivate: [authGuard]},
+            {path: 'payment-success/:type/:id', component: PaymentSuccess, canActivate: [authGuard]},
             {path:'', redirectTo:'user/home', pathMatch:'full'}
         ]
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
     },
     {
     path: 'admin/login',

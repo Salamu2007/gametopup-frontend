@@ -20,6 +20,8 @@
         [(ngModel)]="password"
       />
 
+      <div class="error-box" *ngIf="errorMessage">{{ errorMessage }}</div>
+
       <button
         type="submit"
         class="btn-primary"
