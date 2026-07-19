@@ -17,12 +17,14 @@
   display: flex;
   align-items: center;
   gap: 24px;
+  flex: 1 1 auto;
 }
 
 .header-right {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 .user-icon {
@@ -49,6 +51,8 @@
   direction: rtl;
   text-align: center;
   align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
 }
 
 .nav a,
