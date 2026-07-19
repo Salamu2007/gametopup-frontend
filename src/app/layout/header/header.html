@@ -1,33 +1,38 @@
 <header class="header">
-  <div class="logo">
-    <a href="https://gamestopupdz.vercel.app/user/home"></a>
-    <img src="/assets/images/logo.png" alt="GameTopUp DZ Logo"> GameTopUp DZ
-  </div>
-
-  <div class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen" aria-label="قائمة">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-
-  <nav class="nav" [class.active]="isMenuOpen">
-    <a routerLink="/user/home" (click)="closeMenu()">الرئيسية</a>
-    <a routerLink="/user/charge-games" (click)="closeMenu()">شحن الألعاب</a>
-    <a routerLink="/user/games" (click)="closeMenu()">الألعاب الأصلية</a>
-    <a routerLink="/user/about-us" (click)="closeMenu()">من نحن ؟</a>
-    <a routerLink="/user/how-it-works" (click)="closeMenu()">كيف يتم الشحن؟</a>
-    <a routerLink="/user/contact" (click)="closeMenu()">تواصل معنا</a>
-
-    <div class="nav-actions">
-      <ng-container *ngIf="currentUser; else guestActions">
-        <span class="user-badge">{{ currentUser.username }}</span>
-        <button type="button" class="logout-button" (click)="logout()">خروج</button>
-      </ng-container>
-
-      <ng-template #guestActions>
-        <a routerLink="/login" (click)="closeMenu()">تسجيل الدخول</a>
-        <a routerLink="/register" (click)="closeMenu()">إنشاء حساب</a>
-      </ng-template>
+  <div class="header-left">
+    <div class="logo">
+      <a href="https://gamestopupdz.vercel.app/user/home"></a>
+      <img src="/assets/images/logo.png" alt="GameTopUp DZ Logo"> GameTopUp DZ
     </div>
-  </nav>
+
+    <div class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen" aria-label="قائمة">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav class="nav" [class.active]="isMenuOpen">
+      <a routerLink="/user/home" (click)="closeMenu()">الرئيسية</a>
+      <a routerLink="/user/charge-games" (click)="closeMenu()">شحن الألعاب</a>
+      <a routerLink="/user/games" (click)="closeMenu()">الألعاب الأصلية</a>
+      <a routerLink="/user/about-us" (click)="closeMenu()">من نحن ؟</a>
+      <a routerLink="/user/how-it-works" (click)="closeMenu()">كيف يتم الشحن؟</a>
+      <a routerLink="/user/contact" (click)="closeMenu()">تواصل معنا</a>
+    </nav>
+  </div>
+
+  <div class="header-right">
+    <ng-container *ngIf="currentUser; else guestActions">
+      <span class="user-badge">
+        <span class="user-icon">👤</span>
+        {{ currentUser.username }}
+      </span>
+      <button type="button" class="logout-button" (click)="logout()">خروج</button>
+    </ng-container>
+
+    <ng-template #guestActions>
+      <a class="auth-link" routerLink="/login" (click)="closeMenu()">تسجيل الدخول</a>
+      <a class="auth-link auth-link--primary" routerLink="/register" (click)="closeMenu()">إنشاء حساب</a>
+    </ng-template>
+  </div>
 </header>
