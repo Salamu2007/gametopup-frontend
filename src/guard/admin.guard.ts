@@ -13,7 +13,18 @@ export class AdminGuard implements CanActivate {
 
   canActivate(): boolean | UrlTree {
     const token = this.adminService.getToken();
-    if (token) {
+    const authUser = localStorage.getItem('auth_user');
+    let parsedUser: { role?: string } | null = null;
+
+    if (authUser) {
+      try {
+        parsedUser = JSON.parse(authUser);
+      } catch {
+        parsedUser = null;
+      }
+    }
+
+    if (token && parsedUser?.role === 'admin') {
       return true;
     }
 

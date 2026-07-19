@@ -4,8 +4,19 @@
   min-height: 100vh;
   direction: rtl;
   font-family: 'Cairo', sans-serif;
-  background: #0f172a; /* dark background */
+  background: #0f172a;
   color: #fff;
+}
+
+.logout-button {
+  margin-top: auto;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 15px;
+  background: #dc2626;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 /* ===== SIDEBAR ===== */

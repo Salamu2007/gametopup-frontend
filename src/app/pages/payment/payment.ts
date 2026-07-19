@@ -103,6 +103,19 @@ export class Payment implements OnInit {
     return this.unitPrice * this.quantity;
   }
 
+  getStatusLabel(status: string | null | undefined): string {
+    switch (status) {
+      case 'waiting_verification':
+        return 'قيد الانتظار';
+      case 'paid':
+        return 'مكتمل';
+      case 'rejected':
+        return 'مرفوض';
+      default:
+        return 'قيد الانتظار';
+    }
+  }
+
   paymentDetails() {
     return this.paymentFallbacks[this.paymentMethod] || {};
   }

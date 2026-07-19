@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { GameService } from '../../services/game.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { AuthService } from '../../services/auth.service';
 
 export interface Field {
   name: string;
@@ -53,6 +54,7 @@ export interface GameDetailbuyLocal {
   ]
 })
 export class DetailBuyGame implements OnInit {
+  private readonly authService = inject(AuthService);
   game: GameDetailbuyLocal | null = null;
   quantity: number = 1;
   email: string = '';
@@ -154,9 +156,12 @@ export class DetailBuyGame implements OnInit {
 
     this.isLoading = true;
 
+    const currentUser = this.authService.getCurrentUser();
+
     const payload = {
       quantity: this.quantity,
       paymentMethod: this.paymentMethod,
+      username: currentUser?.username || this.email?.split('@')[0] || 'مستخدم',
       email: this.email,
       phone: this.phone,
       dynamicData: this.dynamicData

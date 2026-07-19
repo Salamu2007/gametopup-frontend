@@ -61,8 +61,22 @@ export class AdminOrders implements OnInit {
     }
     this.orders = this.allOrders.filter(o =>
       (o.gameName || '').toLowerCase().includes(term) ||
+      (o.username || '').toLowerCase().includes(term) ||
       (o.email || '').toLowerCase().includes(term)
     );
+  }
+
+  getStatusLabel(status: string): string {
+    switch (status) {
+      case 'waiting_verification':
+        return 'قيد الانتظار';
+      case 'paid':
+        return 'مكتمل';
+      case 'rejected':
+        return 'مرفوض';
+      default:
+        return 'قيد الانتظار';
+    }
   }
 
   openOrder(order: AdminOrder) {

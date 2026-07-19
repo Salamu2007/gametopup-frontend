@@ -27,6 +27,7 @@
     <table *ngIf="orders.length > 0" class="orders-table">
       <thead>
         <tr>
+          <th>اسم المستخدم</th>
           <th>اللعبة</th>
           <th>صورة اللعبة</th>
           <th>صورة الدفع</th>
@@ -39,6 +40,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let o of orders" class="order-row" (click)="openOrder(o)">
+          <td>{{ o.username || o.email?.split('@')[0] || 'مستخدم' }}</td>
           <td>{{ o.gameName }}</td>
           <td>
             <img
@@ -58,7 +60,7 @@
           <td>{{ o.email }}</td>
           <td>{{ o.quantity }}</td>
           <td>{{ o.currency || 'دج' }}</td>
-          <td>{{ o.status }}</td>
+          <td>{{ getStatusLabel(o.status) }}</td>
           <td>{{ o.createdAt | date:'short' }}</td>
         </tr>
       </tbody>
@@ -73,11 +75,12 @@
         <button class="close-btn" (click)="closeModal()">✕</button>
       </div>
       <div class="modal-body">
+        <p><strong>اسم المستخدم:</strong> {{ selectedOrder.username || selectedOrder.email?.split('@')[0] || 'مستخدم' }}</p>
         <p><strong>اللعبة:</strong> {{ selectedOrder.gameName }}</p>
         <p><strong>الايميل:</strong> {{ selectedOrder.email }}</p>
         <p><strong>الكمية:</strong> {{ selectedOrder.quantity }}</p>
         <p><strong>العملة:</strong> {{ selectedOrder.currency || 'دج' }}</p>
-        <p><strong>الحالة:</strong> {{ selectedOrder.status }}</p>
+        <p><strong>الحالة:</strong> {{ getStatusLabel(selectedOrder.status) }}</p>
         <p><strong>التاريخ:</strong> {{ selectedOrder.createdAt | date:'short' }}</p>
 
         <!-- Dynamic Fields -->

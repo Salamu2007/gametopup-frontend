@@ -10,6 +10,7 @@ export interface AdminOrder {
   image?: string; // legacy fallback
   currency?: string;
   paymentImage?: string;
+  username?: string;
   email: string;
   quantity: number;
   status: string;

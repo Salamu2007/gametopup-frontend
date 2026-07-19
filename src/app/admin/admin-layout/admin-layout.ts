@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,5 +10,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./admin-layout.css'],
 })
 export class AdminLayout {
+  private readonly router = inject(Router);
   notifications: string[] = [];
+
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('auth_user');
+    this.router.navigateByUrl('/admin/login');
+  }
 }

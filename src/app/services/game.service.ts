@@ -92,6 +92,7 @@ export interface OrderPayment {
   totalPrice: number;   // precomputed total
   price?: number;       // optional original product price
   email?: string;
+  username?: string;
 }
 
 export interface chargePayment {
