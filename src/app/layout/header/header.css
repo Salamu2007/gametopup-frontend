@@ -81,6 +81,10 @@
   font-weight: 700;
 }
 
+.user-menu {
+  position: relative;
+}
+
 .user-badge {
   display: inline-flex;
   align-items: center;
@@ -91,6 +95,40 @@
   padding: 6px 12px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 140px;
+  padding: 10px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  z-index: 1200;
+}
+
+.user-dropdown a,
+.user-dropdown button {
+  text-align: right;
+  color: #ffffff;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.user-dropdown a:hover,
+.user-dropdown button:hover {
+  color: #00c6ff;
 }
 
 .logout-button {

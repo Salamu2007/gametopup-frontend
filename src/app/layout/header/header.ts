@@ -14,6 +14,7 @@ export class Header {
   private readonly router = inject(Router);
 
   isMenuOpen = false;
+  isUserMenuOpen = false;
   currentUser: AuthUser | null = this.authService.getCurrentUser();
 
   constructor() {
@@ -28,6 +29,15 @@ export class Header {
 
   closeMenu() {
     this.isMenuOpen = false;
+  }
+
+  toggleUserMenu() {
+    this.isUserMenuOpen = !this.isUserMenuOpen;
+  }
+
+  closeUserMenuAndMenu() {
+    this.isUserMenuOpen = false;
+    this.closeMenu();
   }
 
   logout(): void {

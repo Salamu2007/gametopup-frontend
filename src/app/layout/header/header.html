@@ -23,12 +23,17 @@
 
   <div class="header-right">
     <ng-container *ngIf="currentUser; else guestActions">
-      <a class="my-orders-link" routerLink="/user/my-orders" (click)="closeMenu()">طلباتي</a>
-      <span class="user-badge">
-        <span class="user-icon">👤</span>
-        {{ currentUser.username }}
-      </span>
-      <button type="button" class="logout-button" (click)="logout()">خروج</button>
+      <div class="user-menu">
+        <button type="button" class="user-badge" (click)="toggleUserMenu()" aria-label="فتح قائمة المستخدم">
+          <span class="user-icon">👤</span>
+          {{ currentUser.username }}
+        </button>
+
+        <div class="user-dropdown" *ngIf="isUserMenuOpen">
+          <a routerLink="/user/my-orders" (click)="closeUserMenuAndMenu()">طلباتي</a>
+          <button type="button" class="logout-button" (click)="logout()">خروج</button>
+        </div>
+      </div>
     </ng-container>
 
     <ng-template #guestActions>
