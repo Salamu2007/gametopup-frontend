@@ -79,6 +79,21 @@ export class AdminOrders implements OnInit {
     }
   }
 
+  getDisplayName(order: AdminOrder | null | undefined): string {
+    const username = order?.username?.trim();
+    if (username) {
+      return username;
+    }
+
+    const email = order?.email?.trim();
+    if (email) {
+      const localPart = email.split('@')[0];
+      return localPart || 'مستخدم';
+    }
+
+    return 'مستخدم';
+  }
+
   openOrder(order: AdminOrder) {
     this.selectedOrder = order;
   }

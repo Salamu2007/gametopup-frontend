@@ -40,7 +40,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let o of orders" class="order-row" (click)="openOrder(o)">
-          <td>{{ o.username || o.email?.split('@')[0] || 'مستخدم' }}</td>
+          <td>{{ getDisplayName(o) }}</td>
           <td>{{ o.gameName }}</td>
           <td>
             <img
@@ -75,7 +75,7 @@
         <button class="close-btn" (click)="closeModal()">✕</button>
       </div>
       <div class="modal-body">
-        <p><strong>اسم المستخدم:</strong> {{ selectedOrder.username || selectedOrder.email?.split('@')[0] || 'مستخدم' }}</p>
+        <p><strong>اسم المستخدم:</strong> {{ getDisplayName(selectedOrder) }}</p>
         <p><strong>اللعبة:</strong> {{ selectedOrder.gameName }}</p>
         <p><strong>الايميل:</strong> {{ selectedOrder.email }}</p>
         <p><strong>الكمية:</strong> {{ selectedOrder.quantity }}</p>

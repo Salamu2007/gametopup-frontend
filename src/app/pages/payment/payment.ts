@@ -103,6 +103,19 @@ export class Payment implements OnInit {
     return this.unitPrice * this.quantity;
   }
 
+  get displayUsername(): string {
+    if (this.order?.username) {
+      return this.order.username;
+    }
+
+    if (this.order?.email) {
+      const localPart = this.order.email.split('@')[0];
+      return localPart || 'مستخدم';
+    }
+
+    return 'مستخدم';
+  }
+
   getStatusLabel(status: string | null | undefined): string {
     switch (status) {
       case 'waiting_verification':
