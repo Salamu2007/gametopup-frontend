@@ -1,0 +1,28 @@
+<section class="my-orders-page">
+  <div class="page-header">
+    <h2>طلباتي</h2>
+    <p>عرض جميع الطلبات الخاصة بك مع حالة كل طلب</p>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">جاري تحميل طلباتك...</div>
+
+  <div *ngIf="!isLoading && orders.length === 0" class="empty-state">
+    لا توجد طلبات لديك حتى الآن.
+  </div>
+
+  <div *ngIf="!isLoading && orders.length > 0" class="orders-grid">
+    <article class="order-card" *ngFor="let order of orders">
+      <img [src]="order.gameImage" alt="{{ order.gameName }}" class="order-image" />
+      <div class="order-body">
+        <h3>{{ order.gameName }}</h3>
+        <p><strong>اسم المستخدم:</strong> {{ order.username }}</p>
+        <p><strong>البريد:</strong> {{ order.email }}</p>
+        <p><strong>الكمية:</strong> {{ order.quantity }}</p>
+        <p><strong>المجموع:</strong> {{ order.totalPrice }} دج</p>
+        <p><strong>طريقة الدفع:</strong> {{ order.paymentMethod }}</p>
+        <p><strong>الحالة:</strong> <span class="status-badge">{{ getStatusLabel(order.status) }}</span></p>
+        <p><strong>التاريخ:</strong> {{ order.createdAt | date:'short' }}</p>
+      </div>
+    </article>
+  </div>
+</section>

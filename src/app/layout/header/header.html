@@ -23,6 +23,7 @@
 
   <div class="header-right">
     <ng-container *ngIf="currentUser; else guestActions">
+      <a class="my-orders-link" routerLink="/user/my-orders" (click)="closeMenu()">طلباتي</a>
       <span class="user-badge">
         <span class="user-icon">👤</span>
         {{ currentUser.username }}

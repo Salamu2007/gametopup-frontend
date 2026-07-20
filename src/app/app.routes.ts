@@ -9,6 +9,7 @@ import { DetailBuyGame } from './details-games/detail-buy-game/detail-buy-game';
 import { DetailChargeGame } from './details-games/detail-charge-game/detail-charge-game';
 import { Payment } from './pages/payment/payment'
 import { PaymentSuccess } from './pages/payment-success/payment-success';
+import { MyOrdersComponent } from './pages/my-orders/my-orders';
 import { AdminLogin } from './admin/admin-login/admin-login';
 import { AdminLayout } from './admin/admin-layout/admin-layout';
 import { AdminDashboard } from './admin/admin-dashboard/admin-dashboard';
@@ -40,6 +41,7 @@ export const routes: Routes = [
             {path: 'order-payment/:id', component: Payment, canActivate: [authGuard]},
             {path: 'charge-payment/:id', component: Payment, canActivate: [authGuard]},
             {path: 'payment-success/:type/:id', component: PaymentSuccess, canActivate: [authGuard]},
+            {path: 'my-orders', component: MyOrdersComponent, canActivate: [authGuard]},
             {path:'', redirectTo:'user/home', pathMatch:'full'}
         ]
     },

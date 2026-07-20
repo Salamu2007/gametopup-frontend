@@ -181,6 +181,14 @@ export class GameService {
     return this.http.post<any>(`${this.apiUrl}/orders/neworder/${productId}`, payload);
   }
 
+  getMyOrders(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+
+    return this.http.get<any[]>(`${this.apiUrl}/orders/my-orders`, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {}
+    });
+  }
+
   loadGamesCards(): Observable<GameCard[]> {
     return this.http.get<GameCard[]>(`${this.apiUrl}/products/orders`).pipe(
       map((res) => {
