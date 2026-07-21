@@ -97,10 +97,12 @@
             <input type="number" [(ngModel)]="formData.price" name="price" placeholder="0" min="0">
           </div>
           <div class="form-group">
-              <label>نسبة الخصم (%)</label>
-              <input type="number" [(ngModel)]="formData.discount" name="discount" placeholder="0" min="0" max="100">
-            </div>
-            <div class="form-group">
+            <label>نسبة الخصم (%)</label>
+            <input type="number" [(ngModel)]="formData.discount" name="discount" placeholder="0" min="0" max="100">
+          </div>
+          <div class="form-group">
+            <label>الكمية المتوفرة</label>
+            <input type="number" [(ngModel)]="formData.stock" name="stock" placeholder="0" min="0">
           </div>
         </div>
 
@@ -139,6 +141,17 @@
         <div class="form-group">
           <label>الوصف</label>
           <textarea [(ngModel)]="formData.description" name="description" placeholder="اكت وصف اللعبة..." rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>الحسابات المخفية (كل حساب في سطر)</label>
+          <textarea [(ngModel)]="accountsText" name="accountsText" placeholder="email:password" rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>الحقول الديناميكية (كل سطر: name|label|type|required)</label>
+          <textarea [(ngModel)]="dynamicFieldsText" name="dynamicFieldsText" placeholder="playerId|معرف اللاعب|text|true" rows="4"></textarea>
+          <small>مثال: playerId|معرف اللاعب|text|true</small>
         </div>
 
         <!-- Image Upload Section -->

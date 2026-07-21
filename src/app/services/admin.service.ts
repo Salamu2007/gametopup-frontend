@@ -16,6 +16,7 @@ export interface AdminOrder {
   status: string;
   createdAt: string;
   dynamicData?: { [key: string]: any };
+  deliveredData?: any;
 }
 
 export interface AdminCharge {
@@ -168,8 +169,7 @@ export class AdminService {
 
   confirmOrder(orderId: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    const token = this.getToken();
-    return this.http.put(`${this.apiUrl}/confirm/${orderId}`, {}, { headers });
+    return this.http.put(`${this.baseApiUrl}/orders/approve/${orderId}`, {}, { headers });
   }
 
   rejectOrder(orderId: string): Observable<any> {

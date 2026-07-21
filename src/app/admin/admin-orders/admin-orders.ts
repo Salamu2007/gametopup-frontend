@@ -71,6 +71,7 @@ export class AdminOrders implements OnInit {
       case 'waiting_verification':
         return 'قيد الانتظار';
       case 'paid':
+      case 'completed':
         return 'مكتمل';
       case 'rejected':
         return 'مرفوض';
@@ -135,5 +136,19 @@ export class AdminOrders implements OnInit {
 
   objectKeys(obj: any): string[] {
     return Object.keys(obj || {});
+  }
+
+  copyDeliveredData() {
+    if (!this.selectedOrder?.deliveredData?.account) return;
+
+    const value = typeof this.selectedOrder.deliveredData.account === 'string'
+      ? this.selectedOrder.deliveredData.account
+      : JSON.stringify(this.selectedOrder.deliveredData.account, null, 2);
+
+    navigator.clipboard.writeText(value).then(() => {
+      alert('تم نسخ البيانات المسلمة');
+    }).catch(() => {
+      alert('تعذر نسخ البيانات');
+    });
   }
 }

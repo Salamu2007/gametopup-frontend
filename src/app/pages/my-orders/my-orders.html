@@ -21,6 +21,15 @@
         <p><strong>المجموع:</strong> {{ order.totalPrice }} دج</p>
         <p><strong>طريقة الدفع:</strong> {{ order.paymentMethod }}</p>
         <p><strong>الحالة:</strong> <span class="status-badge">{{ getStatusLabel(order.status) }}</span></p>
+
+        <div *ngIf="order.deliveredData?.account" class="delivery-section">
+          <p><strong>البيانات المسلمة:</strong></p>
+          <div class="delivery-box">
+            <pre>{{ order.deliveredData.account }}</pre>
+            <button type="button" class="copy-btn" (click)="copyDeliveredData(order.deliveredData.account)">نسخ</button>
+          </div>
+        </div>
+
         <p><strong>التاريخ:</strong> {{ order.createdAt | date:'short' }}</p>
       </div>
     </article>

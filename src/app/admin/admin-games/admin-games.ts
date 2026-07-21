@@ -22,6 +22,7 @@ export interface Game {
   currency?: string;
   currencyType?: string;
   stock?: number;
+  accounts?: string[];
   image?: string;
   description?: string;
   genre?: string;
@@ -46,6 +47,8 @@ export class AdminGames implements OnInit {
   editingId: string | null = null;
   uploadingImage = false;
   imagePreview: string | null = null;
+  accountsText = '';
+  dynamicFieldsText = '';
 
   formData: Game = this.getEmptyForm();
   categories = ['أكشن', 'مغامرة', 'ألغاز', 'رياضة', 'محاكاة', 'أخرى'];
@@ -75,6 +78,8 @@ export class AdminGames implements OnInit {
 
   openAddForm() {
     this.formData = this.getEmptyForm();
+    this.accountsText = '';
+    this.dynamicFieldsText = '';
     this.editingId = null;
     this.formTitle = 'إضافة لعبة جديدة';
     this.showForm = true;
@@ -83,6 +88,8 @@ export class AdminGames implements OnInit {
 
   openEditForm(game: Game) {
     this.formData = { ...game };
+    this.accountsText = (game.accounts || []).join('\n');
+    this.dynamicFieldsText = this.buildDynamicFieldsText(game.fields || []);
     this.editingId = game._id || null;
     this.formTitle = 'تعديل اللعبة';
     this.showForm = true;
@@ -92,6 +99,8 @@ export class AdminGames implements OnInit {
   closeForm() {
     this.showForm = false;
     this.formData = this.getEmptyForm();
+    this.accountsText = '';
+    this.dynamicFieldsText = '';
     this.editingId = null;
     this.imagePreview = null;
   }
@@ -143,6 +152,15 @@ export class AdminGames implements OnInit {
     if (!this.formData.name || !this.formData.category) {
       alert('يرجى ملء الحقول المطلوبة');
       return;
+    }
+
+    this.formData.accounts = this.accountsText
+      .split(/\r?\n/)
+      .map((item) => item.trim())
+      .filter(Boolean);
+
+    if (this.dynamicFieldsText.trim()) {
+      this.formData.fields = this.parseDynamicFieldsText(this.dynamicFieldsText);
     }
 
     // حساب السعر الأصلي تلقائياً بناءً على نسبة الخصم (إن وجدت)
@@ -217,6 +235,7 @@ export class AdminGames implements OnInit {
       originalPrice: 0,
       discount: 0,
       stock: 0,
+      accounts: [],
       currency: 'دج',
       currencyType: 'UC',
       description: '',
@@ -227,6 +246,35 @@ export class AdminGames implements OnInit {
       package: [],
       fields: []
     };
+  }
+
+  private buildDynamicFieldsText(fields: Field[] = []): string {
+    return (fields || [])
+      .map((field) => `${field.name}|${field.label}|${field.type}|${field.required}`)
+      .join('\n');
+  }
+
+  private parseDynamicFieldsText(text: string): Field[] {
+    return text
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .map((line) => {
+        const parts = line.split('|').map((part) => part.trim());
+        const name = parts[0] || '';
+        const label = parts[1] || name;
+        const type = (parts[2] as Field['type']) || 'text';
+        const required = parts[3] === 'true' || parts[3] === '1';
+
+        return {
+          name,
+          label,
+          type,
+          required,
+          options: []
+        };
+      })
+      .filter((field) => Boolean(field.name));
   }
 
   addPackage() {

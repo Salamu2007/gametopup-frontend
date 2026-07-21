@@ -94,6 +94,14 @@
           </div>
         </div>
 
+        <div *ngIf="selectedOrder.deliveredData?.account" class="modal-section">
+          <strong>البيانات المسلمة:</strong>
+          <div class="delivery-box">
+            <pre>{{ selectedOrder.deliveredData.account }}</pre>
+            <button class="btn btn-copy" type="button" (click)="copyDeliveredData()">نسخ</button>
+          </div>
+        </div>
+
         <div *ngIf="selectedOrder.gameImage || selectedOrder.image" class="modal-section">
           <strong>صورة اللعبة:</strong><br/>
           <img [src]="selectedOrder.gameImage || selectedOrder.image" class="modal-img" />

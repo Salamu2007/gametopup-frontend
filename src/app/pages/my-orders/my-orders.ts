@@ -13,6 +13,7 @@ interface UserOrder {
   username: string;
   email: string;
   status: string;
+  deliveredData?: any;
   createdAt: string;
 }
 
@@ -53,11 +54,20 @@ export class MyOrdersComponent implements OnInit {
       case 'waiting_verification':
         return 'قيد الانتظار';
       case 'paid':
+      case 'completed':
         return 'مكتمل';
       case 'rejected':
         return 'مرفوض';
       default:
         return 'قيد الانتظار';
     }
+  }
+
+  copyDeliveredData(value: string): void {
+    navigator.clipboard.writeText(value).then(() => {
+      alert('تم نسخ الحساب');
+    }).catch(() => {
+      alert('تعذر نسخ الحساب');
+    });
   }
 }

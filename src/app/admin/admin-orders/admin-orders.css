@@ -215,6 +215,31 @@
   border: 1px solid #334155;
 }
 
+.delivery-box {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 8px;
+}
+
+.delivery-box pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #f8fafc;
+}
+
+.btn-copy {
+  margin-top: 10px;
+  background: #38bdf8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
 .field-item {
   display: flex;
   justify-content: space-between;
