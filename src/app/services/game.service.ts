@@ -105,6 +105,7 @@ export interface chargePayment {
   paymentMethod: string;
   status: string;
   price: number;
+  username?: string;
   email?: string;
 }
 

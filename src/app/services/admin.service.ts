@@ -26,6 +26,7 @@ export interface AdminCharge {
   currency?: string;
   currencyType?: string;
   paymentImage?: string;
+  username?: string;
   email: string;
   quantity: number;
   status: string;

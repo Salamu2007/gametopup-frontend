@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GameService } from '../../services/game.service';
 import { GameDetailcharge } from '../../services/game.service';
+import { AuthService } from '../../services/auth.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 export interface Field {
@@ -50,7 +51,8 @@ export class DetailChargeGame implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -163,6 +165,7 @@ export class DetailChargeGame implements OnInit {
       amount: this.selectedPackage.price, // price to pay
       quantity: this.selectedPackage.amount, // actual top-up quantity
       email: this.email,
+      username: this.authService.getCurrentUser()?.username || this.email.split('@')[0] || 'مستخدم',
       phone: this.phone,
       paymentMethod: this.paymentMethod,
       currencyType: this.game.currencyType || "UC",

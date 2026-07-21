@@ -116,6 +116,19 @@ export class Payment implements OnInit {
     return 'مستخدم';
   }
 
+  get displayChargeUsername(): string {
+    if (this.charge?.username) {
+      return this.charge.username;
+    }
+
+    if (this.charge?.email) {
+      const localPart = this.charge.email.split('@')[0];
+      return localPart || 'مستخدم';
+    }
+
+    return 'مستخدم';
+  }
+
   getStatusLabel(status: string | null | undefined): string {
     switch (status) {
       case 'waiting_verification':

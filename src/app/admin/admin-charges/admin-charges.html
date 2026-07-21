@@ -27,6 +27,7 @@
     <table *ngIf="charges.length > 0" class="charges-table">
       <thead>
         <tr>
+          <th>اسم المستخدم</th>
           <th>اللعبة</th>
           <th>صورة اللعبة</th>
           <th>صورة الدفع</th>
@@ -39,6 +40,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let c of charges" class="charge-row" (click)="openCharge(c)">
+          <td>{{ getDisplayName(c) }}</td>
           <td>{{ c.gameName }}</td>
           <td>
             <img
@@ -73,6 +75,7 @@
         <button class="close-btn" (click)="closeModal()">✕</button>
       </div>
       <div class="modal-body">
+        <p><strong>اسم المستخدم:</strong> {{ getDisplayName(selectedCharge) }}</p>
         <p><strong>اللعبة:</strong> {{ selectedCharge.gameName }}</p>
         <p><strong>الايميل:</strong> {{ selectedCharge.email }}</p>
         <p><strong>الكمية:</strong> {{ selectedCharge.quantity }}</p>

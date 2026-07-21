@@ -60,8 +60,24 @@ export class AdminCharges implements OnInit {
     }
     this.charges = this.allCharges.filter(c =>
       (c.gameName || '').toLowerCase().includes(term) ||
+      (c.username || '').toLowerCase().includes(term) ||
       (c.email || '').toLowerCase().includes(term) 
     );
+  }
+
+  getDisplayName(charge: AdminCharge | null | undefined): string {
+    const username = charge?.username?.trim();
+    if (username) {
+      return username;
+    }
+
+    const email = charge?.email?.trim();
+    if (email) {
+      const localPart = email.split('@')[0];
+      return localPart || 'مستخدم';
+    }
+
+    return 'مستخدم';
   }
 
   openCharge(charge: AdminCharge) {
